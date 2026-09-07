@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baile de Munique | FC26 Pro Clubs</title>
+    <!-- O CSS ditará as cores: vermelho e branco primários, detalhes em azul -->
+    <link rel="stylesheet" href="./src/css/main.css">
+    <link rel="stylesheet" href="./src/css/components.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <!-- Escudo com copo de cerveja centralizado -->
+            <img src="./src/assets/img/escudo.png" alt="Escudo Baile de Munique" class="logo">
+            <h1>Baile de Munique</h1>
+        </div>
+        
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#home" class="active" data-route="home">Home</a></li>
+                <li><a href="#elenco" data-route="elenco">Elenco</a></li>
+                <li><a href="#noticias" data-route="noticias">Notícias</a></li>
+                <li><a href="#jogos" data-route="jogos">Últimos Jogos</a></li>
+                <li><a href="#estatisticas" data-route="estatisticas">Estatísticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- O conteúdo de cada página será injetado aqui via JS -->
+    <main id="app-content">
+        <section id="home-view" class="view-section">
+            <h2>Bem-vindo ao Baile</h2>
+            <p>Acompanhe a trajetória da nossa equipe dominando a formação 1-4-2-3-1.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Acompanhe no Instagram: <a href="https://www.instagram.com/bailedemunichofc/" target="_blank">@bailedemunichofc</a></p>
+        
+        <!-- Indicador visual de atualização via Actions -->
+        <div class="update-status">
+            <span id="last-update">Última atualização de dados: Carregando...</span>
+            <span id="update-error" style="display: none; color: red;" title="Falha no script Python">⚠️ Falha de Sincronia</span>
+        </div>
+    </footer>
+
+    <!-- Scripts modularizados -->
+    <script type="module" src="./src/js/app.js"></script>
+</body>
+</html>

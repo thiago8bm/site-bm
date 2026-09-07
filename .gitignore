@@ -1,0 +1,23 @@
+# Ambiente virtual do Python
+.venv/
+venv/
+env/
+.env/
+
+# Arquivos de ambiente e chaves (NUNCA envie para o GitHub)
+.env
+.env.local
+
+# Arquivos temporários do Python e Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Diretórios das IDEs (VSCode, PyCharm, etc)
+.vscode/
+.idea/
