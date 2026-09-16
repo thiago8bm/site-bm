@@ -3,7 +3,7 @@
  * Gerencia a navegação entre views sem reload de página.
  */
 
-import { renderHome, renderElenco, renderUltimosJogos, renderEstatisticas } from './ui.js';
+import { renderHome, renderElenco, renderUltimosJogos, renderEstatisticas, renderPesquisa } from './ui.js';
 
 // =====================================================
 // CONSTANTES E CONFIGURAÇÃO
@@ -167,8 +167,10 @@ async function renderRoute(route) {
         case 'elenco':       await renderElenco();        break;
         case 'jogos':        await renderUltimosJogos();  break;
         case 'estatisticas': await renderEstatisticas();  break;
-        // noticias e pesquisa serão implementados nas próximas fases
+        case 'pesquisa':     await renderPesquisa();      break;
+        // noticias será implementado futuramente
         default: break;
+
     }
 }
 
