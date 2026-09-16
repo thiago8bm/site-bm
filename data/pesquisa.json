@@ -1,0 +1,251 @@
+{
+    "last_updated": "2026-09-16T08:55:54.959976",
+    "status": "success",
+    "total_respostas": 8,
+    "termometro": {
+        "media_auto": 3.38,
+        "media_coletiva": 2.62,
+        "dist_auto": {
+            "1": 1,
+            "3": 3,
+            "4": 3,
+            "5": 1
+        },
+        "qtd_outliers": 2,
+        "notas_outliers": [
+            5,
+            1
+        ],
+        "alerta_texto": "ALERTA: 2 jogador(es) se autoavaliaram com discrepância ≥ 1 estrela da média do grupo (3.38). Valores discrepantes: 5 estrela(s), 1 estrela(s)."
+    },
+    "premiacoes": {
+        "consistentes": [
+            {
+                "posicao": 1,
+                "nome": "Gabriel",
+                "votos": 8
+            },
+            {
+                "posicao": 1,
+                "nome": "Thiago",
+                "votos": 8
+            },
+            {
+                "posicao": 3,
+                "nome": "Boueri",
+                "votos": 3
+            }
+        ],
+        "decisivos": [
+            {
+                "posicao": 1,
+                "nome": "Gabriel",
+                "votos": 8
+            },
+            {
+                "posicao": 2,
+                "nome": "Thiago",
+                "votos": 6
+            },
+            {
+                "posicao": 3,
+                "nome": "Boueri",
+                "votos": 2
+            },
+            {
+                "posicao": 3,
+                "nome": "Daniel",
+                "votos": 2
+            }
+        ],
+        "evoluiram": [
+            {
+                "nome": "João",
+                "votos": 6
+            },
+            {
+                "nome": "Bruno",
+                "votos": 3
+            },
+            {
+                "nome": "Wendel",
+                "votos": 3
+            },
+            {
+                "nome": "Daniel",
+                "votos": 3
+            },
+            {
+                "nome": "Boueri",
+                "votos": 3
+            }
+        ],
+        "precisam_melhorar_qtd": 3
+    },
+    "escalacao_ideal": {
+        "VLE": {
+            "nome": "Daniel",
+            "votos": 8
+        },
+        "MEI": {
+            "nome": "Thiago",
+            "votos": 8
+        },
+        "CA": {
+            "nome": "Gabriel",
+            "votos": 8
+        },
+        "ZGE": {
+            "nome": "Bruno",
+            "votos": 6
+        },
+        "LE": {
+            "nome": "BOT",
+            "votos": 5
+        },
+        "VLD": {
+            "nome": "João",
+            "votos": 4
+        },
+        "PE": {
+            "nome": "Boueri",
+            "votos": 4
+        },
+        "GK": {
+            "nome": "Pedrão",
+            "votos": 3
+        },
+        "ZGD": {
+            "nome": "Ronald",
+            "votos": 3
+        },
+        "LD": {
+            "nome": "Wendel",
+            "votos": 2
+        },
+        "PD": {
+            "nome": "Gabri",
+            "votos": 2
+        }
+    },
+    "coringas": {
+        "ZAG": [
+            {
+                "nome": "Bruno",
+                "votos": 7
+            },
+            {
+                "nome": "Ronald",
+                "votos": 4
+            },
+            {
+                "nome": "Daniel",
+                "votos": 1
+            }
+        ],
+        "LD/LE": [
+            {
+                "nome": "Pedrão",
+                "votos": 5
+            },
+            {
+                "nome": "Daniel",
+                "votos": 3
+            },
+            {
+                "nome": "Bruno",
+                "votos": 2
+            }
+        ],
+        "VOL": [
+            {
+                "nome": "Daniel",
+                "votos": 6
+            },
+            {
+                "nome": "João",
+                "votos": 5
+            },
+            {
+                "nome": "Thiago",
+                "votos": 5
+            }
+        ],
+        "MEI": [
+            {
+                "nome": "Thiago",
+                "votos": 8
+            },
+            {
+                "nome": "Daniel",
+                "votos": 5
+            },
+            {
+                "nome": "Gabriel",
+                "votos": 4
+            }
+        ],
+        "PD/PE": [
+            {
+                "nome": "João",
+                "votos": 7
+            },
+            {
+                "nome": "Boueri",
+                "votos": 6
+            },
+            {
+                "nome": "Gabri",
+                "votos": 6
+            }
+        ],
+        "CA": [
+            {
+                "nome": "Gabriel",
+                "votos": 8
+            },
+            {
+                "nome": "Boueri",
+                "votos": 7
+            },
+            {
+                "nome": "Daniel",
+                "votos": 4
+            }
+        ]
+    },
+    "graficos": {
+        "posicoes_fav": {
+            "labels": [
+                "CA",
+                "PE",
+                "MEI",
+                "ZAG",
+                "GK",
+                "VOL"
+            ],
+            "data": [
+                2,
+                2,
+                1,
+                1,
+                1,
+                1
+            ]
+        },
+        "capitaes": {
+            "labels": [
+                "Thiago",
+                "Daniel",
+                "Gabriel",
+                "Boueri"
+            ],
+            "data": [
+                8,
+                4,
+                4,
+                1
+            ]
+        }
+    }
+}
