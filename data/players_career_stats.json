@@ -1,0 +1,146 @@
+{
+    "last_updated": "2026-09-08T00:28:40.450747",
+    "status": "success",
+    "data": {
+        "members": [
+            {
+                "name": "Thiago_Souza108",
+                "proPos": "14",
+                "gamesPlayed": "222",
+                "goals": "76",
+                "assists": "139",
+                "manOfTheMatch": "34",
+                "ratingAve": "7.7",
+                "prevGoals": "1",
+                "favoritePosition": "midfielder"
+            },
+            {
+                "name": "NortonJONES",
+                "proPos": "14",
+                "gamesPlayed": "267",
+                "goals": "75",
+                "assists": "61",
+                "manOfTheMatch": "6",
+                "ratingAve": "6.8",
+                "prevGoals": "1",
+                "favoritePosition": "midfielder"
+            },
+            {
+                "name": "DanyTheTrotos",
+                "proPos": "5",
+                "gamesPlayed": "230",
+                "goals": "137",
+                "assists": "147",
+                "manOfTheMatch": "46",
+                "ratingAve": "7.5",
+                "prevGoals": "0",
+                "favoritePosition": "defender"
+            },
+            {
+                "name": "gavrielcrvg",
+                "proPos": "14",
+                "gamesPlayed": "311",
+                "goals": "171",
+                "assists": "195",
+                "manOfTheMatch": "39",
+                "ratingAve": "7.5",
+                "prevGoals": "0",
+                "favoritePosition": "midfielder"
+            },
+            {
+                "name": "Maximo_Vini1109",
+                "proPos": "25",
+                "gamesPlayed": "12",
+                "goals": "4",
+                "assists": "6",
+                "manOfTheMatch": "0",
+                "ratingAve": "6.9",
+                "prevGoals": "0",
+                "favoritePosition": "forward"
+            },
+            {
+                "name": "john_shellllby",
+                "proPos": "14",
+                "gamesPlayed": "4",
+                "goals": "3",
+                "assists": "0",
+                "manOfTheMatch": "0",
+                "ratingAve": "7.8",
+                "prevGoals": "2",
+                "favoritePosition": "midfielder"
+            },
+            {
+                "name": "ZeCriminoso",
+                "proPos": "14",
+                "gamesPlayed": "102",
+                "goals": "9",
+                "assists": "6",
+                "manOfTheMatch": "1",
+                "ratingAve": "6.4",
+                "prevGoals": "0",
+                "favoritePosition": "midfielder"
+            },
+            {
+                "name": "Wendelkkho",
+                "proPos": "25",
+                "gamesPlayed": "138",
+                "goals": "60",
+                "assists": "28",
+                "manOfTheMatch": "7",
+                "ratingAve": "6.6",
+                "prevGoals": "0",
+                "favoritePosition": "forward"
+            },
+            {
+                "name": "Mau-Mau_Damas",
+                "proPos": "14",
+                "gamesPlayed": "21",
+                "goals": "4",
+                "assists": "8",
+                "manOfTheMatch": "0",
+                "ratingAve": "7.1",
+                "prevGoals": "0",
+                "favoritePosition": "midfielder"
+            },
+            {
+                "name": "SRGT_XEREQUINHA",
+                "proPos": "25",
+                "gamesPlayed": "166",
+                "goals": "92",
+                "assists": "78",
+                "manOfTheMatch": "23",
+                "ratingAve": "7.2",
+                "prevGoals": "0",
+                "favoritePosition": "forward"
+            },
+            {
+                "name": "Gaps8459",
+                "proPos": "25",
+                "gamesPlayed": "256",
+                "goals": "350",
+                "assists": "152",
+                "manOfTheMatch": "82",
+                "ratingAve": "8.0",
+                "prevGoals": "2",
+                "favoritePosition": "forward"
+            },
+            {
+                "name": "brsferrari",
+                "proPos": "5",
+                "gamesPlayed": "133",
+                "goals": "16",
+                "assists": "26",
+                "manOfTheMatch": "4",
+                "ratingAve": "6.9",
+                "prevGoals": "0",
+                "favoritePosition": "defender"
+            }
+        ],
+        "positionCount": {
+            "midfielder": 6,
+            "goalkeeper": 0,
+            "forward": 4,
+            "defender": 2
+        }
+    }
+}

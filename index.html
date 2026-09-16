@@ -10,22 +10,30 @@
 </head>
 <body>
     <header class="header">
-        <div class="logo-container">
-            <!-- Escudo com copo de cerveja centralizado -->
-            <img src="./src/assets/img/escudo.png" alt="Escudo Baile de Munique" class="logo">
-            <h1>Baile de Munique</h1>
+        <div class="header__inner">
+            <a href="#home" class="logo-container" data-route="home" aria-label="Ir para Home">
+                <!-- Escudo Baile de Munique -->
+                <img src="./src/assets/img/EscudoBM.jpeg" alt="Escudo Baile de Munique" class="logo">
+                <h1>Baile de Munique</h1>
+            </a>
+
+            <button class="hamburger" aria-label="Abrir menu de navegação" aria-expanded="false">
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+            </button>
+
+            <nav class="navbar" role="navigation" aria-label="Menu principal">
+                <ul class="nav-links">
+                    <li><a href="#home" class="active" data-route="home">Home</a></li>
+                    <li><a href="#elenco" data-route="elenco">Elenco</a></li>
+                    <li><a href="#noticias" data-route="noticias">Notícias</a></li>
+                    <li><a href="#jogos" data-route="jogos">Últimos Jogos</a></li>
+                    <li><a href="#estatisticas" data-route="estatisticas">Estatísticas</a></li>
+                    <li><a href="#pesquisa" data-route="pesquisa">Pesquisa de Elenco</a></li>
+                </ul>
+            </nav>
         </div>
-        
-        <nav class="navbar">
-            <ul class="nav-links">
-                <li><a href="#home" class="active" data-route="home">Home</a></li>
-                <li><a href="#elenco" data-route="elenco">Elenco</a></li>
-                <li><a href="#noticias" data-route="noticias">Notícias</a></li>
-                <li><a href="#jogos" data-route="jogos">Últimos Jogos</a></li>
-                <li><a href="#estatisticas" data-route="estatisticas">Estatísticas</a></li>
-                <li><a href="#pesquisa" data-route="pesquisa">Pesquisa de elenco</a></li>
-            </ul>
-        </nav>
     </header>
 
     <!-- O conteúdo de cada página será injetado aqui via JS -->

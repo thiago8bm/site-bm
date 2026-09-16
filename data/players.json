@@ -1,0 +1,120 @@
+{
+    "last_updated": "2026-09-16T03:00:00",
+    "status": "manual",
+    "data": [
+        {
+            "id": "thiago",
+            "ea_id": null,
+            "name": "Thiago",
+            "number": 8,
+            "position": "MEI",
+            "position_ea": "midfielder",
+            "role": "1º Capitão",
+            "status": "ativo",
+            "photo": "./src/assets/players/thiago.jpg",
+            "instagram": null
+        },
+        {
+            "id": "abreu",
+            "ea_id": null,
+            "name": "Abreu",
+            "number": 15,
+            "position": "VOL",
+            "position_ea": "midfielder",
+            "role": "2º Capitão",
+            "status": "ativo",
+            "photo": "./src/assets/players/abreu.jpg",
+            "instagram": null
+        },
+        {
+            "id": "gaps",
+            "ea_id": null,
+            "name": "Gaps",
+            "number": 10,
+            "position": "CA",
+            "position_ea": "forward",
+            "role": "3º Capitão",
+            "status": "ativo",
+            "photo": "./src/assets/players/gaps.jpg",
+            "instagram": null
+        },
+        {
+            "id": "pedrao",
+            "ea_id": null,
+            "name": "Pedrão",
+            "number": 5,
+            "position": "GK",
+            "position_ea": "goalkeeper",
+            "role": "Jogador",
+            "origin_position": "VOL",
+            "status": "ativo",
+            "photo": "./src/assets/players/pedrao.jpg",
+            "instagram": null
+        },
+        {
+            "id": "dilaurentis",
+            "ea_id": null,
+            "name": "DiLaurentis",
+            "number": 19,
+            "position": "ZAG",
+            "position_ea": "defender",
+            "role": "Jogador",
+            "origin_position": "VOL",
+            "status": "ativo",
+            "photo": "./src/assets/players/dilaurentis.jpg",
+            "instagram": null
+        },
+        {
+            "id": "pinto",
+            "ea_id": null,
+            "name": "Pinto",
+            "number": 23,
+            "position": "PE",
+            "position_ea": "midfielder",
+            "role": "Jogador",
+            "origin_position": "PE",
+            "status": "ativo",
+            "photo": "./src/assets/players/pinto.jpg",
+            "instagram": null
+        },
+        {
+            "id": "gabri",
+            "ea_id": null,
+            "name": "Gabri",
+            "number": 27,
+            "position": "PD",
+            "position_ea": "midfielder",
+            "role": "Jogador",
+            "origin_position": "MEI",
+            "status": "ativo",
+            "photo": "./src/assets/players/gabri.jpg",
+            "instagram": null
+        },
+        {
+            "id": "cleiton",
+            "ea_id": null,
+            "name": "Cleiton",
+            "number": 30,
+            "position": "VOL",
+            "position_ea": "midfielder",
+            "role": "Jogador",
+            "origin_position": "PD",
+            "status": "ativo",
+            "photo": "./src/assets/players/cleiton.jpg",
+            "instagram": null
+        },
+        {
+            "id": "formiga",
+            "ea_id": null,
+            "name": "Formiga",
+            "number": 69,
+            "position": "PD",
+            "position_ea": "midfielder",
+            "role": "Jogador",
+            "origin_position": "PD",
+            "status": "ativo",
+            "photo": "./src/assets/players/formiga.jpg",
+            "instagram": null
+        }
+    ]
+}
