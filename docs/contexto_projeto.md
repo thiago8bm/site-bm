@@ -12,7 +12,7 @@ O mapeamento entre a ID oficial da EA e a identidade interna será gerenciado vi
 * **Thiago (#8):** MEI, 1º Capitão.
 * **Abreu (#15):** VOL (Origem: CA/VOL), 2º Capitão.
 * **Gaps (#10):** CA, 3º Capitão.
-* **Pedrão (#5):** LD (Origem: VOL).
+* **Pedrão (#5):** GK (Origem: VOL).
 * **DiLaurentis (#19):** ZAG (Origem: VOL).
 * **Pinto (#23):** PE (Origem: PE).
 * **Gabri (#27):** PD (Origem: MEI).

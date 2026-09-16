@@ -375,4 +375,4 @@ def gerar_dashboard_bm(caminho_xlsx, caminho_saida_html):
         
     print(f"Sucesso! Dashboard v4 (Final) gerado em: {caminho_saida_html}")
 
-gerar_dashboard_bm('scripts/Pesquisa_de_elenco_-_BM_(respostas).xlsx', 'dashboard_baile_de_munique_v4.html')
+gerar_dashboard_bm('data/Pesquisa_de_elenco_-_BM_(respostas).xlsx', 'dashboard_baile_de_munique_v4.html')
