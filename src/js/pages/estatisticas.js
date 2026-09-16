@@ -177,13 +177,17 @@ function buildFullTable(jogadores) {
                     <th>G</th>
                     <th>A</th>
                     <th>G+A</th>
+                    <th>Final.</th>
+                    <th>Passes</th>
+                    <th>Desarmes</th>
                     <th>MVP</th>
                     <th>Nota</th>
-                    <th>Aprov.</th>
                 </tr>
             </thead>
             <tbody>
-                ${sorted.map(j => `
+                ${sorted.map(j => {
+                    const finalizacoes = j.taxa_chute ? Math.round((j.gols * 100) / j.taxa_chute) : 0;
+                    return `
                 <tr>
                     <td><strong>${j.nome_display}</strong></td>
                     <td><span class="posicao-pill" style="background:${getPosicaoColor(j.posicao)}">${j.posicao}</span></td>
@@ -191,10 +195,13 @@ function buildFullTable(jogadores) {
                     <td>${j.gols ?? 0}</td>
                     <td>${j.assistencias ?? 0}</td>
                     <td><strong>${(j.gols ?? 0) + (j.assistencias ?? 0)}</strong></td>
+                    <td>${finalizacoes}</td>
+                    <td>${j.passes_feitos ?? 0}</td>
+                    <td>${j.desarmes ?? 0}</td>
                     <td>${j.mvp ?? 0}</td>
                     <td>${j.media_nota?.toFixed(2) ?? '—'}</td>
-                    <td>${j.win_rate ?? 0}%</td>
-                </tr>`).join('')}
+                </tr>`;
+                }).join('')}
             </tbody>
         </table>
     </div>`;

@@ -106,8 +106,33 @@
     gap: 4px;
 }
 
-.player-card__name  { font-size: 1rem; font-weight: 700; color: var(--color-gray-900); }
-.player-card__meta  { display: flex; gap: 4px; flex-wrap: wrap; }
+.player-card__name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.player-card__name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-gray-900);
+}
+
+.player-card__insta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: var(--spacing-xs);
+    font-size: 0.75rem;
+    color: var(--color-gray-600);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.player-card__insta:hover {
+    color: var(--color-blue);
+}
 
 /* Stats expandidas (ocultas por padrão, reveladas ao clicar) */
 .player-card__stats {

@@ -165,7 +165,7 @@ export async function renderNoticias() {
             <button class="lightbox__nav lightbox__nav--next" id="lb-next" aria-label="Próximo">›</button>
         </div>`;
 
-    initLightbox(theficientsOrdenadas, BASE_PATH_THEFICIENTS);
+    initLightbox();
 }
 
 // ─── Card de edição ───────────────────────────────────────────────────────────
@@ -199,7 +199,7 @@ function buildCard(edicao, basePath) {
 }
 
 // ─── Lightbox ─────────────────────────────────────────────────────────────────
-function initLightbox(lista, basePath) {
+function initLightbox() {
     const lightbox  = document.getElementById('lightbox');
     const imgEl     = document.getElementById('lightbox-img');
     const captionEl = document.getElementById('lightbox-caption');
@@ -209,14 +209,15 @@ function initLightbox(lista, basePath) {
 
     if (!lightbox || !imgEl) return;
 
+    const cards = Array.from(document.getElementById('noticias-view').querySelectorAll('.noticia-card'));
     let currentIdx = 0;
 
     const open = (idx) => {
         currentIdx = idx;
-        const item  = lista[idx];
-        imgEl.src   = `${basePath}${item.filename}`;
-        imgEl.alt   = item.rotulo;
-        captionEl.textContent = item.rotulo;
+        const card  = cards[idx];
+        imgEl.src   = card.dataset.src;
+        imgEl.alt   = card.dataset.caption;
+        captionEl.textContent = card.dataset.caption;
         lightbox.classList.add('is-open');
         document.body.style.overflow = 'hidden';
     };
@@ -227,11 +228,11 @@ function initLightbox(lista, basePath) {
         imgEl.src = '';
     };
 
-    const prev = () => open((currentIdx - 1 + lista.length) % lista.length);
-    const next = () => open((currentIdx + 1) % lista.length);
+    const prev = () => open((currentIdx - 1 + cards.length) % cards.length);
+    const next = () => open((currentIdx + 1) % cards.length);
 
     // Cliques nos cards
-    document.getElementById('noticias-view').querySelectorAll('.noticia-card').forEach((card, idx) => {
+    cards.forEach((card, idx) => {
         card.addEventListener('click', () => open(idx));
         card.addEventListener('keypress', e => { if (e.key === 'Enter' || e.key === ' ') open(idx); });
     });

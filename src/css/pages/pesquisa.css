@@ -177,11 +177,7 @@
     letter-spacing: 0.01em;
 }
 
-.campinho__jogador--gk  { background: #f39c12; color: #333; }
-.campinho__jogador--ca  { background: var(--color-red-dark); }
-.campinho__jogador--mei { background: var(--color-blue); }
-.campinho__jogador--pe,
-.campinho__jogador--pd  { background: #8e44ad; }
+.campinho__jogador--gk  { background: var(--color-blue); color: var(--color-white); }
 
 /* Tabela de coringas */
 .coringas-table { margin-top: var(--spacing-sm); }

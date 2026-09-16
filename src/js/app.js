@@ -109,6 +109,12 @@ function navigateTo(route, updateHash = true) {
     // Oculta todas as seções
     document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
 
+    // Fecha qualquer lightbox ativo (evita modal vazando em outras telas)
+    document.querySelectorAll('.lightbox.is-open').forEach(lb => {
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+    });
+
     // Exibe a seção alvo
     document.getElementById(`${route}-view`)?.classList.add('active');
 

@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-09-16T09:38:09.038671",
+    "last_updated": "2026-09-16T18:19:12.518544",
     "status": "success",
     "total": 9,
     "data": [
@@ -12,7 +12,11 @@
             "posicao": "GK",
             "posicao_ea": "goalkeeper",
             "capitania": null,
-            "foto_pasta": "Pedrao",
+            "fotos": [
+                "src/assets/players/Pedrao/apresentacao_pedrao.png",
+                "src/assets/players/Pedrao/face_pedrao.png"
+            ],
+            "instagram": "pedrao_gk",
             "status": "ativo",
             "partidas": 102,
             "gols": 9,
@@ -42,7 +46,7 @@
                 1
             ],
             "participacoes_gol": 15,
-            "processado_em": "2026-09-16T09:38:09.038612"
+            "processado_em": "2026-09-16T18:19:12.518242"
         },
         {
             "id": "thiago",
@@ -53,7 +57,14 @@
             "posicao": "MEI",
             "posicao_ea": "midfielder",
             "capitania": "1º Capitão",
-            "foto_pasta": "Thiago",
+            "fotos": [
+                "src/assets/players/Thiago/apresentacao_thiago.jfif",
+                "src/assets/players/Thiago/assinatura_thiago.jfif",
+                "src/assets/players/Thiago/face_thiago.jpeg",
+                "src/assets/players/Thiago/patrocinio_Thiago.jpg",
+                "src/assets/players/Thiago/treino_thiago.jfif"
+            ],
+            "instagram": "thiag0.so",
             "status": "ativo",
             "partidas": 222,
             "gols": 76,
@@ -83,7 +94,7 @@
                 1
             ],
             "participacoes_gol": 215,
-            "processado_em": "2026-09-16T09:38:09.038548"
+            "processado_em": "2026-09-16T18:19:12.517915"
         },
         {
             "id": "gaps",
@@ -94,7 +105,11 @@
             "posicao": "CA",
             "posicao_ea": "forward",
             "capitania": "3º Capitão",
-            "foto_pasta": "Gaps",
+            "fotos": [
+                "src/assets/players/Gaps/apresentacao_Gaps.jpg",
+                "src/assets/players/Gaps/patrocinio_Gaps.jpeg"
+            ],
+            "instagram": "gaps.84",
             "status": "ativo",
             "partidas": 256,
             "gols": 350,
@@ -124,7 +139,7 @@
                 8
             ],
             "participacoes_gol": 502,
-            "processado_em": "2026-09-16T09:38:09.038646"
+            "processado_em": "2026-09-16T18:19:12.518452"
         },
         {
             "id": "abreu",
@@ -135,7 +150,10 @@
             "posicao": "VOL",
             "posicao_ea": "midfielder",
             "capitania": "2º Capitão",
-            "foto_pasta": "Abreu",
+            "fotos": [
+                "src/assets/players/Abreu/apresentacao_abreu.jpg"
+            ],
+            "instagram": "abreu.dan",
             "status": "ativo",
             "partidas": 230,
             "gols": 137,
@@ -165,7 +183,7 @@
                 2
             ],
             "participacoes_gol": 284,
-            "processado_em": "2026-09-16T09:38:09.038583"
+            "processado_em": "2026-09-16T18:19:12.518091"
         },
         {
             "id": "dilaurentis",
@@ -176,7 +194,12 @@
             "posicao": "ZGE",
             "posicao_ea": "defender",
             "capitania": null,
-            "foto_pasta": "DiLaurentis",
+            "fotos": [
+                "src/assets/players/DiLaurentis/apresentacao_DiLaurentis.jpg",
+                "src/assets/players/DiLaurentis/campo_DiLaurentis.jpg",
+                "src/assets/players/DiLaurentis/viagem_DiLaurentis.jpg"
+            ],
+            "instagram": "dilaurentis.b",
             "status": "ativo",
             "partidas": 133,
             "gols": 16,
@@ -206,7 +229,7 @@
                 1
             ],
             "participacoes_gol": 42,
-            "processado_em": "2026-09-16T09:38:09.038657"
+            "processado_em": "2026-09-16T18:19:12.518529"
         },
         {
             "id": "pinto",
@@ -217,7 +240,12 @@
             "posicao": "PE",
             "posicao_ea": "midfielder",
             "capitania": null,
-            "foto_pasta": "Pinto",
+            "fotos": [
+                "src/assets/players/Pinto/academia_pinto.jpg",
+                "src/assets/players/Pinto/apresentacao_pinto.webp",
+                "src/assets/players/Pinto/treino_campo_pinto.webp"
+            ],
+            "instagram": "pinto.pe",
             "status": "ativo",
             "partidas": 129,
             "gols": 81,
@@ -247,7 +275,7 @@
                 2
             ],
             "participacoes_gol": 147,
-            "processado_em": "2026-09-16T09:38:09.038635"
+            "processado_em": "2026-09-16T18:19:12.518382"
         },
         {
             "id": "gabri",
@@ -258,7 +286,12 @@
             "posicao": "PD",
             "posicao_ea": "midfielder",
             "capitania": null,
-            "foto_pasta": "Gabri",
+            "fotos": [
+                "src/assets/players/Gabri/apresentacao_gabri.jpg",
+                "src/assets/players/Gabri/face_gabri.png",
+                "src/assets/players/Gabri/night_gabri.jpg"
+            ],
+            "instagram": "gabri.crvg",
             "status": "ativo",
             "partidas": 8,
             "gols": 4,
@@ -288,7 +321,7 @@
                 0
             ],
             "participacoes_gol": 8,
-            "processado_em": "2026-09-16T09:38:09.038596"
+            "processado_em": "2026-09-16T18:19:12.518165"
         },
         {
             "id": "cleiton",
@@ -299,7 +332,11 @@
             "posicao": "VOL",
             "posicao_ea": "midfielder",
             "capitania": null,
-            "foto_pasta": "Cleiton",
+            "fotos": [
+                "src/assets/players/Cleiton/contrato_cleiton.jpg",
+                "src/assets/players/Cleiton/foto_cleiton.jpg"
+            ],
+            "instagram": "cleiton.vol",
             "status": "ativo",
             "partidas": 267,
             "gols": 75,
@@ -329,7 +366,7 @@
                 1
             ],
             "participacoes_gol": 136,
-            "processado_em": "2026-09-16T09:38:09.038570"
+            "processado_em": "2026-09-16T18:19:12.518012"
         },
         {
             "id": "formiga",
@@ -340,7 +377,8 @@
             "posicao": "PD",
             "posicao_ea": "midfielder",
             "capitania": null,
-            "foto_pasta": "Formiga",
+            "fotos": [],
+            "instagram": "formiga.pd",
             "status": "ativo",
             "partidas": 138,
             "gols": 60,
@@ -370,7 +408,7 @@
                 1
             ],
             "participacoes_gol": 88,
-            "processado_em": "2026-09-16T09:38:09.038623"
+            "processado_em": "2026-09-16T18:19:12.518310"
         }
     ]
 }

@@ -34,6 +34,7 @@ ELENCO_MAP = {
         "posicao_ea":   "midfielder",
         "capitania":    "1º Capitão",
         "foto_pasta":   "Thiago",
+        "instagram":    "thiag0.so",
     },
     "DanyTheTrotos": {
         "id":           "abreu",
@@ -43,6 +44,7 @@ ELENCO_MAP = {
         "posicao_ea":   "midfielder",
         "capitania":    "2º Capitão",
         "foto_pasta":   "Abreu",
+        "instagram":    "abreu.dan",
     },
     "Gaps8459": {
         "id":           "gaps",
@@ -52,6 +54,7 @@ ELENCO_MAP = {
         "posicao_ea":   "forward",
         "capitania":    "3º Capitão",
         "foto_pasta":   "Gaps",
+        "instagram":    "gaps.84",
     },
     "ZeCriminoso": {
         "id":           "pedrao",
@@ -61,6 +64,7 @@ ELENCO_MAP = {
         "posicao_ea":   "goalkeeper",
         "capitania":    None,
         "foto_pasta":   "Pedrao",
+        "instagram":    "pedrao_gk",
     },
     "brsferrari": {
         "id":           "dilaurentis",
@@ -70,6 +74,7 @@ ELENCO_MAP = {
         "posicao_ea":   "defender",
         "capitania":    None,
         "foto_pasta":   "DiLaurentis",
+        "instagram":    "dilaurentis.b",
     },
     "SRGT_XEREQUINHA": {
         "id":           "pinto",
@@ -79,6 +84,7 @@ ELENCO_MAP = {
         "posicao_ea":   "midfielder",
         "capitania":    None,
         "foto_pasta":   "Pinto",
+        "instagram":    "pinto.pe",
     },
     "gavrielcrvg": {
         "id":           "gabri",
@@ -88,6 +94,7 @@ ELENCO_MAP = {
         "posicao_ea":   "midfielder",
         "capitania":    None,
         "foto_pasta":   "Gabri",
+        "instagram":    "gabri.crvg",
     },
     # Cleiton = NortonJONES / C. da Costa (confirmado)
     "NortonJONES": {
@@ -98,6 +105,7 @@ ELENCO_MAP = {
         "posicao_ea":   "midfielder",
         "capitania":    None,
         "foto_pasta":   "Cleiton",
+        "instagram":    "cleiton.vol",
     },
     # Formiga = Wendelkkho / Tijolinho (confirmado)
     "Wendelkkho": {
@@ -108,6 +116,7 @@ ELENCO_MAP = {
         "posicao_ea":   "midfielder",
         "capitania":    None,
         "foto_pasta":   "Formiga",
+        "instagram":    "formiga.pd",
     },
 }
 
@@ -143,6 +152,17 @@ def safe_float(val, default=0.0) -> float:
         return float(val)
     except (TypeError, ValueError):
         return default
+
+def get_player_photos(pasta: str) -> list:
+    if not pasta:
+        return []
+    dir_path = os.path.join("src", "assets", "players", pasta)
+    if not os.path.exists(dir_path):
+        return []
+    
+    exts = ('.jpg', '.jpeg', '.png', '.webp', '.jfif')
+    files = [f for f in os.listdir(dir_path) if f.lower().endswith(exts)]
+    return [f"src/assets/players/{pasta}/{f}" for f in files]
 
 # =============================================
 # PROCESSAMENTO DO ELENCO
@@ -193,7 +213,8 @@ def processar_elenco() -> list:
             "posicao":      meta["posicao"],
             "posicao_ea":   meta["posicao_ea"],
             "capitania":    meta["capitania"],
-            "foto_pasta":   meta["foto_pasta"],
+            "fotos":        get_player_photos(meta["foto_pasta"]),
+            "instagram":    meta.get("instagram", ""),
             "status":       "ativo",
 
             # Estatísticas Globais
