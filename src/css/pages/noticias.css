@@ -139,12 +139,19 @@
     z-index: 2000;
     align-items: center;
     justify-content: center;
+    overflow: auto;
 }
 
 .lightbox.is-open {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
+}
+
+.lightbox.is-zoomed {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    padding: var(--spacing-xl);
 }
 
 .lightbox__inner {
@@ -154,6 +161,12 @@
     max-width: 90vw;
     max-height: 90vh;
     gap: var(--spacing-md);
+    margin: auto;
+}
+
+.lightbox.is-zoomed .lightbox__inner {
+    max-width: none;
+    max-height: none;
 }
 
 .lightbox__img {
@@ -164,6 +177,14 @@
     object-fit: contain !important;
     border-radius: var(--border-radius-sm);
     box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    cursor: zoom-in;
+    transition: max-width 0.3s ease, max-height 0.3s ease;
+}
+
+.lightbox.is-zoomed .lightbox__img {
+    max-width: none !important;
+    max-height: none !important;
+    cursor: zoom-out;
 }
 
 .lightbox__caption {

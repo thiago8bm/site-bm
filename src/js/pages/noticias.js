@@ -224,11 +224,13 @@ function initLightbox() {
         imgEl.alt   = card.dataset.caption;
         captionEl.textContent = card.dataset.caption;
         lightbox.classList.add('is-open');
+        lightbox.classList.remove('is-zoomed');
         document.body.style.overflow = 'hidden';
     };
 
     const close = () => {
         lightbox.classList.remove('is-open');
+        lightbox.classList.remove('is-zoomed');
         document.body.style.overflow = '';
         imgEl.src = '';
     };
@@ -246,8 +248,18 @@ function initLightbox() {
     btnPrev.addEventListener('click', prev);
     btnNext.addEventListener('click', next);
 
+    // Zoom ao clicar na imagem
+    imgEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lightbox.classList.toggle('is-zoomed');
+    });
+
     // Fechar ao clicar fora da imagem
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
+    lightbox.addEventListener('click', e => { 
+        if (e.target === lightbox || e.target.classList.contains('lightbox__inner')) {
+            close();
+        }
+    });
 
     // Teclado
     document.addEventListener('keydown', e => {
