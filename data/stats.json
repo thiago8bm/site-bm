@@ -1,0 +1,103 @@
+{
+    "last_updated": "2026-09-16T08:54:14.869505",
+    "status": "success",
+    "clube": {
+        "nome": "Baile de Munique",
+        "id_ea": "1071934",
+        "tatica": "1-4-2-3-1",
+        "instagram": "https://www.instagram.com/bailedemunichofc/"
+    },
+    "liga": {
+        "total_partidas": 10,
+        "vitorias": 5,
+        "empates": 1,
+        "derrotas": 4,
+        "gols_marcados": 33,
+        "gols_sofridos": 24,
+        "saldo_gols": 9,
+        "win_rate": 50.0
+    },
+    "total_partidas_all": 10,
+    "top_artilheiros": [
+        {
+            "nome": "Gaps",
+            "gols": 350,
+            "posicao": "CA"
+        },
+        {
+            "nome": "Abreu",
+            "gols": 137,
+            "posicao": "VOL"
+        },
+        {
+            "nome": "Pinto",
+            "gols": 81,
+            "posicao": "PE"
+        },
+        {
+            "nome": "Thiago",
+            "gols": 76,
+            "posicao": "MEI"
+        },
+        {
+            "nome": "Cleiton",
+            "gols": 60,
+            "posicao": "VOL"
+        }
+    ],
+    "top_assistentes": [
+        {
+            "nome": "Gaps",
+            "assists": 152,
+            "posicao": "CA"
+        },
+        {
+            "nome": "Abreu",
+            "assists": 147,
+            "posicao": "VOL"
+        },
+        {
+            "nome": "Thiago",
+            "assists": 139,
+            "posicao": "MEI"
+        },
+        {
+            "nome": "Pinto",
+            "assists": 66,
+            "posicao": "PE"
+        },
+        {
+            "nome": "Cleiton",
+            "assists": 28,
+            "posicao": "VOL"
+        }
+    ],
+    "top_mvp": [
+        {
+            "nome": "Gaps",
+            "mvps": 82,
+            "posicao": "CA"
+        },
+        {
+            "nome": "Abreu",
+            "mvps": 46,
+            "posicao": "VOL"
+        },
+        {
+            "nome": "Thiago",
+            "mvps": 34,
+            "posicao": "MEI"
+        },
+        {
+            "nome": "Pinto",
+            "mvps": 14,
+            "posicao": "PE"
+        },
+        {
+            "nome": "Cleiton",
+            "mvps": 7,
+            "posicao": "VOL"
+        }
+    ],
+    "membros_ativos": 8
+}
