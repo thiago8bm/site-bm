@@ -32,10 +32,24 @@ export async function renderHome() {
                         href="https://www.instagram.com/bailedemunichofc/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="btn btn--ghost home-hero__instagram"
+                        class="btn btn--instagram home-hero__instagram"
                         aria-label="Instagram do Baile de Munique"
                     >
-                        📸 @bailedemunichofc
+                        <svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                            <defs>
+                                <radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">
+                                    <stop offset="0%"  stop-color="#fdf497"/>
+                                    <stop offset="5%"  stop-color="#fdf497"/>
+                                    <stop offset="45%" stop-color="#fd5949"/>
+                                    <stop offset="60%" stop-color="#d6249f"/>
+                                    <stop offset="90%" stop-color="#285AEB"/>
+                                </radialGradient>
+                            </defs>
+                            <rect x="2" y="2" width="20" height="20" rx="6" ry="6" fill="url(#ig-grad)"/>
+                            <circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" stroke-width="1.8"/>
+                            <circle cx="17.5" cy="6.5" r="1.2" fill="#fff"/>
+                        </svg>
+                        @bailedemunichofc
                     </a>
                 </div>
 

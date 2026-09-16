@@ -8,6 +8,7 @@ import { renderElenco }       from './pages/elenco.js';
 import { renderUltimosJogos } from './pages/jogos.js';
 import { renderEstatisticas } from './pages/estatisticas.js';
 import { renderPesquisa }     from './pages/pesquisa.js';
+import { renderNoticias }     from './pages/noticias.js';
 
 // =====================================================
 // CONSTANTES E CONFIGURAÇÃO
@@ -140,7 +141,7 @@ async function renderRoute(route) {
         case 'jogos':        await renderUltimosJogos();  break;
         case 'estatisticas': await renderEstatisticas();  break;
         case 'pesquisa':     await renderPesquisa();      break;
-        case 'noticias':     /* placeholder — Fase futura */ break;
+        case 'noticias':     await renderNoticias();      break;
         default: break;
     }
 }
