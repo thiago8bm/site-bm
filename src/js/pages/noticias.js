@@ -208,6 +208,11 @@ function initLightbox() {
     const btnNext   = document.getElementById('lb-next');
 
     if (!lightbox || !imgEl) return;
+    
+    // Remove do container atual e injeta no body para escapar de z-index e transform contexts
+    if (lightbox.parentNode !== document.body) {
+        document.body.appendChild(lightbox);
+    }
 
     const cards = Array.from(document.getElementById('noticias-view').querySelectorAll('.noticia-card'));
     let currentIdx = 0;
