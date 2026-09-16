@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baile de Munique | FC26 Pro Clubs</title>
+    <script>
+        // Corrige erro do GitHub Pages: força barra no final da URL para não quebrar caminhos relativos
+        if (window.location.hostname.includes("github.io") && !window.location.pathname.endsWith('/')) {
+            window.location.replace(window.location.pathname + '/' + window.location.search + window.location.hash);
+        }
+    </script>
     <!-- Base -->
     <link rel="stylesheet" href="./src/css/main.css">
     <!-- Components -->
