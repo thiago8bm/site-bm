@@ -33,14 +33,14 @@ export async function renderPesquisa() {
             <div class="termometro-grid">
                 <div class="termo-card">
                     <span class="termo-card__icon">👥</span>
-                    <span class="termo-card__label">Percepção Coletiva</span>
+                    <span class="termo-card__label">Percepção Média do Coletivo</span>
                     <span class="termo-card__value termo-card__value--blue">
                         ${termometro.media_coletiva.toFixed(2)}<small> / 5</small>
                     </span>
                     <div class="termo-stars">${renderStars(termometro.media_coletiva)}</div>
                 </div>
                 <div class="termo-card">
-                    <span class="termo-card__icon">🪞</span>
+                    <span class="termo-card__icon">🧠</span>
                     <span class="termo-card__label">Autoavaliação Média</span>
                     <span class="termo-card__value termo-card__value--red">
                         ${termometro.media_auto.toFixed(2)}<small> / 5</small>

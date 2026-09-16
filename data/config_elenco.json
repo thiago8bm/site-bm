@@ -1,0 +1,83 @@
+﻿{
+    "Thiago (#8)": {
+        "ea_id": "Thiago_Souza108",
+        "posicao": "MEI",
+        "instagram": "@thiago8ofc_",
+        "posicao_ea": "midfielder",
+        "capitania": "1º Capitão",
+        "foto_pasta": "Thiago",
+        "id_interno": "thiago"
+    },
+    "Abreu (#15)": {
+        "ea_id": "DanyTheTrotos",
+        "posicao": "VOL",
+        "instagram": "@sturridge_a15_",
+        "posicao_ea": "midfielder",
+        "capitania": "2º Capitão",
+        "foto_pasta": "Abreu",
+        "id_interno": "abreu"
+    },
+    "Gaps (#10)": {
+        "ea_id": "Gaps8459",
+        "posicao": "CA",
+        "instagram": "@gapsofc_",
+        "posicao_ea": "forward",
+        "capitania": "3º Capitão",
+        "foto_pasta": "Gaps",
+        "id_interno": "gaps"
+    },
+    "Pedrão (#5)": {
+        "ea_id": "ZeCriminoso",
+        "posicao": "GK",
+        "instagram": null,
+        "posicao_ea": "goalkeeper",
+        "capitania": null,
+        "foto_pasta": "Pedrao",
+        "id_interno": "pedrao"
+    },
+    "DiLaurentis (#19)": {
+        "ea_id": "brsferrari",
+        "posicao": "ZGE",
+        "instagram": "@mattia.dila",
+        "posicao_ea": "defender",
+        "capitania": null,
+        "foto_pasta": "DiLaurentis",
+        "id_interno": "dilaurentis"
+    },
+    "Pinto (#23)": {
+        "ea_id": "SRGT_XEREQUINHA",
+        "posicao": "PE",
+        "instagram": "@l.pinto23",
+        "posicao_ea": "midfielder",
+        "capitania": null,
+        "foto_pasta": "Pinto",
+        "id_interno": "pinto"
+    },
+    "Gabri (#27)": {
+        "ea_id": "gavrielcrvg",
+        "posicao": "PD",
+        "instagram": "@gabrijogador27",
+        "posicao_ea": "midfielder",
+        "capitania": null,
+        "foto_pasta": "Gabri",
+        "id_interno": "gabri"
+    },
+    "Cleiton (#30)": {
+        "ea_id": "NortonJONES",
+        "posicao": "VOL",
+        "instagram": "@cleiton_da.costa",
+        "posicao_ea": "midfielder",
+        "capitania": null,
+        "foto_pasta": "Cleiton",
+        "id_interno": "cleiton"
+    },
+    "Formiga (#69)": {
+        "ea_id": "Wendelkkho",
+        "posicao": "PD",
+        "instagram": null,
+        "posicao_ea": "midfielder",
+        "capitania": null,
+        "foto_pasta": "Formiga",
+        "id_interno": "formiga"
+    }
+}

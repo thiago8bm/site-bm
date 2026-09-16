@@ -23,102 +23,44 @@ MATCH_TYPES  = ["leagueMatch", "playoffMatch", "friendlyMatch"]
 
 # =============================================
 # DICIONÁRIO DE MAPEAMENTO DO ELENCO
-# Chave: nome de usuário EA (campo "name" / "playername")
 # =============================================
-ELENCO_MAP = {
-    "Thiago_Souza108": {
-        "id":           "thiago",
-        "nome_display": "Thiago",
-        "numero":       8,
-        "posicao":      "MEI",
-        "posicao_ea":   "midfielder",
-        "capitania":    "1º Capitão",
-        "foto_pasta":   "Thiago",
-        "instagram":    "thiag0.so",
-    },
-    "DanyTheTrotos": {
-        "id":           "abreu",
-        "nome_display": "Abreu",
-        "numero":       15,
-        "posicao":      "VOL",
-        "posicao_ea":   "midfielder",
-        "capitania":    "2º Capitão",
-        "foto_pasta":   "Abreu",
-        "instagram":    "abreu.dan",
-    },
-    "Gaps8459": {
-        "id":           "gaps",
-        "nome_display": "Gaps",
-        "numero":       10,
-        "posicao":      "CA",
-        "posicao_ea":   "forward",
-        "capitania":    "3º Capitão",
-        "foto_pasta":   "Gaps",
-        "instagram":    "gaps.84",
-    },
-    "ZeCriminoso": {
-        "id":           "pedrao",
-        "nome_display": "Pedrão",
-        "numero":       5,
-        "posicao":      "GK",
-        "posicao_ea":   "goalkeeper",
-        "capitania":    None,
-        "foto_pasta":   "Pedrao",
-        "instagram":    "pedrao_gk",
-    },
-    "brsferrari": {
-        "id":           "dilaurentis",
-        "nome_display": "DiLaurentis",
-        "numero":       19,
-        "posicao":      "ZGE",
-        "posicao_ea":   "defender",
-        "capitania":    None,
-        "foto_pasta":   "DiLaurentis",
-        "instagram":    "dilaurentis.b",
-    },
-    "SRGT_XEREQUINHA": {
-        "id":           "pinto",
-        "nome_display": "Pinto",
-        "numero":       23,
-        "posicao":      "PE",
-        "posicao_ea":   "midfielder",
-        "capitania":    None,
-        "foto_pasta":   "Pinto",
-        "instagram":    "pinto.pe",
-    },
-    "gavrielcrvg": {
-        "id":           "gabri",
-        "nome_display": "Gabri",
-        "numero":       27,
-        "posicao":      "PD",
-        "posicao_ea":   "midfielder",
-        "capitania":    None,
-        "foto_pasta":   "Gabri",
-        "instagram":    "gabri.crvg",
-    },
-    # Cleiton = NortonJONES / C. da Costa (confirmado)
-    "NortonJONES": {
-        "id":           "cleiton",
-        "nome_display": "Cleiton",
-        "numero":       30,
-        "posicao":      "VOL",
-        "posicao_ea":   "midfielder",
-        "capitania":    None,
-        "foto_pasta":   "Cleiton",
-        "instagram":    "cleiton.vol",
-    },
-    # Formiga = Wendelkkho / Tijolinho (confirmado)
-    "Wendelkkho": {
-        "id":           "formiga",
-        "nome_display": "Formiga",
-        "numero":       69,
-        "posicao":      "PD",
-        "posicao_ea":   "midfielder",
-        "capitania":    None,
-        "foto_pasta":   "Formiga",
-        "instagram":    "formiga.pd",
-    },
-}
+CONFIG_ELENCO_PATH = os.path.join("data", "config_elenco.json")
+ELENCO_MAP = {}
+
+def load_config_elenco():
+    global ELENCO_MAP
+    if not os.path.exists(CONFIG_ELENCO_PATH):
+        print(f"  [ERRO] Arquivo de config não encontrado: {CONFIG_ELENCO_PATH}")
+        return
+    try:
+        with open(CONFIG_ELENCO_PATH, "r", encoding="utf-8-sig") as f:
+            config = json.load(f)
+    except Exception as e:
+        print(f"  [ERRO] Falha ao ler {CONFIG_ELENCO_PATH}: {e}")
+        return
+        
+    for key, data in config.items():
+        # A chave vem no formato "Thiago (#8)"
+        try:
+            nome = key.split(" (#")[0]
+            numero = int(key.split(" (#")[1].replace(")", ""))
+        except Exception:
+            nome = key
+            numero = 0
+            
+        ea_id = data.get("ea_id")
+        if not ea_id: continue
+        
+        ELENCO_MAP[ea_id] = {
+            "id":           data.get("id_interno", nome.lower()),
+            "nome_display": nome,
+            "numero":       numero,
+            "posicao":      data.get("posicao"),
+            "posicao_ea":   data.get("posicao_ea"),
+            "capitania":    data.get("capitania"),
+            "foto_pasta":   data.get("foto_pasta"),
+            "instagram":    data.get("instagram")
+        }
 
 # =============================================
 # UTILITÁRIOS
@@ -442,6 +384,9 @@ def main():
     print("  process_stats.py — Baile de Munique")
     print(f"  Iniciando em: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
+
+    print("\n[0/3] Carregando config do elenco...")
+    load_config_elenco()
 
     print("\n[1/3] Processando elenco...")
     elenco = processar_elenco()
