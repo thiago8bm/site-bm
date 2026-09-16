@@ -3,11 +3,17 @@
  * Gerencia a navegação entre views sem reload de página.
  */
 
+import { renderHome, renderElenco, renderUltimosJogos, renderEstatisticas } from './ui.js';
+
 // =====================================================
 // CONSTANTES E CONFIGURAÇÃO
 // =====================================================
 const ROUTES = ['home', 'elenco', 'noticias', 'jogos', 'estatisticas', 'pesquisa'];
 const DEFAULT_ROUTE = 'home';
+
+// Controla quais rotas já foram renderizadas (lazy render)
+const _rendered = new Set();
+
 
 // =====================================================
 // BOOTSTRAP (aguarda DOM estar pronto)
@@ -142,11 +148,33 @@ function navigateTo(route, updateHash = true) {
     // Scroll suave ao topo ao trocar de seção
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
+    // Renderiza o conteúdo da rota (lazy: apenas na primeira visita)
+    renderRoute(route);
+
     console.log(`[Router] Navegou para: ${route}`);
 }
 
 /**
+ * Despacha o renderizador correto para cada rota.
+ * Usa lazy rendering: só executa na primeira visita.
+ */
+async function renderRoute(route) {
+    if (_rendered.has(route)) return;
+    _rendered.add(route);
+
+    switch (route) {
+        case 'home':         await renderHome();          break;
+        case 'elenco':       await renderElenco();        break;
+        case 'jogos':        await renderUltimosJogos();  break;
+        case 'estatisticas': await renderEstatisticas();  break;
+        // noticias e pesquisa serão implementados nas próximas fases
+        default: break;
+    }
+}
+
+/**
  * Garante que todas as seções de rota existam no DOM.
+
  * Se não existir, cria um placeholder com loading state.
  */
 function ensureAllViewsExist() {
