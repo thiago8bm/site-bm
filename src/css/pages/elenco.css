@@ -1,0 +1,147 @@
+/* ===== ELENCO — Player Cards Grid ===== */
+.elenco-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+@media (min-width: 480px) { .elenco-grid { grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); } }
+@media (min-width: 768px) { .elenco-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); } }
+
+/* Player Card */
+.player-card {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition:
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal),
+        transform var(--transition-normal);
+}
+
+.player-card:hover,
+.player-card:focus-visible {
+    border-color: var(--color-red);
+    outline: none;
+}
+
+.player-card__header {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--color-gray-200);
+}
+
+.player-card__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform var(--transition-slow);
+}
+
+.player-card:hover .player-card__photo { transform: scale(1.04); }
+
+.player-card__photo--placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-red), var(--color-red-dark));
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--color-white);
+}
+
+.player-card__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: var(--spacing-sm);
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+}
+
+.player-card__number {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-white);
+}
+
+.player-card__posicao {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-white);
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+}
+
+.capitania-badge {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: gold;
+    color: #333;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 999px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+.player-card__body {
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.player-card__name  { font-size: 1rem; font-weight: 700; color: var(--color-gray-900); }
+.player-card__meta  { display: flex; gap: 4px; flex-wrap: wrap; }
+
+/* Stats expandidas (ocultas por padrão, reveladas ao clicar) */
+.player-card__stats {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-slow), padding var(--transition-slow);
+    padding: 0 var(--spacing-md);
+}
+
+.player-card.is-expanded .player-card__stats {
+    max-height: 220px;
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--color-gray-200);
+    font-size: 0.85rem;
+}
+
+.stat-row:last-child  { border-bottom: none; }
+.stat-label           { color: var(--text-secondary); }
+.stat-value           { font-weight: 700; color: var(--color-gray-900); }
+
+.player-card__hint {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 4px;
+    transition: opacity var(--transition-fast);
+    margin: 0;
+}
+
+.player-card.is-expanded .player-card__hint { opacity: 0; height: 0; padding: 0; }

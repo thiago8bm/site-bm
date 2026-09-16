@@ -1,0 +1,108 @@
+/* ===== ESTATÍSTICAS — Overview + Tabs + Tabelas ===== */
+
+/* Overview: 8 stat-cards em grid */
+.stats-overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 600px) { .stats-overview { grid-template-columns: repeat(2, 1fr); } }
+
+.stat-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md) var(--spacing-sm);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border-top: 3px solid var(--color-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-card--win  { border-top-color: #2ecc71; }
+.stat-card--draw { border-top-color: var(--color-gray-500); }
+.stat-card--loss { border-top-color: var(--color-red); }
+
+.stat-card__value {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--color-gray-900);
+    line-height: 1;
+}
+
+.stat-card__label {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Tabs */
+.stats-tabs {
+    display: flex;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--color-gray-200);
+    padding-bottom: var(--spacing-sm);
+}
+
+.tab-panel         { display: none; }
+.tab-panel.active  { display: block; }
+
+/* Tabelas de ranking */
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.stats-table thead th {
+    background: var(--color-gray-100);
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--color-gray-200);
+    white-space: nowrap;
+}
+
+.stats-table tbody td {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 1px solid var(--color-gray-200);
+    color: var(--color-gray-900);
+}
+
+.stats-table tbody tr:last-child td { border-bottom: none; }
+.stats-table tbody tr:hover td      { background: var(--color-gray-100); }
+
+.stats-table tbody .row--first td {
+    background: rgba(200,16,46,0.05);
+    font-weight: 700;
+}
+
+.rank-cell {
+    font-weight: 700;
+    color: var(--text-secondary);
+    width: 32px;
+    text-align: center;
+}
+
+.cell--highlight {
+    font-weight: 800;
+    color: var(--color-red);
+    font-size: 1rem;
+}

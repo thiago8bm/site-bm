@@ -1,0 +1,45 @@
+/* ===== FOOTER ===== */
+.footer {
+    background-color: var(--bg-footer);
+    color: var(--color-gray-300);
+    padding: var(--spacing-lg) var(--spacing-md);
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer p {
+    color: var(--color-gray-300);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer a {
+    color: var(--color-blue-light);
+    font-weight: 600;
+    transition: color var(--transition-fast);
+}
+
+.footer a:hover {
+    color: var(--color-white);
+    text-decoration: underline;
+}
+
+.update-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+#last-update {
+    font-size: 0.8rem;
+    color: var(--color-gray-500);
+    font-style: italic;
+}
+
+#update-error {
+    font-size: 0.8rem;
+    font-weight: 600;
+}

@@ -1,0 +1,218 @@
+/* ===== PESQUISA DE ELENCO — Dashboard ===== */
+
+.pesquisa-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-blue);
+    margin: var(--spacing-xl) 0 var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid rgba(0,48,135,0.15);
+}
+
+/* Termômetro */
+.termometro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+@media (max-width: 480px) { .termometro-grid { grid-template-columns: 1fr; } }
+
+.termo-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    text-align: center;
+    border-top: 4px solid var(--color-blue);
+}
+
+.termo-card__icon  { font-size: 2rem; }
+.termo-card__label { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; }
+
+.termo-card__value {
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.termo-card__value small         { font-size: 0.9rem; font-weight: 400; opacity: 0.7; }
+.termo-card__value--blue         { color: var(--color-blue); }
+.termo-card__value--red          { color: var(--color-red); }
+.termo-stars                     { display: flex; gap: 2px; }
+
+/* Alerta de outliers */
+.alerta-outlier {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-left: 5px solid #f39c12;
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.9rem;
+    color: #795548;
+    line-height: 1.5;
+}
+
+.alerta-outlier__icon { font-size: 1.4rem; flex-shrink: 0; }
+.alerta-outlier p     { margin: 0; }
+
+/* Premiações */
+.premiacoes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+@media (max-width: 600px) { .premiacoes-grid { grid-template-columns: 1fr; } }
+
+.premios-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-top: 4px solid var(--color-blue);
+}
+
+.premios-card--alert { border-top-color: var(--color-red); text-align: center; }
+
+.premios-card__title { font-size: 0.95rem; font-weight: 700; color: var(--color-gray-700); margin-bottom: var(--spacing-md); }
+.premios-card__title small { font-weight: 400; color: var(--text-secondary); }
+
+.premio-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--color-gray-200);
+    font-size: 0.9rem;
+}
+
+.premio-row:last-child { border-bottom: none; }
+.premio-pos   { font-weight: 800; color: var(--color-blue); min-width: 24px; }
+.premio-nome  { flex: 1; font-weight: 600; }
+.premio-votos { font-size: 0.8rem; color: var(--text-secondary); background: var(--color-gray-200); padding: 2px 6px; border-radius: 999px; }
+.premio-empty { color: var(--text-secondary); font-size: 0.9rem; margin: 0; padding: var(--spacing-sm) 0; }
+
+.precisam-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--color-red);
+    line-height: 1;
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+}
+
+/* Campinho + Coringas */
+.campo-coringas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: start;
+    margin-bottom: var(--spacing-md);
+}
+
+@media (max-width: 768px) { .campo-coringas-grid { grid-template-columns: 1fr; } }
+
+.campo-titulo { font-size: 0.95rem; font-weight: 700; color: var(--color-blue); margin-bottom: var(--spacing-sm); text-align: center; }
+.campo-desc   { font-size: 0.85rem; color: var(--text-secondary); text-align: center; margin-bottom: var(--spacing-md); }
+
+/* O Campinho — gramado tático */
+.campinho {
+    background: linear-gradient(to bottom, #4a8c3f, #3d7a34);
+    border: 3px solid #2d6125;
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md) var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    max-width: 340px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+/* Linha central */
+.campinho::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    width: 90%;
+    height: 2px;
+    background: rgba(255,255,255,0.22);
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.campinho__linha {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.campinho__jogador {
+    background: var(--color-red);
+    color: var(--color-white);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+    white-space: nowrap;
+    min-width: 40px;
+    letter-spacing: 0.01em;
+}
+
+.campinho__jogador--gk  { background: #f39c12; color: #333; }
+.campinho__jogador--ca  { background: var(--color-red-dark); }
+.campinho__jogador--mei { background: var(--color-blue); }
+.campinho__jogador--pe,
+.campinho__jogador--pd  { background: #8e44ad; }
+
+/* Tabela de coringas */
+.coringas-table { margin-top: var(--spacing-sm); }
+
+/* Gráficos Chart.js */
+.graficos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 600px) { .graficos-grid { grid-template-columns: 1fr; } }
+
+.grafico-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+}
+
+.grafico-card__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-gray-700);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.grafico-container {
+    position: relative;
+    height: 260px;
+    width: 100%;
+}
