@@ -65,7 +65,8 @@ export async function renderEstatisticas() {
 
             <!-- Tabs de ranking de jogadores -->
             <div class="stats-tabs" id="stats-tabs">
-                <button class="tab-btn active" data-tab="gols">⚽ Artilheiros</button>
+                <button class="tab-btn active" data-tab="resumo">📊 Resumo</button>
+                <button class="tab-btn" data-tab="gols">⚽ Artilharia</button>
                 <button class="tab-btn" data-tab="assists">🅰️ Assistências</button>
                 <button class="tab-btn" data-tab="ga">G+A</button>
                 <button class="tab-btn" data-tab="mvp">⭐ MVPs</button>
@@ -73,8 +74,11 @@ export async function renderEstatisticas() {
             </div>
 
             <div id="stats-tab-content">
-                <div class="tab-panel active" id="tab-gols">
-                    ${buildRankingTable(jogadores, 'gols', '⚽ Artilheiros', 'Gols')}
+                <div class="tab-panel active" id="tab-resumo">
+                    ${buildResumoTable(jogadores)}
+                </div>
+                <div class="tab-panel" id="tab-gols">
+                    ${buildRankingTable(jogadores, 'gols', '⚽ Artilharia', 'Gols')}
                 </div>
                 <div class="tab-panel" id="tab-assists">
                     ${buildRankingTable(jogadores, 'assistencias', '🅰️ Mais Assistências', 'Assists')}
@@ -164,7 +168,7 @@ function buildGATable(jogadores) {
     </div>`;
 }
 
-function buildFullTable(jogadores) {
+function buildResumoTable(jogadores) {
     const sorted = [...jogadores].sort((a, b) => (b.partidas ?? 0) - (a.partidas ?? 0));
     return `
     <div class="table-wrapper">
@@ -177,11 +181,53 @@ function buildFullTable(jogadores) {
                     <th>G</th>
                     <th>A</th>
                     <th>G+A</th>
-                    <th>Final.</th>
-                    <th>Passes</th>
-                    <th>Desarmes</th>
                     <th>MVP</th>
                     <th>Nota</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${sorted.map(j => `
+                <tr>
+                    <td><strong>${j.nome_display}</strong></td>
+                    <td><span class="posicao-pill" style="background:${getPosicaoColor(j.posicao)}">${j.posicao}</span></td>
+                    <td>${j.partidas ?? 0}</td>
+                    <td>${j.gols ?? 0}</td>
+                    <td>${j.assistencias ?? 0}</td>
+                    <td><strong>${(j.gols ?? 0) + (j.assistencias ?? 0)}</strong></td>
+                    <td>${j.mvp ?? 0}</td>
+                    <td>${j.media_nota?.toFixed(2) ?? '—'}</td>
+                </tr>`).join('')}
+            </tbody>
+        </table>
+    </div>`;
+}
+
+function buildFullTable(jogadores) {
+    const sorted = [...jogadores].sort((a, b) => (b.partidas ?? 0) - (a.partidas ?? 0));
+    return `
+    <div class="table-wrapper">
+        <table class="stats-table stats-table--full">
+            <thead>
+                <tr>
+                    <th>Jogador</th>
+                    <th>Pos.</th>
+                    <th>Overall</th>
+                    <th>J</th>
+                    <th>% Vit.</th>
+                    <th>G</th>
+                    <th>A</th>
+                    <th>G+A</th>
+                    <th>MVP</th>
+                    <th>Nota</th>
+                    <th>Final.</th>
+                    <th>% Chute</th>
+                    <th>Passes</th>
+                    <th>% Passe</th>
+                    <th>Desarmes</th>
+                    <th>% Desarme</th>
+                    <th>Verm.</th>
+                    <th>CS Def</th>
+                    <th>CS GK</th>
                 </tr>
             </thead>
             <tbody>
@@ -191,15 +237,23 @@ function buildFullTable(jogadores) {
                 <tr>
                     <td><strong>${j.nome_display}</strong></td>
                     <td><span class="posicao-pill" style="background:${getPosicaoColor(j.posicao)}">${j.posicao}</span></td>
+                    <td>${j.overall ?? '—'}</td>
                     <td>${j.partidas ?? 0}</td>
+                    <td>${j.win_rate ?? 0}%</td>
                     <td>${j.gols ?? 0}</td>
                     <td>${j.assistencias ?? 0}</td>
                     <td><strong>${(j.gols ?? 0) + (j.assistencias ?? 0)}</strong></td>
-                    <td>${finalizacoes}</td>
-                    <td>${j.passes_feitos ?? 0}</td>
-                    <td>${j.desarmes ?? 0}</td>
                     <td>${j.mvp ?? 0}</td>
                     <td>${j.media_nota?.toFixed(2) ?? '—'}</td>
+                    <td>${finalizacoes}</td>
+                    <td>${j.taxa_chute ?? 0}%</td>
+                    <td>${j.passes_feitos ?? 0}</td>
+                    <td>${j.taxa_passe ?? 0}%</td>
+                    <td>${j.desarmes ?? 0}</td>
+                    <td>${j.taxa_desarme ?? 0}%</td>
+                    <td>${j.cartoes_vermelhos ?? 0}</td>
+                    <td>${j.clean_sheets_def ?? 0}</td>
+                    <td>${j.clean_sheets_gk ?? 0}</td>
                 </tr>`;
                 }).join('')}
             </tbody>
