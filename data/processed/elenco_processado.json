@@ -1,7 +1,7 @@
 {
-    "last_updated": "2026-09-16T18:52:47.024894",
+    "last_updated": "2026-09-16T20:00:47.762691",
     "status": "success",
-    "total": 9,
+    "total": 10,
     "data": [
         {
             "id": "pedrao",
@@ -46,7 +46,7 @@
                 1
             ],
             "participacoes_gol": 15,
-            "processado_em": "2026-09-16T18:52:47.024581"
+            "processado_em": "2026-09-16T20:00:47.762268"
         },
         {
             "id": "thiago",
@@ -94,7 +94,7 @@
                 1
             ],
             "participacoes_gol": 215,
-            "processado_em": "2026-09-16T18:52:47.024224"
+            "processado_em": "2026-09-16T20:00:47.762035"
         },
         {
             "id": "gaps",
@@ -139,7 +139,7 @@
                 8
             ],
             "participacoes_gol": 502,
-            "processado_em": "2026-09-16T18:52:47.024794"
+            "processado_em": "2026-09-16T20:00:47.762196"
         },
         {
             "id": "abreu",
@@ -183,7 +183,7 @@
                 2
             ],
             "participacoes_gol": 284,
-            "processado_em": "2026-09-16T18:52:47.024427"
+            "processado_em": "2026-09-16T20:00:47.762121"
         },
         {
             "id": "dilaurentis",
@@ -229,7 +229,7 @@
                 1
             ],
             "participacoes_gol": 42,
-            "processado_em": "2026-09-16T18:52:47.024875"
+            "processado_em": "2026-09-16T20:00:47.762340"
         },
         {
             "id": "pinto",
@@ -275,7 +275,7 @@
                 2
             ],
             "participacoes_gol": 147,
-            "processado_em": "2026-09-16T18:52:47.024723"
+            "processado_em": "2026-09-16T20:00:47.762411"
         },
         {
             "id": "gabri",
@@ -321,7 +321,7 @@
                 0
             ],
             "participacoes_gol": 8,
-            "processado_em": "2026-09-16T18:52:47.024504"
+            "processado_em": "2026-09-16T20:00:47.762480"
         },
         {
             "id": "cleiton",
@@ -366,7 +366,7 @@
                 1
             ],
             "participacoes_gol": 136,
-            "processado_em": "2026-09-16T18:52:47.024343"
+            "processado_em": "2026-09-16T20:00:47.762549"
         },
         {
             "id": "formiga",
@@ -408,7 +408,49 @@
                 1
             ],
             "participacoes_gol": 88,
-            "processado_em": "2026-09-16T18:52:47.024650"
+            "processado_em": "2026-09-16T20:00:47.762616"
+        },
+        {
+            "id": "ronald",
+            "nome_display": "Lyonel Lucas",
+            "ea_username": "",
+            "pro_name": "",
+            "numero": 999,
+            "posicao": "LE",
+            "posicao_ea": "defender",
+            "capitania": null,
+            "fotos": [],
+            "instagram": null,
+            "status": "ativo",
+            "partidas": 0,
+            "gols": 0,
+            "assistencias": 0,
+            "win_rate": 0,
+            "media_nota": 0.0,
+            "mvp": 0,
+            "cartoes_vermelhos": 0,
+            "passes_feitos": 0,
+            "taxa_passe": 0,
+            "taxa_chute": 0,
+            "desarmes": 0,
+            "taxa_desarme": 0,
+            "overall": 0,
+            "clean_sheets_def": 0,
+            "clean_sheets_gk": 0,
+            "tendencia_gols": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "participacoes_gol": 0,
+            "processado_em": "2026-09-16T20:00:47.762677"
         }
     ]
 }

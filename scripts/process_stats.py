@@ -42,24 +42,32 @@ def load_config_elenco():
     for key, data in config.items():
         # A chave vem no formato "Thiago (#8)"
         try:
-            nome = key.split(" (#")[0]
-            numero = int(key.split(" (#")[1].replace(")", ""))
+            if " (#" in key:
+                nome = key.split(" (#")[0]
+                num_str = key.split(" (#")[1].replace(")", "")
+                if num_str == "??" or not num_str.isdigit():
+                    numero = 999
+                else:
+                    numero = int(num_str)
+            else:
+                nome = key
+                numero = 999
         except Exception:
-            nome = key
-            numero = 0
+            nome = key.split(" (#")[0] if " (#" in key else key
+            numero = 999
             
         ea_id = data.get("ea_id")
-        if not ea_id: continue
         
-        ELENCO_MAP[ea_id] = {
+        ELENCO_MAP[key] = {
             "id":           data.get("id_interno", nome.lower()),
+            "ea_id":        ea_id,
             "nome_display": nome,
             "numero":       numero,
             "posicao":      data.get("posicao"),
             "posicao_ea":   data.get("posicao_ea"),
             "capitania":    data.get("capitania"),
-            "foto_pasta":   data.get("foto_pasta"),
-            "instagram":    data.get("instagram")
+            "foto_pasta":   data.get("foto_pasta", nome),
+            "instagram":    data.get("instagram", "")
         }
 
 # =============================================
@@ -110,22 +118,21 @@ def get_player_photos(pasta: str) -> list:
 # PROCESSAMENTO DO ELENCO
 # =============================================
 def processar_elenco() -> list:
-    """Lê players_club_stats.json e retorna lista de jogadores mapeados."""
+    """Lê players_club_stats.json e retorna lista de jogadores mapeados, incluindo novos sem dados."""
     raw = carregar_json(os.path.join(RAW_DIR, "players_club_stats.json"))
     if not raw:
-        print("  [AVISO] Não foi possível processar elenco.")
-        return []
+        print("  [AVISO] Não foi possível ler stats brutos, mas vamos gerar com 0.")
+        membros_brutos = []
+    else:
+        membros_brutos = raw.get("data", {}).get("members", [])
 
-    membros_brutos = raw.get("data", {}).get("members", [])
-    elenco_final   = []
+    # Cria um mapa de ea_username -> dados brutos
+    brutos_map = {m.get("name", ""): m for m in membros_brutos}
+    elenco_final = []
 
-    for membro in membros_brutos:
-        ea_username = membro.get("name", "")
-        meta        = ELENCO_MAP.get(ea_username)
-
-        if not meta:
-            print(f"  [INFO] Jogador não mapeado ignorado: {ea_username}")
-            continue
+    for key, meta in ELENCO_MAP.items():
+        ea_id = meta["ea_id"]
+        membro = brutos_map.get(ea_id) if ea_id else {}
 
         gamesPlayed   = safe_int(membro.get("gamesPlayed"))
         goals         = safe_int(membro.get("goals"))
@@ -143,13 +150,12 @@ def processar_elenco() -> list:
         cleanSheetsDef= safe_int(membro.get("cleanSheetsDef"))
         cleanSheetsGK = safe_int(membro.get("cleanSheetsGK"))
 
-        # Últimas 10 partidas de gols (índices prevGoals0..prevGoals10)
         prev_goals = [safe_int(membro.get(f"prevGoals{'' if i == 0 else i}")) for i in range(11)]
 
         jogador = {
             "id":           meta["id"],
             "nome_display": meta["nome_display"],
-            "ea_username":  ea_username,
+            "ea_username":  ea_id or "",
             "pro_name":     membro.get("proName", ""),
             "numero":       meta["numero"],
             "posicao":      meta["posicao"],
@@ -158,8 +164,6 @@ def processar_elenco() -> list:
             "fotos":        get_player_photos(meta["foto_pasta"]),
             "instagram":    meta.get("instagram", ""),
             "status":       "ativo",
-
-            # Estatísticas Globais
             "partidas":            gamesPlayed,
             "gols":                goals,
             "assistencias":        assists,
@@ -175,14 +179,13 @@ def processar_elenco() -> list:
             "overall":             proOverall,
             "clean_sheets_def":    cleanSheetsDef,
             "clean_sheets_gk":     cleanSheetsGK,
-
-            "tendencia_gols":      prev_goals[1:],  # últimas 10
+            "tendencia_gols":      prev_goals[1:],
             "participacoes_gol":   goals + assists,
             "processado_em":       datetime.now().isoformat(),
         }
 
         elenco_final.append(jogador)
-        print(f"  [OK] Processado: {meta['nome_display']} ({ea_username})")
+        print(f"  [OK] Processado: {meta['nome_display']} ({ea_id or 'Sem EA ID'})")
 
     elenco_final.sort(key=lambda x: x["numero"])
     return elenco_final
@@ -197,6 +200,7 @@ def processar_partidas() -> list:
     partidas com placar, adversário, e estatísticas completas por jogador.
     """
     todas_partidas = {}
+    EA_MAP = {v["ea_id"]: v for v in ELENCO_MAP.values() if v.get("ea_id")}
 
     for match_type in MATCH_TYPES:
         filepath = os.path.join(RAW_DIR, f"matches_{match_type}.json")
@@ -237,7 +241,7 @@ def processar_partidas() -> list:
 
             for player_id, pdata in nossos_players.items():
                 ea_username    = pdata.get("playername", "")
-                meta           = ELENCO_MAP.get(ea_username)
+                meta           = EA_MAP.get(ea_username)
                 nome           = meta["nome_display"] if meta else ea_username
                 pos            = pdata.get("pos", "")
                 is_gk          = pos == "goalkeeper"

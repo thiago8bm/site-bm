@@ -116,7 +116,7 @@ function buildPlayerCard(j) {
             ${fotoHTML}
             ${capitaniaBadge}
             <div class="player-card__overlay">
-                <span class="player-card__number">#${j.numero}</span>
+                ${j.numero !== 999 ? `<span class="player-card__number">#${j.numero}</span>` : ''}
                 <span class="player-card__posicao" style="background:${posColor}">${j.posicao}</span>
             </div>
         </div>
