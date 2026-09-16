@@ -1,0 +1,1228 @@
+{
+    "last_updated": "2026-09-16T09:38:09.041825",
+    "status": "success",
+    "total": 10,
+    "data": [
+        {
+            "match_id": "1037398263840492",
+            "timestamp": 1788668954,
+            "data": "2026-09-06",
+            "tipo": "leagueMatch",
+            "adversario": "Real StreeT FC",
+            "placar_nos": 7,
+            "placar_adv": 4,
+            "resultado": "vitoria",
+            "marcadores": [
+                {
+                    "nome": "Thiago",
+                    "gols": 1
+                },
+                {
+                    "nome": "Cleiton",
+                    "gols": 1
+                },
+                {
+                    "nome": "Gabri",
+                    "gols": 3
+                },
+                {
+                    "nome": "Gaps",
+                    "gols": 2
+                }
+            ],
+            "assistentes": [
+                {
+                    "nome": "Abreu",
+                    "assists": 2
+                },
+                {
+                    "nome": "Gaps",
+                    "assists": 3
+                }
+            ],
+            "mvp": "Gaps",
+            "jogadores": [
+                {
+                    "nome": "Gaps",
+                    "ea_username": "Gaps8459",
+                    "posicao": "forward",
+                    "goals": 2,
+                    "assists": 3,
+                    "rating": 10.0,
+                    "mom": true,
+                    "shots": 6,
+                    "passattempts": 23,
+                    "passesmade": 19,
+                    "tackleattempts": 8,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 7
+                },
+                {
+                    "nome": "Gabri",
+                    "ea_username": "gavrielcrvg",
+                    "posicao": "midfielder",
+                    "goals": 3,
+                    "assists": 0,
+                    "rating": 8.9,
+                    "mom": false,
+                    "shots": 5,
+                    "passattempts": 22,
+                    "passesmade": 14,
+                    "tackleattempts": 9,
+                    "tacklesmade": 4,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 7
+                },
+                {
+                    "nome": "Abreu",
+                    "ea_username": "DanyTheTrotos",
+                    "posicao": "midfielder",
+                    "goals": 0,
+                    "assists": 2,
+                    "rating": 8.0,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 26,
+                    "passesmade": 22,
+                    "tackleattempts": 4,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 7
+                },
+                {
+                    "nome": "Thiago",
+                    "ea_username": "Thiago_Souza108",
+                    "posicao": "forward",
+                    "goals": 1,
+                    "assists": 0,
+                    "rating": 7.0,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 13,
+                    "passesmade": 8,
+                    "tackleattempts": 0,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 7
+                },
+                {
+                    "nome": "Cleiton",
+                    "ea_username": "NortonJONES",
+                    "posicao": "forward",
+                    "goals": 1,
+                    "assists": 0,
+                    "rating": 7.0,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 13,
+                    "passesmade": 9,
+                    "tackleattempts": 1,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 7
+                }
+            ]
+        },
+        {
+            "match_id": "1037370233270231",
+            "timestamp": 1788667811,
+            "data": "2026-09-06",
+            "tipo": "leagueMatch",
+            "adversario": "SANRINTHINENSE",
+            "placar_nos": 3,
+            "placar_adv": 4,
+            "resultado": "derrota",
+            "marcadores": [
+                {
+                    "nome": "Cleiton",
+                    "gols": 1
+                },
+                {
+                    "nome": "Gabri",
+                    "gols": 1
+                },
+                {
+                    "nome": "Gaps",
+                    "gols": 1
+                }
+            ],
+            "assistentes": [
+                {
+                    "nome": "Thiago",
+                    "assists": 2
+                },
+                {
+                    "nome": "Gabri",
+                    "assists": 1
+                }
+            ],
+            "mvp": "Gabri",
+            "jogadores": [
+                {
+                    "nome": "Gabri",
+                    "ea_username": "gavrielcrvg",
+                    "posicao": "forward",
+                    "goals": 1,
+                    "assists": 1,
+                    "rating": 8.4,
+                    "mom": false,
+                    "shots": 5,
+                    "passattempts": 22,
+                    "passesmade": 18,
+                    "tackleattempts": 1,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 3
+                },
+                {
+                    "nome": "Cleiton",
+                    "ea_username": "NortonJONES",
+                    "posicao": "forward",
+                    "goals": 1,
+                    "assists": 0,
+                    "rating": 8.0,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 19,
+                    "passesmade": 15,
+                    "tackleattempts": 4,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 3
+                },
+                {
+                    "nome": "Thiago",
+                    "ea_username": "Thiago_Souza108",
+                    "posicao": "midfielder",
+                    "goals": 0,
+                    "assists": 2,
+                    "rating": 7.7,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 14,
+                    "passesmade": 14,
+                    "tackleattempts": 2,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 3
+                },
+                {
+                    "nome": "Gaps",
+                    "ea_username": "Gaps8459",
+                    "posicao": "forward",
+                    "goals": 1,
+                    "assists": 0,
+                    "rating": 7.5,
+                    "mom": false,
+                    "shots": 3,
+                    "passattempts": 19,
+                    "passesmade": 14,
+                    "tackleattempts": 7,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 3
+                },
+                {
+                    "nome": "Abreu",
+                    "ea_username": "DanyTheTrotos",
+                    "posicao": "defender",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 6.9,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 13,
+                    "passesmade": 11,
+                    "tackleattempts": 0,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 3
+                },
+                {
+                    "nome": "DiLaurentis",
+                    "ea_username": "brsferrari",
+                    "posicao": "midfielder",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 6.7,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 15,
+                    "passesmade": 9,
+                    "tackleattempts": 4,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 3
+                }
+            ]
+        },
+        {
+            "match_id": "1037146582780015",
+            "timestamp": 1788662518,
+            "data": "2026-09-05",
+            "tipo": "leagueMatch",
+            "adversario": "OS THE BROXAS",
+            "placar_nos": 3,
+            "placar_adv": 0,
+            "resultado": "empate",
+            "marcadores": [],
+            "assistentes": [],
+            "mvp": "Thiago",
+            "jogadores": [
+                {
+                    "nome": "Thiago",
+                    "ea_username": "Thiago_Souza108",
+                    "posicao": "midfielder",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 7.6,
+                    "mom": true,
+                    "shots": 2,
+                    "passattempts": 18,
+                    "passesmade": 14,
+                    "tackleattempts": 2,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 0
+                },
+                {
+                    "nome": "DiLaurentis",
+                    "ea_username": "brsferrari",
+                    "posicao": "defender",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 7.4,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 9,
+                    "passesmade": 6,
+                    "tackleattempts": 4,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 0
+                },
+                {
+                    "nome": "Cleiton",
+                    "ea_username": "NortonJONES",
+                    "posicao": "forward",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 7.1,
+                    "mom": false,
+                    "shots": 2,
+                    "passattempts": 13,
+                    "passesmade": 10,
+                    "tackleattempts": 0,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 0
+                },
+                {
+                    "nome": "Gabri",
+                    "ea_username": "gavrielcrvg",
+                    "posicao": "forward",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 6.7,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 17,
+                    "passesmade": 12,
+                    "tackleattempts": 1,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 0
+                },
+                {
+                    "nome": "Pedrão",
+                    "ea_username": "ZeCriminoso",
+                    "posicao": "defender",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 6.2,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 5,
+                    "passesmade": 4,
+                    "tackleattempts": 1,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 0
+                },
+                {
+                    "nome": "Gaps",
+                    "ea_username": "Gaps8459",
+                    "posicao": "forward",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 6.0,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 16,
+                    "passesmade": 15,
+                    "tackleattempts": 1,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 4,
+                    "score": 0
+                }
+            ]
+        },
+        {
+            "match_id": "1032110721040385",
+            "timestamp": 1788495837,
+            "data": "2026-09-04",
+            "tipo": "leagueMatch",
+            "adversario": "SuperSonicBronz",
+            "placar_nos": 4,
+            "placar_adv": 2,
+            "resultado": "vitoria",
+            "marcadores": [
+                {
+                    "nome": "Cleiton",
+                    "gols": 1
+                },
+                {
+                    "nome": "Abreu",
+                    "gols": 1
+                },
+                {
+                    "nome": "DiLaurentis",
+                    "gols": 1
+                }
+            ],
+            "assistentes": [
+                {
+                    "nome": "Cleiton",
+                    "assists": 1
+                },
+                {
+                    "nome": "Abreu",
+                    "assists": 1
+                },
+                {
+                    "nome": "Pinto",
+                    "assists": 1
+                },
+                {
+                    "nome": "DiLaurentis",
+                    "assists": 1
+                }
+            ],
+            "mvp": "DiLaurentis",
+            "jogadores": [
+                {
+                    "nome": "DiLaurentis",
+                    "ea_username": "brsferrari",
+                    "posicao": "midfielder",
+                    "goals": 1,
+                    "assists": 1,
+                    "rating": 8.4,
+                    "mom": false,
+                    "shots": 2,
+                    "passattempts": 15,
+                    "passesmade": 10,
+                    "tackleattempts": 6,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 4
+                },
+                {
+                    "nome": "Abreu",
+                    "ea_username": "DanyTheTrotos",
+                    "posicao": "forward",
+                    "goals": 1,
+                    "assists": 1,
+                    "rating": 8.2,
+                    "mom": false,
+                    "shots": 5,
+                    "passattempts": 19,
+                    "passesmade": 15,
+                    "tackleattempts": 11,
+                    "tacklesmade": 4,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 4
+                },
+                {
+                    "nome": "Cleiton",
+                    "ea_username": "NortonJONES",
+                    "posicao": "forward",
+                    "goals": 1,
+                    "assists": 1,
+                    "rating": 7.9,
+                    "mom": false,
+                    "shots": 4,
+                    "passattempts": 12,
+                    "passesmade": 9,
+                    "tackleattempts": 9,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 4
+                },
+                {
+                    "nome": "Pinto",
+                    "ea_username": "SRGT_XEREQUINHA",
+                    "posicao": "forward",
+                    "goals": 0,
+                    "assists": 1,
+                    "rating": 6.8,
+                    "mom": false,
+                    "shots": 3,
+                    "passattempts": 17,
+                    "passesmade": 11,
+                    "tackleattempts": 20,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 4
+                }
+            ]
+        },
+        {
+            "match_id": "1032086693980063",
+            "timestamp": 1788494783,
+            "data": "2026-09-04",
+            "tipo": "leagueMatch",
+            "adversario": "Parana ClubeFRG",
+            "placar_nos": 1,
+            "placar_adv": 3,
+            "resultado": "derrota",
+            "marcadores": [
+                {
+                    "nome": "DiLaurentis",
+                    "gols": 1
+                }
+            ],
+            "assistentes": [
+                {
+                    "nome": "Cleiton",
+                    "assists": 1
+                }
+            ],
+            "mvp": "DiLaurentis",
+            "jogadores": [
+                {
+                    "nome": "DiLaurentis",
+                    "ea_username": "brsferrari",
+                    "posicao": "midfielder",
+                    "goals": 1,
+                    "assists": 0,
+                    "rating": 7.7,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 20,
+                    "passesmade": 13,
+                    "tackleattempts": 3,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 3,
+                    "score": 1
+                },
+                {
+                    "nome": "Cleiton",
+                    "ea_username": "NortonJONES",
+                    "posicao": "forward",
+                    "goals": 0,
+                    "assists": 1,
+                    "rating": 6.6,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 13,
+                    "passesmade": 11,
+                    "tackleattempts": 7,
+                    "tacklesmade": 3,
+                    "redcards": 0,
+                    "goalsconceded": 3,
+                    "score": 1
+                },
+                {
+                    "nome": "Abreu",
+                    "ea_username": "DanyTheTrotos",
+                    "posicao": "forward",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 6.2,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 17,
+                    "passesmade": 13,
+                    "tackleattempts": 8,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 3,
+                    "score": 1
+                },
+                {
+                    "nome": "Pinto",
+                    "ea_username": "SRGT_XEREQUINHA",
+                    "posicao": "forward",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 5.8,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 14,
+                    "passesmade": 9,
+                    "tackleattempts": 6,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 3,
+                    "score": 1
+                }
+            ]
+        },
+        {
+            "match_id": "1031800929390308",
+            "timestamp": 1788487086,
+            "data": "2026-09-03",
+            "tipo": "leagueMatch",
+            "adversario": "Setor 081",
+            "placar_nos": 2,
+            "placar_adv": 3,
+            "resultado": "derrota",
+            "marcadores": [
+                {
+                    "nome": "Thiago",
+                    "gols": 1
+                },
+                {
+                    "nome": "Gaps",
+                    "gols": 1
+                }
+            ],
+            "assistentes": [
+                {
+                    "nome": "Gaps",
+                    "assists": 1
+                }
+            ],
+            "mvp": "Gaps",
+            "jogadores": [
+                {
+                    "nome": "Gaps",
+                    "ea_username": "Gaps8459",
+                    "posicao": "forward",
+                    "goals": 1,
+                    "assists": 1,
+                    "rating": 7.9,
+                    "mom": false,
+                    "shots": 4,
+                    "passattempts": 17,
+                    "passesmade": 16,
+                    "tackleattempts": 6,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 3,
+                    "score": 2
+                },
+                {
+                    "nome": "Thiago",
+                    "ea_username": "Thiago_Souza108",
+                    "posicao": "midfielder",
+                    "goals": 1,
+                    "assists": 0,
+                    "rating": 7.8,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 22,
+                    "passesmade": 17,
+                    "tackleattempts": 4,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 3,
+                    "score": 2
+                },
+                {
+                    "nome": "Abreu",
+                    "ea_username": "DanyTheTrotos",
+                    "posicao": "midfielder",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 7.6,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 21,
+                    "passesmade": 16,
+                    "tackleattempts": 4,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 3,
+                    "score": 2
+                },
+                {
+                    "nome": "DiLaurentis",
+                    "ea_username": "brsferrari",
+                    "posicao": "defender",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 7.0,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 13,
+                    "passesmade": 11,
+                    "tackleattempts": 5,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 3,
+                    "score": 2
+                },
+                {
+                    "nome": "Pinto",
+                    "ea_username": "SRGT_XEREQUINHA",
+                    "posicao": "forward",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 6.2,
+                    "mom": false,
+                    "shots": 2,
+                    "passattempts": 16,
+                    "passesmade": 8,
+                    "tackleattempts": 4,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 3,
+                    "score": 2
+                },
+                {
+                    "nome": "Pedrão",
+                    "ea_username": "ZeCriminoso",
+                    "posicao": "defender",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 6.0,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 5,
+                    "passesmade": 4,
+                    "tackleattempts": 1,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 3,
+                    "score": 2
+                }
+            ]
+        },
+        {
+            "match_id": "1031844684520395",
+            "timestamp": 1788486005,
+            "data": "2026-09-03",
+            "tipo": "leagueMatch",
+            "adversario": "1CE M3LT",
+            "placar_nos": 5,
+            "placar_adv": 2,
+            "resultado": "vitoria",
+            "marcadores": [
+                {
+                    "nome": "Cleiton",
+                    "gols": 1
+                },
+                {
+                    "nome": "Pinto",
+                    "gols": 1
+                },
+                {
+                    "nome": "Gaps",
+                    "gols": 3
+                }
+            ],
+            "assistentes": [
+                {
+                    "nome": "Thiago",
+                    "assists": 1
+                },
+                {
+                    "nome": "Abreu",
+                    "assists": 1
+                },
+                {
+                    "nome": "Gaps",
+                    "assists": 1
+                }
+            ],
+            "mvp": "Gaps",
+            "jogadores": [
+                {
+                    "nome": "Gaps",
+                    "ea_username": "Gaps8459",
+                    "posicao": "forward",
+                    "goals": 3,
+                    "assists": 1,
+                    "rating": 10.0,
+                    "mom": true,
+                    "shots": 4,
+                    "passattempts": 14,
+                    "passesmade": 10,
+                    "tackleattempts": 7,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 5
+                },
+                {
+                    "nome": "Abreu",
+                    "ea_username": "DanyTheTrotos",
+                    "posicao": "midfielder",
+                    "goals": 0,
+                    "assists": 1,
+                    "rating": 7.9,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 16,
+                    "passesmade": 16,
+                    "tackleattempts": 5,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 5
+                },
+                {
+                    "nome": "Cleiton",
+                    "ea_username": "NortonJONES",
+                    "posicao": "midfielder",
+                    "goals": 1,
+                    "assists": 0,
+                    "rating": 7.7,
+                    "mom": false,
+                    "shots": 2,
+                    "passattempts": 14,
+                    "passesmade": 11,
+                    "tackleattempts": 5,
+                    "tacklesmade": 3,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 5
+                },
+                {
+                    "nome": "DiLaurentis",
+                    "ea_username": "brsferrari",
+                    "posicao": "defender",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 7.7,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 14,
+                    "passesmade": 10,
+                    "tackleattempts": 9,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 5
+                },
+                {
+                    "nome": "Pedrão",
+                    "ea_username": "ZeCriminoso",
+                    "posicao": "defender",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 7.2,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 13,
+                    "passesmade": 10,
+                    "tackleattempts": 1,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 5
+                },
+                {
+                    "nome": "Pinto",
+                    "ea_username": "SRGT_XEREQUINHA",
+                    "posicao": "forward",
+                    "goals": 1,
+                    "assists": 0,
+                    "rating": 7.1,
+                    "mom": false,
+                    "shots": 3,
+                    "passattempts": 17,
+                    "passesmade": 11,
+                    "tackleattempts": 6,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 5
+                },
+                {
+                    "nome": "Thiago",
+                    "ea_username": "Thiago_Souza108",
+                    "posicao": "midfielder",
+                    "goals": 0,
+                    "assists": 1,
+                    "rating": 6.8,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 14,
+                    "passesmade": 12,
+                    "tackleattempts": 1,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 5
+                }
+            ]
+        },
+        {
+            "match_id": "1031986123110216",
+            "timestamp": 1788484828,
+            "data": "2026-09-03",
+            "tipo": "leagueMatch",
+            "adversario": "DyElite",
+            "placar_nos": 1,
+            "placar_adv": 2,
+            "resultado": "derrota",
+            "marcadores": [
+                {
+                    "nome": "Pinto",
+                    "gols": 1
+                }
+            ],
+            "assistentes": [
+                {
+                    "nome": "Gaps",
+                    "assists": 1
+                }
+            ],
+            "mvp": "Abreu",
+            "jogadores": [
+                {
+                    "nome": "Abreu",
+                    "ea_username": "DanyTheTrotos",
+                    "posicao": "midfielder",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 8.2,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 20,
+                    "passesmade": 19,
+                    "tackleattempts": 9,
+                    "tacklesmade": 4,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 1
+                },
+                {
+                    "nome": "Cleiton",
+                    "ea_username": "NortonJONES",
+                    "posicao": "midfielder",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 7.1,
+                    "mom": false,
+                    "shots": 2,
+                    "passattempts": 15,
+                    "passesmade": 11,
+                    "tackleattempts": 8,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 1
+                },
+                {
+                    "nome": "Gaps",
+                    "ea_username": "Gaps8459",
+                    "posicao": "forward",
+                    "goals": 0,
+                    "assists": 1,
+                    "rating": 7.0,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 28,
+                    "passesmade": 21,
+                    "tackleattempts": 10,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 1
+                },
+                {
+                    "nome": "Pinto",
+                    "ea_username": "SRGT_XEREQUINHA",
+                    "posicao": "forward",
+                    "goals": 1,
+                    "assists": 0,
+                    "rating": 6.8,
+                    "mom": false,
+                    "shots": 2,
+                    "passattempts": 13,
+                    "passesmade": 8,
+                    "tackleattempts": 4,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 1
+                },
+                {
+                    "nome": "DiLaurentis",
+                    "ea_username": "brsferrari",
+                    "posicao": "defender",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 6.5,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 17,
+                    "passesmade": 11,
+                    "tackleattempts": 2,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 1
+                },
+                {
+                    "nome": "Pedrão",
+                    "ea_username": "ZeCriminoso",
+                    "posicao": "defender",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 6.4,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 14,
+                    "passesmade": 12,
+                    "tackleattempts": 1,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 1
+                }
+            ]
+        },
+        {
+            "match_id": "1031678822380338",
+            "timestamp": 1788483681,
+            "data": "2026-09-03",
+            "tipo": "leagueMatch",
+            "adversario": "FACTIONS FC",
+            "placar_nos": 3,
+            "placar_adv": 2,
+            "resultado": "vitoria",
+            "marcadores": [
+                {
+                    "nome": "Pinto",
+                    "gols": 1
+                },
+                {
+                    "nome": "Gaps",
+                    "gols": 2
+                }
+            ],
+            "assistentes": [
+                {
+                    "nome": "Cleiton",
+                    "assists": 1
+                },
+                {
+                    "nome": "Gaps",
+                    "assists": 1
+                }
+            ],
+            "mvp": "Gaps",
+            "jogadores": [
+                {
+                    "nome": "Gaps",
+                    "ea_username": "Gaps8459",
+                    "posicao": "forward",
+                    "goals": 2,
+                    "assists": 1,
+                    "rating": 9.6,
+                    "mom": true,
+                    "shots": 5,
+                    "passattempts": 23,
+                    "passesmade": 19,
+                    "tackleattempts": 6,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 3
+                },
+                {
+                    "nome": "Abreu",
+                    "ea_username": "DanyTheTrotos",
+                    "posicao": "midfielder",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 7.8,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 25,
+                    "passesmade": 22,
+                    "tackleattempts": 4,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 3
+                },
+                {
+                    "nome": "Pinto",
+                    "ea_username": "SRGT_XEREQUINHA",
+                    "posicao": "forward",
+                    "goals": 1,
+                    "assists": 0,
+                    "rating": 7.7,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 20,
+                    "passesmade": 16,
+                    "tackleattempts": 6,
+                    "tacklesmade": 2,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 3
+                },
+                {
+                    "nome": "Cleiton",
+                    "ea_username": "NortonJONES",
+                    "posicao": "midfielder",
+                    "goals": 0,
+                    "assists": 1,
+                    "rating": 7.2,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 14,
+                    "passesmade": 11,
+                    "tackleattempts": 8,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 3
+                },
+                {
+                    "nome": "DiLaurentis",
+                    "ea_username": "brsferrari",
+                    "posicao": "defender",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 7.0,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 17,
+                    "passesmade": 13,
+                    "tackleattempts": 4,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 3
+                },
+                {
+                    "nome": "Pedrão",
+                    "ea_username": "ZeCriminoso",
+                    "posicao": "defender",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 6.8,
+                    "mom": false,
+                    "shots": 0,
+                    "passattempts": 13,
+                    "passesmade": 10,
+                    "tackleattempts": 4,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 3
+                }
+            ]
+        },
+        {
+            "match_id": "1027218281700317",
+            "timestamp": 1788323563,
+            "data": "2026-09-02",
+            "tipo": "leagueMatch",
+            "adversario": "HI Hi",
+            "placar_nos": 4,
+            "placar_adv": 2,
+            "resultado": "vitoria",
+            "marcadores": [
+                {
+                    "nome": "Thiago",
+                    "gols": 1
+                },
+                {
+                    "nome": "Abreu",
+                    "gols": 2
+                }
+            ],
+            "assistentes": [
+                {
+                    "nome": "Abreu",
+                    "assists": 1
+                }
+            ],
+            "mvp": "Abreu",
+            "jogadores": [
+                {
+                    "nome": "Abreu",
+                    "ea_username": "DanyTheTrotos",
+                    "posicao": "forward",
+                    "goals": 2,
+                    "assists": 1,
+                    "rating": 8.9,
+                    "mom": true,
+                    "shots": 5,
+                    "passattempts": 15,
+                    "passesmade": 9,
+                    "tackleattempts": 12,
+                    "tacklesmade": 1,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 4
+                },
+                {
+                    "nome": "Thiago",
+                    "ea_username": "Thiago_Souza108",
+                    "posicao": "midfielder",
+                    "goals": 1,
+                    "assists": 0,
+                    "rating": 7.4,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 28,
+                    "passesmade": 19,
+                    "tackleattempts": 0,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 4
+                },
+                {
+                    "nome": "Cleiton",
+                    "ea_username": "NortonJONES",
+                    "posicao": "forward",
+                    "goals": 0,
+                    "assists": 0,
+                    "rating": 7.1,
+                    "mom": false,
+                    "shots": 1,
+                    "passattempts": 28,
+                    "passesmade": 19,
+                    "tackleattempts": 3,
+                    "tacklesmade": 0,
+                    "redcards": 0,
+                    "goalsconceded": 2,
+                    "score": 4
+                }
+            ]
+        }
+    ]
+}

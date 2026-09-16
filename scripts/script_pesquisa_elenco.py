@@ -16,8 +16,8 @@ from datetime import datetime
 # =============================================
 # CONFIGURAÇÃO
 # =============================================
-CAMINHO_XLSX  = "data/Pesquisa_de_elenco_-_BM_(respostas).xlsx"
-CAMINHO_JSON  = "data/pesquisa.json"
+CAMINHO_XLSX  = os.path.join("data", "survey", "Pesquisa_de_elenco_-_BM_(respostas).xlsx")
+CAMINHO_JSON  = os.path.join("data", "survey", "pesquisa.json")
 
 # =============================================
 # UTILITÁRIO: Extrair top N com suporte a empates

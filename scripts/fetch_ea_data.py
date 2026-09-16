@@ -45,8 +45,8 @@ class API:
    
     def _salvar_json(self, dados: dict | list, filename: str, extra_meta: dict = None) -> None: # type: ignore
         """Salva dados genéricos sobrescrevendo o arquivo e aceitando metadados extras."""
-        os.makedirs("data", exist_ok=True)
-        path = os.path.join("data", filename)
+        os.makedirs(os.path.join("data", "raw"), exist_ok=True)
+        path = os.path.join("data", "raw", filename)
         payload = {
             "last_updated": datetime.now().isoformat(),
             "status": "success",
@@ -73,7 +73,7 @@ class API:
             return
 
         filename = f"matches_{match_type}.json"
-        path = os.path.join("data", filename)
+        path = os.path.join("data", "raw", filename)
         
         dados_existentes = []
         

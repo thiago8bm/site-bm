@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-09-16T08:54:14.869505",
+    "last_updated": "2026-09-16T09:38:09.043744",
     "status": "success",
     "clube": {
         "nome": "Baile de Munique",
@@ -41,7 +41,7 @@
         },
         {
             "nome": "Cleiton",
-            "gols": 60,
+            "gols": 75,
             "posicao": "VOL"
         }
     ],
@@ -68,7 +68,7 @@
         },
         {
             "nome": "Cleiton",
-            "assists": 28,
+            "assists": 61,
             "posicao": "VOL"
         }
     ],
@@ -94,10 +94,10 @@
             "posicao": "PE"
         },
         {
-            "nome": "Cleiton",
+            "nome": "Formiga",
             "mvps": 7,
-            "posicao": "VOL"
+            "posicao": "PD"
         }
     ],
-    "membros_ativos": 8
+    "membros_ativos": 9
 }
