@@ -22,11 +22,11 @@ async function fetchJSON(path) {
 
 // Caminhos dos JSONs processados
 const PATHS = {
-    stats:    './data/processed/stats.json',
-    elenco:   './data/processed/elenco_processado.json',
-    partidas: './data/processed/matches_processado.json',
-    players:  './data/processed/players.json',
-    pesquisa: './data/survey/pesquisa.json',
+    stats:    'data/processed/stats.json',
+    elenco:   'data/processed/elenco_processado.json',
+    partidas: 'data/processed/matches_processado.json',
+    players:  'data/processed/players.json',
+    pesquisa: 'data/survey/pesquisa.json',
 };
 
 export const getStats        = ()      => fetchJSON(PATHS.stats);

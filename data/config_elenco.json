@@ -79,5 +79,14 @@
         "capitania": null,
         "foto_pasta": "Formiga",
         "id_interno": "formiga"
+    },
+    "Lyonel Lucas (#??)": {
+        "ea_id": null,
+        "posicao": "LE",
+        "instagram": null,
+        "posicao_ea": "defender",
+        "capitania": null,
+        "foto_pasta": "Ronald",
+        "id_interno": "ronald"
     }
 }
