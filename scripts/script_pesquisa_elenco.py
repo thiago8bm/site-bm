@@ -16,7 +16,7 @@ from datetime import datetime
 # =============================================
 # CONFIGURAÇÃO
 # =============================================
-CAMINHO_XLSX  = os.path.join("data", "survey", "Pesquisa_de_elenco_-_BM_(respostas).xlsx")
+CAMINHO_XLSX  = os.path.join("data", "raw", "Pesquisa_de_elenco_-_BM_(respostas).xlsx")
 CAMINHO_JSON  = os.path.join("data", "survey", "pesquisa.json")
 
 # =============================================
@@ -119,8 +119,8 @@ def processar_pesquisa(caminho_xlsx: str) -> dict:
         "qtd_outliers":        len(alertas_outliers),
         "notas_outliers":      alertas_outliers,
         "alerta_texto":        (
-            f"ALERTA: {len(alertas_outliers)} jogador(es) se autoavaliaram com discrepância "
-            f"≥ 1 estrela da média do grupo ({media_auto:.2f}). "
+            f"ALERTA: {len(alertas_outliers)} jogador(es) se autoavaliaram com uma diferença "
+            f"de mais do que 1 estrela em relação à média do grupo ({media_auto:.2f}). "
             f"Valores discrepantes: {', '.join([f'{n} estrela(s)' for n in alertas_outliers])}."
             if alertas_outliers
             else "Nenhuma autoavaliação apresentou discrepância maior que 1 estrela em relação à média do grupo."
