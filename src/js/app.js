@@ -222,6 +222,52 @@ function initFooter() {
 
 
 // =====================================================
+// TEMA (DARK/LIGHT MODE)
+// =====================================================
+function initTheme() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (!toggleBtn) return;
+
+    const iconSun = document.getElementById('theme-icon-sun');
+    const iconMoon = document.getElementById('theme-icon-moon');
+    const rootElement = document.documentElement;
+    
+    // O padrão é dark. Verifica se o usuário já salvou "light" no localStorage
+    const savedTheme = localStorage.getItem('site-theme');
+    if (savedTheme === 'light') {
+        rootElement.setAttribute('data-theme', 'light');
+        if (iconSun) iconSun.style.display = 'none';
+        if (iconMoon) iconMoon.style.display = 'block';
+    } else {
+        rootElement.removeAttribute('data-theme');
+        if (iconSun) iconSun.style.display = 'block';
+        if (iconMoon) iconMoon.style.display = 'none';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        const currentTheme = rootElement.getAttribute('data-theme');
+        if (currentTheme === 'light') {
+            rootElement.removeAttribute('data-theme');
+            localStorage.setItem('site-theme', 'dark');
+            if (iconSun) iconSun.style.display = 'block';
+            if (iconMoon) iconMoon.style.display = 'none';
+        } else {
+            rootElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('site-theme', 'light');
+            if (iconSun) iconSun.style.display = 'none';
+            if (iconMoon) iconMoon.style.display = 'block';
+        }
+        
+        // Se a pessoa alternar de tema e estiver na aba de pesquisa, recomendamos dar refresh 
+        // para os gráficos do Chart.js atualizarem as cores (opcional/UX enhancement)
+        if (window.location.hash.includes('pesquisa')) {
+            window.location.reload();
+        }
+    });
+}
+
+
+// =====================================================
 // EXPORTS
 // =====================================================
 export { navigateTo, ROUTES, DEFAULT_ROUTE };

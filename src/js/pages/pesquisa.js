@@ -184,8 +184,9 @@ function initCharts(graficos) {
     }
 
     // Adaptação para o Dark Theme global
-    Chart.defaults.color = '#cccccc';
-    Chart.defaults.borderColor = '#333333';
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    Chart.defaults.color = isLight ? '#1a1a1a' : '#cccccc';
+    Chart.defaults.borderColor = isLight ? '#ECECEC' : '#333333';
 
     const RED    = '#C8102E';
     const BLUE   = '#3b82f6'; // Azul mais claro para destacar no fundo escuro
