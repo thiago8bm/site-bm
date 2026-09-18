@@ -106,8 +106,7 @@
 
 /* Status do Clube */
 .home-status-section {
-    margin-top: 60px;
-    padding-top: 60px;
+    margin-top: 20px;
     padding-bottom: var(--spacing-xl);
 }
 
@@ -248,7 +247,7 @@
 
 /* News Section */
 .home-news-section {
-    padding-top: var(--spacing-2xl);
+    padding-top: var(--spacing-xs);
     padding-bottom: var(--spacing-2xl);
 }
 

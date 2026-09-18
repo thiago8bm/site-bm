@@ -87,52 +87,56 @@ export async function renderHome() {
         '</div>' +
     '</div>' +
 
-    '<div class="container home-status-section">' +
-        '<div class="status-grid">' +
-            '<div class="status-card divisions-track-card">' +
-                '<h4 class="status-card__title">Escalada de Divisões</h4>' +
-                '<div class="divisions-track-container">' +
-                    '<div class="divisions-progress-line"></div>' +
-                    '<div class="divisions-track">' +
-                        divisions.map(div => {
-                            const isCurrent = div.level === clubConfig.divisaoAtual;
-                            const isReached = div.level >= clubConfig.divisaoAtual;
-                            const reachedClass = isReached ? 'is-reached' : 'not-reached';
-                            const activeClass = isCurrent ? 'is-current' : '';
-                            return '<div class="division-item ' + activeClass + ' ' + reachedClass + '" title="' + div.alt + '">' +
-                                   '<img src="./src/assets/img/' + div.src + '" alt="' + div.alt + '">' +
-                                   '</div>';
-                        }).join('') +
+    '<div class="container">' +
+        '<div class="home-status-section">' +
+            '<div class="status-grid">' +
+                '<div class="status-card divisions-track-card">' +
+                    '<h4 class="status-card__title">Escalada de Divisões</h4>' +
+                    '<div class="divisions-track-container">' +
+                        '<div class="divisions-progress-line"></div>' +
+                        '<div class="divisions-track">' +
+                            divisions.map(div => {
+                                const isCurrent = div.level === clubConfig.divisaoAtual;
+                                const isReached = div.level >= clubConfig.divisaoAtual;
+                                const reachedClass = isReached ? 'is-reached' : 'not-reached';
+                                const activeClass = isCurrent ? 'is-current' : '';
+                                return '<div class="division-item ' + activeClass + ' ' + reachedClass + '" title="' + div.alt + '">' +
+                                       '<img src="./src/assets/img/' + div.src + '" alt="' + div.alt + '">' +
+                                       '</div>';
+                            }).join('') +
+                        '</div>' +
                     '</div>' +
                 '</div>' +
-            '</div>' +
 
-            '<div class="status-card reputation-card">' +
-                '<h4 class="status-card__title">Reputação</h4>' +
-                '<div class="reputation-content">' +
-                    '<img src="./src/assets/img/reputacao-tier' + reputacaoTier + '.png" alt="Reputação do Clube" class="reputation-icon">' +
-                    '<div class="reputation-info">' +
-                        '<span class="reputation-level">Nível ' + clubConfig.reputacaoNivel + '</span>' +
-                        '<span class="reputation-label">' + reputacaoTitulo + '</span>' +
-                        '<span class="reputation-fans">' + clubConfig.torcedores + ' torcedores</span>' +
+                '<div class="status-card reputation-card">' +
+                    '<h4 class="status-card__title">Reputação</h4>' +
+                    '<div class="reputation-content">' +
+                        '<img src="./src/assets/img/reputacao-tier' + reputacaoTier + '.png" alt="Reputação do Clube" class="reputation-icon">' +
+                        '<div class="reputation-info">' +
+                            '<span class="reputation-level">Nível ' + clubConfig.reputacaoNivel + '</span>' +
+                            '<span class="reputation-label">' + reputacaoTitulo + '</span>' +
+                            '<span class="reputation-fans">' + clubConfig.torcedores + ' torcedores</span>' +
+                        '</div>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
         '</div>' +
     '</div>' +
 
-    '<div class="container home-news-section">' +
-        '<h3 class="section-title">Última Edição do Jornal</h3>' +
-        '<div class="latest-news-card">' +
-            '<div class="latest-news__thumb">' +
-                '<div class="latest-news__tag">ÚLTIMA EDIÇÃO</div>' +
-                '<img src="' + imgSrc + '" alt="' + ultimaEdicao.rotulo + '">' +
-            '</div>' +
-            '<div class="latest-news__info">' +
-                '<span class="latest-news__date">' + ultimaEdicao.data + '</span>' +
-                '<h4 class="latest-news__title">' + ultimaEdicao.titulo + '</h4>' +
-                '<p class="latest-news__desc">Acompanhe todos os bastidores, análises pós-jogo e entrevistas exclusivas na íntegra.</p>' +
-                '<a href="#noticias" class="btn btn--primary" id="btn-ler-edicao">Ler Edição Completa</a>' +
+    '<div class="container">' +
+        '<div class="home-news-section">' +
+            '<h3 class="section-title">Última Edição do Jornal</h3>' +
+            '<div class="latest-news-card">' +
+                '<div class="latest-news__thumb">' +
+                    '<div class="latest-news__tag">ÚLTIMA EDIÇÃO</div>' +
+                    '<img src="' + imgSrc + '" alt="' + ultimaEdicao.rotulo + '">' +
+                '</div>' +
+                '<div class="latest-news__info">' +
+                    '<span class="latest-news__date">' + ultimaEdicao.data + '</span>' +
+                    '<h4 class="latest-news__title">' + ultimaEdicao.titulo + '</h4>' +
+                    '<p class="latest-news__desc">Acompanhe todos os bastidores, análises pós-jogo e entrevistas exclusivas na íntegra.</p>' +
+                    '<a href="#noticias" class="btn btn--primary" id="btn-ler-edicao">Ler Edição Completa</a>' +
+                '</div>' +
             '</div>' +
         '</div>' +
     '</div>';
