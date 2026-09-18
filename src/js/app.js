@@ -25,6 +25,7 @@ const _rendered = new Set();
 // =====================================================
 document.addEventListener('DOMContentLoaded', () => {
     initHeader();
+    initTheme();
     initRouter();
     initFooter();
 });
