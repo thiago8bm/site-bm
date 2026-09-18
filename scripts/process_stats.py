@@ -118,74 +118,99 @@ def get_player_photos(pasta: str) -> list:
 # PROCESSAMENTO DO ELENCO
 # =============================================
 def processar_elenco() -> list:
-    """Lê players_club_stats.json e retorna lista de jogadores mapeados, incluindo novos sem dados."""
-    raw = carregar_json(os.path.join(RAW_DIR, "players_club_stats.json"))
-    if not raw:
-        print("  [AVISO] Não foi possível ler stats brutos, mas vamos gerar com 0.")
-        membros_brutos = []
-    else:
-        membros_brutos = raw.get("data", {}).get("members", [])
+    """
+    Lê players_club_stats.json e retorna lista de jogadores mapeados.
+    Se o arquivo bruto não estiver disponível (ex: falha na API da EA),
+    preserva os dados processados anteriores para evitar zerar as estatísticas do clube.
+    """
+    raw_path = os.path.join(RAW_DIR, "players_club_stats.json")
+    raw = carregar_json(raw_path) if os.path.exists(raw_path) else None
 
-    # Cria um mapa de ea_username -> dados brutos
+    # Tenta carregar dados processados anteriores como fallback de segurança
+    fallback_map = {}
+    proc_path = os.path.join(OUT_DIR, "elenco_processado.json")
+    if os.path.exists(proc_path):
+        dados_antigos = carregar_json(proc_path)
+        if dados_antigos and isinstance(dados_antigos.get("data"), list):
+            fallback_map = {j.get("id"): j for j in dados_antigos["data"] if j.get("id")}
+
+    membros_brutos = raw.get("data", {}).get("members", []) if raw else []
     brutos_map = {m.get("name", ""): m for m in membros_brutos}
+    
+    if not membros_brutos and fallback_map:
+        print("  [AVISO] Dados brutos da EA indisponíveis. Preservando estatísticas anteriores do elenco.")
+
     elenco_final = []
 
     for key, meta in ELENCO_MAP.items():
         ea_id = meta["ea_id"]
-        membro = brutos_map.get(ea_id) if ea_id else {}
+        id_jogador = meta["id"]
 
-        gamesPlayed   = safe_int(membro.get("gamesPlayed"))
-        goals         = safe_int(membro.get("goals"))
-        assists       = safe_int(membro.get("assists"))
-        winRate       = safe_int(membro.get("winRate"))
-        ratingAve     = safe_float(membro.get("ratingAve"))
-        manOfTheMatch = safe_int(membro.get("manOfTheMatch"))
-        redCards      = safe_int(membro.get("redCards"))
-        passesmade    = safe_int(membro.get("passesMade"))
-        passSuccess   = safe_int(membro.get("passSuccessRate"))
-        shotSuccess   = safe_int(membro.get("shotSuccessRate"))
-        tackles       = safe_int(membro.get("tacklesMade"))
-        tackleSuccess = safe_int(membro.get("tackleSuccessRate"))
-        proOverall    = safe_int(membro.get("proOverall"))
-        cleanSheetsDef= safe_int(membro.get("cleanSheetsDef"))
-        cleanSheetsGK = safe_int(membro.get("cleanSheetsGK"))
+        # Se temos dados brutos da EA para esse jogador:
+        membro = (brutos_map.get(ea_id) or {}) if ea_id else {}
+        tem_dados_ea = bool(membro)
 
-        prev_goals = [safe_int(membro.get(f"prevGoals{'' if i == 0 else i}")) for i in range(11)]
+        # Se não temos dados novos da EA agora, mas temos histórico anterior:
+        dados_anteriores = fallback_map.get(id_jogador, {}) if not tem_dados_ea else {}
+
+        gamesPlayed   = safe_int(membro.get("gamesPlayed", dados_anteriores.get("partidas", 0)))
+        goals         = safe_int(membro.get("goals", dados_anteriores.get("gols", 0)))
+        assists       = safe_int(membro.get("assists", dados_anteriores.get("assistencias", 0)))
+        winRate       = safe_int(membro.get("winRate", dados_anteriores.get("win_rate", 0)))
+        ratingAve     = safe_float(membro.get("ratingAve", dados_anteriores.get("media_nota", 0.0)))
+        manOfTheMatch = safe_int(membro.get("manOfTheMatch", dados_anteriores.get("mvp", 0)))
+        redCards      = safe_int(membro.get("redCards", dados_anteriores.get("cartoes_vermelhos", 0)))
+        passesmade    = safe_int(membro.get("passesMade", dados_anteriores.get("passes_feitos", 0)))
+        passSuccess   = safe_int(membro.get("passSuccessRate", dados_anteriores.get("taxa_passe", 0)))
+        shotSuccess   = safe_int(membro.get("shotSuccessRate", dados_anteriores.get("taxa_chute", 0)))
+        tackles       = safe_int(membro.get("tacklesMade", dados_anteriores.get("desarmes", 0)))
+        tackleSuccess = safe_int(membro.get("tackleSuccessRate", dados_anteriores.get("taxa_desarme", 0)))
+        proOverall    = safe_int(membro.get("proOverall", dados_anteriores.get("overall", 0)))
+        cleanSheetsDef= safe_int(membro.get("cleanSheetsDef", dados_anteriores.get("clean_sheets_def", 0)))
+        cleanSheetsGK = safe_int(membro.get("cleanSheetsGK", dados_anteriores.get("clean_sheets_gk", 0)))
+
+        if tem_dados_ea:
+            prev_goals = [safe_int(membro.get(f"prevGoals{'' if i == 0 else i}")) for i in range(11)][1:]
+        else:
+            prev_goals = dados_anteriores.get("tendencia_gols", [0] * 10)
+
+        pro_name = membro.get("proName", dados_anteriores.get("pro_name", ""))
 
         jogador = {
-            "id":           meta["id"],
-            "nome_display": meta["nome_display"],
-            "ea_username":  ea_id or "",
-            "pro_name":     membro.get("proName", ""),
-            "numero":       meta["numero"],
-            "posicao":      meta["posicao"],
-            "posicao_ea":   meta["posicao_ea"],
-            "capitania":    meta["capitania"],
-            "fotos":        get_player_photos(meta["foto_pasta"]),
-            "instagram":    meta.get("instagram", ""),
-            "status":       "ativo",
-            "partidas":            gamesPlayed,
-            "gols":                goals,
-            "assistencias":        assists,
-            "win_rate":            winRate,
-            "media_nota":          ratingAve,
-            "mvp":                 manOfTheMatch,
-            "cartoes_vermelhos":   redCards,
-            "passes_feitos":       passesmade,
-            "taxa_passe":          passSuccess,
-            "taxa_chute":          shotSuccess,
-            "desarmes":            tackles,
-            "taxa_desarme":        tackleSuccess,
-            "overall":             proOverall,
-            "clean_sheets_def":    cleanSheetsDef,
-            "clean_sheets_gk":     cleanSheetsGK,
-            "tendencia_gols":      prev_goals[1:],
-            "participacoes_gol":   goals + assists,
-            "processado_em":       datetime.now().isoformat(),
+            "id":                 id_jogador,
+            "nome_display":       meta["nome_display"],
+            "ea_username":        ea_id or "",
+            "pro_name":           pro_name,
+            "numero":             meta["numero"],
+            "posicao":            meta["posicao"],
+            "posicao_ea":         meta["posicao_ea"],
+            "capitania":          meta["capitania"],
+            "fotos":              get_player_photos(meta["foto_pasta"]),
+            "instagram":          meta.get("instagram", ""),
+            "status":             "ativo",
+            "partidas":           gamesPlayed,
+            "gols":               goals,
+            "assistencias":       assists,
+            "win_rate":           winRate,
+            "media_nota":         ratingAve,
+            "mvp":                manOfTheMatch,
+            "cartoes_vermelhos":  redCards,
+            "passes_feitos":      passesmade,
+            "taxa_passe":         passSuccess,
+            "taxa_chute":         shotSuccess,
+            "desarmes":           tackles,
+            "taxa_desarme":       tackleSuccess,
+            "overall":            proOverall,
+            "clean_sheets_def":   cleanSheetsDef,
+            "clean_sheets_gk":    cleanSheetsGK,
+            "tendencia_gols":     prev_goals,
+            "participacoes_gol":  goals + assists,
+            "processado_em":      datetime.now().isoformat(),
         }
 
         elenco_final.append(jogador)
-        print(f"  [OK] Processado: {meta['nome_display']} ({ea_id or 'Sem EA ID'})")
+        origem = "EA Atualizada" if tem_dados_ea else ("Histórico Preservado" if dados_anteriores else "Novo (Zerado)")
+        print(f"  [OK] {meta['nome_display']} ({ea_id or 'Sem EA ID'}) — {origem}")
 
     elenco_final.sort(key=lambda x: x["numero"])
     return elenco_final
@@ -201,6 +226,17 @@ def processar_partidas() -> list:
     """
     todas_partidas = {}
     EA_MAP = {v["ea_id"]: v for v in ELENCO_MAP.values() if v.get("ea_id")}
+
+    # Preserva o histórico já processado de partidas se existir
+    processed_path = os.path.join(OUT_DIR, "matches_processado.json")
+    if os.path.exists(processed_path):
+        antigas = carregar_json(processed_path)
+        if antigas and isinstance(antigas.get("data"), list):
+            for p in antigas["data"]:
+                m_id = p.get("match_id")
+                if m_id:
+                    todas_partidas[m_id] = p
+            print(f"  [INFO] Base histórica carregada: {len(todas_partidas)} partidas.")
 
     for match_type in MATCH_TYPES:
         filepath = os.path.join(RAW_DIR, f"matches_{match_type}.json")

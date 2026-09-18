@@ -1,5 +1,6 @@
 import json
 import os
+import time
 import urllib.parse
 from datetime import datetime
 from curl_cffi import requests
@@ -13,7 +14,7 @@ MATCH_TYPES = ["leagueMatch", "playoffMatch", "friendlyMatch"]
 class API:
     def __init__(self) -> None:
         self.url_base = "https://proclubs.ea.com/api/fc"
-        self.timeout = 15
+        self.timeout = 25
         self._ultimo_nome: str = None # type: ignore
         self._ultimo_id: str = None # type: ignore
         self._ultima_plataforma: str = None # type: ignore
@@ -24,24 +25,41 @@ class API:
             return endpoint
         return f"{self.url_base}/{endpoint.lstrip('/')}"   
 
-    def _chamar_api(self, url: str, descricao: str) -> list | None:
-        try:
-            print(f"Buscando {descricao}...")
-            resposta = requests.get(url, impersonate="chrome", timeout=self.timeout)
-            resposta.raise_for_status()
-            
-            # Garante que a resposta seja interpretada como JSON com segurança
-            payload = resposta.json()
-            if not payload:
-                return []
-            return payload
-            
-        except requests.exceptions.RequestException as e:
-            print(f"Erro de rede ao buscar {descricao}: {e}")
-            return None
-        except json.JSONDecodeError as e:
-            print(f"Erro ao decodificar JSON de {descricao}: {e}")
-            return None
+    def _chamar_api(self, url: str, descricao: str, retries: int = 3, backoff: float = 2.0) -> list | dict | None:
+        headers = {
+            "Accept": "application/json, text/plain, */*",
+            "Referer": "https://www.ea.com/",
+            "Origin": "https://www.ea.com"
+        }
+        for tentativa in range(1, retries + 1):
+            try:
+                print(f"Buscando {descricao} (tentativa {tentativa}/{retries})...")
+                resposta = requests.get(url, impersonate="chrome", timeout=self.timeout, headers=headers)
+
+                # A EA retorna HTTP 500 para playoffMatch quando a janela de playoffs não está aberta
+                if resposta.status_code == 500 and "playoffMatch" in url:
+                    print(f"[{descricao}] Playoffs inativos no momento (EA retornou HTTP 500 esperado).")
+                    return []
+
+                resposta.raise_for_status()
+                
+                # Garante que a resposta seja interpretada como JSON com segurança
+                payload = resposta.json()
+                if not payload:
+                    return []
+                return payload
+                
+            except requests.exceptions.RequestException as e:
+                print(f"Erro ao buscar {descricao} (tentativa {tentativa}/{retries}): {e}")
+                if tentativa < retries:
+                    espera = backoff * tentativa
+                    print(f"Aguardando {espera:.1f}s antes de tentar novamente...")
+                    time.sleep(espera)
+                else:
+                    return None
+            except json.JSONDecodeError as e:
+                print(f"Erro ao decodificar JSON de {descricao}: {e}")
+                return None
    
     def _salvar_json(self, dados: dict | list, filename: str, extra_meta: dict = None) -> None: # type: ignore
         """Salva dados genéricos sobrescrevendo o arquivo e aceitando metadados extras."""
