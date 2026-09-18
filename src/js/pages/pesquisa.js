@@ -183,8 +183,12 @@ function initCharts(graficos) {
         return;
     }
 
+    // Adaptação para o Dark Theme global
+    Chart.defaults.color = '#cccccc';
+    Chart.defaults.borderColor = '#333333';
+
     const RED    = '#C8102E';
-    const BLUE   = '#003087';
+    const BLUE   = '#3b82f6'; // Azul mais claro para destacar no fundo escuro
     const COLORS = [BLUE, RED, '#f39c12', '#2ecc71', '#9b59b6', '#34495e', '#e74c3c'];
 
     // Horizontal bar — Votação para capitão
@@ -196,7 +200,7 @@ function initCharts(graficos) {
                 labels: graficos.capitaes.labels,
                 datasets: [{
                     data: graficos.capitaes.data,
-                    backgroundColor: graficos.capitaes.labels.map((_, i) => i === 0 ? BLUE : i === 1 ? RED : '#ccc'),
+                    backgroundColor: graficos.capitaes.labels.map((_, i) => i === 0 ? BLUE : i === 1 ? RED : '#555555'),
                     borderRadius: 6,
                 }],
             },
@@ -221,7 +225,7 @@ function initCharts(graficos) {
                     data: graficos.posicoes_fav.data,
                     backgroundColor: COLORS,
                     borderWidth: 2,
-                    borderColor: '#fff',
+                    borderColor: '#1e1e1e', // Cor do bg do card para recortar a rosca
                 }],
             },
             options: {
