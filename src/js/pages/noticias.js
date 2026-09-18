@@ -10,7 +10,7 @@ import { renderLoading } from '../utils/helpers.js';
 // Formato de nome: {Editora}_{tipo}{numero}_{DDMM}.jpg
 // Editoras conhecidas: TheFicientsNews, BMNews (vazia por ora)
 
-const THEFICIENTS_EDITIONS = [
+export const THEFICIENTS_EDITIONS = [
     'TheFicientsNews_1ed_1507.jpg',
     'TheFicientsNews_2ed_1607.jpg',
     'TheFicientsNews_3ed_2107.jpg',
@@ -32,7 +32,7 @@ const THEFICIENTS_EDITIONS = [
     'TheFicientsNews_19ed_2808.jpg',
     'TheFicientsNews_20ed_0209.jpg',
     'TheFicientsNews_21ed_0509.jpg',
-    'TheFicientsNews_22ed_0509.jpg',
+    'edicao22_2026-09-05_Volta-por-Cima-em-Revanche-Historica.jpg',
     // Plantões
     'TheFicientsNews_plantao1_2807.jpg',
     'TheFicientsNews_plantao2_2907.jpg',
@@ -44,50 +44,63 @@ const THEFICIENTS_EDITIONS = [
     'TheFicientsNews_poster_2508.jpg',
 ];
 
-const BASE_PATH_THEFICIENTS = './src/assets/news/TheFicientsNews/';
+export const BASE_PATH_THEFICIENTS = './src/assets/news/TheFicientsNews/';
 const BASE_PATH_BMNEWS      = './src/assets/news/BMNews/';
 
 // ─── Parser do nome de arquivo ────────────────────────────────────────────────
-function parseEdition(filename) {
-    // Extrai tudo após o prefixo da editora
-    // Ex: TheFicientsNews_22ed_0509.jpg → tipo=ed, num=22, ddmm=0509
-    // Ex: TheFicientsNews_plantao3_1208.jpg → tipo=plantao, num=3, ddmm=1208
-    // Ex: TheFicientsNews_poster_2508.jpg → tipo=poster, ddmm=2508
+export function parseEdition(filename) {
+    const noExt = filename.replace(/\.(jpg|jpeg|png|webp)$/i, '');
+    let tipo, numero, rotulo, dataFormatada;
 
-    const noExt   = filename.replace(/\.(jpg|jpeg|png|webp)$/i, '');
-    const parts   = noExt.split('_');
-    // parts[0] = editora, parts[1] = tipo+num, parts[2] = ddmm
+    // Novo Padrão: edicao{NUMERO}_{DATA-ISO}_{TITULO}
+    if (noExt.startsWith('edicao') && noExt.includes('_202')) {
+        const parts = noExt.split('_');
+        tipo = 'edicao';
+        numero = parseInt(parts[0].replace('edicao', ''), 10);
+        
+        const isoDate = parts[1]; // ex: 2026-09-05
+        const dateParts = isoDate.split('-');
+        if (dateParts.length === 3) {
+            dataFormatada = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+        } else {
+            dataFormatada = isoDate;
+        }
+        
+        const tituloBruto = parts.slice(2).join('-');
+        const tituloLimpo = tituloBruto.replace(/-/g, ' ');
+        
+        rotulo = `Edição Nº ${numero} — ${tituloLimpo}`;
+        return { tipo, numero, rotulo, data: dataFormatada, filename, titulo: tituloLimpo };
+    }
 
+    // Antigo padrão: TheFicientsNews_22ed_0509
+    const parts = noExt.split('_');
     const tipoPart = parts[1] ?? '';
-    const ddmm     = parts[2] ?? '';
+    const ddmm = parts[2] ?? '';
 
-    // Data formatada
-    const dataFormatada = ddmm.length === 4
+    dataFormatada = ddmm.length === 4
         ? `${ddmm.slice(0, 2)}/${ddmm.slice(2)}`
         : '—';
 
-    let tipo, numero, rotulo;
-
     if (tipoPart.startsWith('poster')) {
-        tipo   = 'poster';
+        tipo = 'poster';
         numero = null;
         rotulo = `Poster — ${dataFormatada}`;
     } else if (tipoPart.startsWith('plantao')) {
-        tipo   = 'plantao';
+        tipo = 'plantao';
         numero = parseInt(tipoPart.replace('plantao', ''), 10);
         rotulo = `Plantão #${numero} — ${dataFormatada}`;
     } else {
-        // ex: "22ed"
-        tipo   = 'edicao';
+        tipo = 'edicao';
         numero = parseInt(tipoPart.replace('ed', ''), 10);
         rotulo = `Edição ${numero} — ${dataFormatada}`;
     }
 
-    return { tipo, numero, rotulo, data: dataFormatada, filename };
+    return { tipo, numero, rotulo, data: dataFormatada, filename, titulo: rotulo };
 }
 
 // ─── Ordenação: edições regulares (por número) → plantões → posters ──────────
-function ordenarEdicoes(lista) {
+export function ordenarEdicoes(lista) {
     const order = { edicao: 0, plantao: 1, poster: 2 };
     return [...lista].sort((a, b) => {
         if (order[a.tipo] !== order[b.tipo]) return order[a.tipo] - order[b.tipo];
@@ -268,4 +281,10 @@ function initLightbox() {
         if (e.key === 'ArrowLeft')   prev();
         if (e.key === 'ArrowRight')  next();
     });
+
+    // Auto-open via trigger da Home
+    if (sessionStorage.getItem('openLatestNews') === 'true') {
+        sessionStorage.removeItem('openLatestNews');
+        setTimeout(() => open(0), 100);
+    }
 }

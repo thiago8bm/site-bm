@@ -1,10 +1,10 @@
 /**
  * pages/home.js — Baile de Munique
- * Renderiza a seção Home com hero banner e stats do clube.
+ * Renderiza a seção Home refatorada (Hero Temático, Divisões, Reputação e TheFicients News).
  */
 
-import { getStats } from '../api.js';
-import { renderLoading, renderError } from '../utils/helpers.js';
+import { renderLoading } from '../utils/helpers.js';
+import { THEFICIENTS_EDITIONS, parseEdition, ordenarEdicoes, BASE_PATH_THEFICIENTS } from './noticias.js';
 
 export async function renderHome() {
     const section = document.getElementById('home-view');
@@ -12,12 +12,25 @@ export async function renderHome() {
 
     renderLoading(section, 'Carregando...');
 
-    const stats = await getStats();
+    // Pega a última edição de forma dinâmica usando a lógica de noticias.js
+    const theficientsParsed = THEFICIENTS_EDITIONS.map(parseEdition);
+    const edicoes = ordenarEdicoes(theficientsParsed).filter(e => e.tipo === 'edicao');
+    const ultimaEdicao = edicoes[0];
+    const imgSrc = `${BASE_PATH_THEFICIENTS}${ultimaEdicao.filename}`;
 
-    const liga = stats?.liga ?? null;
+    // Divisões (5 é a pior/inicial, Elite é o topo)
+    const currentDiv = 5; // A divisão atual (simulada/estática por ora)
+    const divisions = [
+        { level: 5, src: 'divisao5.png', alt: 'Divisão 5' },
+        { level: 4, src: 'divisao4.png', alt: 'Divisão 4' },
+        { level: 3, src: 'divisioncrest3.png', alt: 'Divisão 3' },
+        { level: 2, src: 'divisioncrest2.png', alt: 'Divisão 2' },
+        { level: 1, src: 'divisao1.png', alt: 'Divisão 1' },
+        { level: 0, src: 'divisaoElite.png', alt: 'Divisão Elite' }
+    ];
 
     section.innerHTML = `
-        <div class="container">
+        <div class="home-hero-wrapper">
             <div class="home-hero">
                 <div class="home-hero__content">
                     <img
@@ -52,26 +65,70 @@ export async function renderHome() {
                         @bailedemunichofc
                     </a>
                 </div>
-
-                ${liga ? `
-                <div class="home-hero__stats">
-                    <div class="hero-stat">
-                        <span class="hero-stat__value">${liga.total_partidas}</span>
-                        <span class="hero-stat__label">Partidas</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat__value">${liga.vitorias}</span>
-                        <span class="hero-stat__label">Vitórias</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat__value">${liga.gols_marcados}</span>
-                        <span class="hero-stat__label">Gols</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat__value">${liga.win_rate}%</span>
-                        <span class="hero-stat__label">Aproveit.</span>
-                    </div>
-                </div>` : ''}
             </div>
-        </div>`;
+        </div>
+
+        <div class="container home-status-section">
+            <div class="status-grid">
+                
+                <div class="status-card divisions-track-card">
+                    <h4 class="status-card__title">Escalada de Divisões</h4>
+                    <div class="divisions-track-container">
+                        <div class="divisions-progress-line"></div>
+                        <div class="divisions-track">
+                            ${divisions.map(div => {
+                                const isCurrent = div.level === currentDiv;
+                                const isReached = div.level >= currentDiv; // Divisão 5 (level 5) >= current (5) = true. Div 4 (level 4) >= 5 = false.
+                                const reachedClass = isReached ? 'is-reached' : 'not-reached';
+                                const activeClass = isCurrent ? 'is-current' : '';
+                                return \`
+                                    <div class="division-item \${activeClass} \${reachedClass}" title="\${div.alt}">
+                                        <img src="./src/assets/img/\${div.src}" alt="\${div.alt}">
+                                    </div>
+                                \`;
+                            }).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-card reputation-card">
+                    <h4 class="status-card__title">Reputação</h4>
+                    <div class="reputation-content">
+                        <img src="./src/assets/img/reputacao.png" alt="Reputação do Clube" class="reputation-icon">
+                        <div class="reputation-info">
+                            <span class="reputation-level">Nível 7</span>
+                            <span class="reputation-label">Conhecido</span>
+                            <span class="reputation-fans">12.482.942 torcedores</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container home-news-section">
+            <h3 class="section-title">Última Edição do Jornal</h3>
+            <div class="latest-news-card">
+                <div class="latest-news__thumb">
+                    <div class="latest-news__tag">ÚLTIMA EDIÇÃO</div>
+                    <img src="\${imgSrc}" alt="\${ultimaEdicao.rotulo}">
+                </div>
+                <div class="latest-news__info">
+                    <span class="latest-news__date">\${ultimaEdicao.data}</span>
+                    <h4 class="latest-news__title">\${ultimaEdicao.titulo}</h4>
+                    <p class="latest-news__desc">Acompanhe todos os bastidores, análises pós-jogo e entrevistas exclusivas na íntegra.</p>
+                    <a href="#noticias" class="btn btn--primary" id="btn-ler-edicao">Ler Edição Completa</a>
+                </div>
+            </div>
+        </div>
+    \`;
+
+    // Ao clicar na notícia, rola pro topo na tela de notícias e aciona flag pro modal
+    const btnLer = document.getElementById('btn-ler-edicao');
+    if (btnLer) {
+        btnLer.addEventListener('click', () => {
+            sessionStorage.setItem('openLatestNews', 'true');
+            window.scrollTo(0, 0);
+        });
+    }
 }
