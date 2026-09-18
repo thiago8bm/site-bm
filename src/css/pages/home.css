@@ -1,9 +1,25 @@
 /* ===== HOME VIEWS ===== */
 
+#home-view {
+    width: 100vw;
+    position: relative;
+    margin-left: calc(50% - 50vw);
+    background: linear-gradient(180deg, #111111 0%, #220505 40%, #111111 100%);
+    color: #fff;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+
+#home-view .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
 .home-hero-wrapper {
     position: relative;
     width: 100%;
-    background-image: url('../../assets/img/estadioBM.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -11,14 +27,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.home-hero-wrapper::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.85));
-    z-index: 1;
 }
 
 .home-hero {
@@ -53,7 +61,7 @@
 .home-hero__title {
     font-size: clamp(2.2rem, 7vw, 4rem);
     font-weight: 900;
-    color: var(--color-white);
+    color: #fff;
     letter-spacing: -0.03em;
     text-shadow: 0 2px 8px rgba(0,0,0,0.6);
     margin: 0;
@@ -91,6 +99,24 @@
 }
 .instagram-icon { flex-shrink: 0; }
 
+/* OVERRIDES PARA MODO ESCURO DA HOME */
+#home-view .section-title {
+    color: #fff !important;
+}
+
+.status-card, .latest-news-card {
+    background: #1e1e1e !important;
+    border: 1px solid #333 !important;
+}
+
+.status-card__title, .latest-news__title {
+    color: #fff !important;
+}
+
+.reputation-label {
+    color: #bbb !important;
+}
+
 /* Status do Clube */
 .home-status-section {
     padding-top: var(--spacing-2xl);
@@ -102,21 +128,20 @@
     grid-template-columns: 2fr 1fr;
     gap: var(--spacing-lg);
     align-items: stretch;
+    min-width: 0;
 }
 
 .status-card {
-    background: var(--bg-card);
     border-radius: var(--border-radius-md);
     padding: var(--spacing-lg);
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--color-gray-200);
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .status-card__title {
     font-size: 1.2rem;
-    color: var(--color-gray-900);
     margin-bottom: var(--spacing-lg);
     font-weight: 800;
     text-transform: uppercase;
@@ -130,7 +155,7 @@
 /* Trilhas de Divisões */
 .divisions-track-container {
     position: relative;
-    padding: var(--spacing-md) var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
     overflow-x: auto;
     scrollbar-width: none; 
 }
@@ -142,7 +167,7 @@
     left: 20px;
     right: 20px;
     height: 4px;
-    background: var(--color-gray-200);
+    background: #444;
     z-index: 1;
     transform: translateY(-50%);
     border-radius: 2px;
@@ -158,15 +183,16 @@
 }
 
 .division-item {
-    width: 65px;
-    height: 65px;
+    width: 75px;
+    height: 75px;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease;
-    background: var(--bg-card);
+    background: #2a2a2a;
     border-radius: 50%;
-    padding: 8px;
+    padding: 12px;
+    box-sizing: border-box;
 }
 
 .division-item img {
@@ -176,7 +202,7 @@
 }
 
 .division-item.not-reached {
-    opacity: 0.35;
+    opacity: 0.4;
     filter: grayscale(100%);
 }
 
@@ -184,9 +210,9 @@
     transform: scale(1.35);
     filter: none;
     opacity: 1;
-    box-shadow: 0 0 15px rgba(200, 16, 46, 0.4); 
+    box-shadow: 0 0 15px rgba(200, 16, 46, 0.6); 
     border: 2px solid var(--color-red);
-    background: #fff;
+    background: #111;
 }
 
 /* Reputação */
@@ -198,10 +224,10 @@
 }
 
 .reputation-icon {
-    width: 80px;
+    width: 110px;
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
 }
 
 .reputation-info {
@@ -210,20 +236,21 @@
 }
 
 .reputation-level {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
+    line-height: 1.1;
     font-weight: 900;
     color: var(--color-red);
+    margin-bottom: 2px;
 }
 
 .reputation-label {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--color-gray-800);
+    font-size: 1.15rem;
+    font-weight: 800;
     text-transform: uppercase;
 }
 
 .reputation-fans {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
     margin-top: 4px;
     font-weight: 600;
@@ -238,11 +265,10 @@
     display: grid;
     grid-template-columns: 350px 1fr;
     gap: var(--spacing-xl);
-    background: var(--bg-card);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--color-gray-200);
     overflow: hidden;
+    min-width: 0;
 }
 
 .latest-news__thumb {
@@ -292,7 +318,6 @@
 .latest-news__title {
     font-size: 1.8rem;
     font-weight: 800;
-    color: var(--color-gray-900);
     margin-bottom: var(--spacing-md);
     line-height: 1.2;
 }
