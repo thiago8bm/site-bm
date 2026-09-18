@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-09-16T20:00:47.762691",
+    "last_updated": "2026-09-18T05:08:37.445352",
     "status": "success",
     "total": 10,
     "data": [
@@ -13,8 +13,8 @@
             "posicao_ea": "goalkeeper",
             "capitania": null,
             "fotos": [
-                "src/assets/players/Pedrao/apresentacao_pedrao.png",
-                "src/assets/players/Pedrao/face_pedrao.png"
+                "src/assets/players/Pedrao/face_pedrao.png",
+                "src/assets/players/Pedrao/apresentacao_pedrao.png"
             ],
             "instagram": null,
             "status": "ativo",
@@ -46,7 +46,7 @@
                 1
             ],
             "participacoes_gol": 15,
-            "processado_em": "2026-09-16T20:00:47.762268"
+            "processado_em": "2026-09-18T05:08:37.445145"
         },
         {
             "id": "thiago",
@@ -58,10 +58,10 @@
             "posicao_ea": "midfielder",
             "capitania": "1º Capitão",
             "fotos": [
-                "src/assets/players/Thiago/apresentacao_thiago.jfif",
                 "src/assets/players/Thiago/assinatura_thiago.jfif",
-                "src/assets/players/Thiago/face_thiago.jpeg",
+                "src/assets/players/Thiago/apresentacao_thiago.jfif",
                 "src/assets/players/Thiago/patrocinio_Thiago.jpg",
+                "src/assets/players/Thiago/face_thiago.jpeg",
                 "src/assets/players/Thiago/treino_thiago.jfif"
             ],
             "instagram": "@thiago8ofc_",
@@ -94,7 +94,7 @@
                 1
             ],
             "participacoes_gol": 215,
-            "processado_em": "2026-09-16T20:00:47.762035"
+            "processado_em": "2026-09-18T05:08:37.445013"
         },
         {
             "id": "gaps",
@@ -106,8 +106,8 @@
             "posicao_ea": "forward",
             "capitania": "3º Capitão",
             "fotos": [
-                "src/assets/players/Gaps/apresentacao_Gaps.jpg",
-                "src/assets/players/Gaps/patrocinio_Gaps.jpeg"
+                "src/assets/players/Gaps/patrocinio_Gaps.jpeg",
+                "src/assets/players/Gaps/apresentacao_Gaps.jpg"
             ],
             "instagram": "@gapsofc_",
             "status": "ativo",
@@ -139,7 +139,7 @@
                 8
             ],
             "participacoes_gol": 502,
-            "processado_em": "2026-09-16T20:00:47.762196"
+            "processado_em": "2026-09-18T05:08:37.445104"
         },
         {
             "id": "abreu",
@@ -183,7 +183,7 @@
                 2
             ],
             "participacoes_gol": 284,
-            "processado_em": "2026-09-16T20:00:47.762121"
+            "processado_em": "2026-09-18T05:08:37.445061"
         },
         {
             "id": "dilaurentis",
@@ -195,9 +195,9 @@
             "posicao_ea": "defender",
             "capitania": null,
             "fotos": [
+                "src/assets/players/DiLaurentis/viagem_DiLaurentis.jpg",
                 "src/assets/players/DiLaurentis/apresentacao_DiLaurentis.jpg",
-                "src/assets/players/DiLaurentis/campo_DiLaurentis.jpg",
-                "src/assets/players/DiLaurentis/viagem_DiLaurentis.jpg"
+                "src/assets/players/DiLaurentis/campo_DiLaurentis.jpg"
             ],
             "instagram": "@mattia.dila",
             "status": "ativo",
@@ -229,7 +229,7 @@
                 1
             ],
             "participacoes_gol": 42,
-            "processado_em": "2026-09-16T20:00:47.762340"
+            "processado_em": "2026-09-18T05:08:37.445183"
         },
         {
             "id": "pinto",
@@ -241,9 +241,9 @@
             "posicao_ea": "midfielder",
             "capitania": null,
             "fotos": [
+                "src/assets/players/Pinto/treino_campo_pinto.webp",
                 "src/assets/players/Pinto/academia_pinto.jpg",
-                "src/assets/players/Pinto/apresentacao_pinto.webp",
-                "src/assets/players/Pinto/treino_campo_pinto.webp"
+                "src/assets/players/Pinto/apresentacao_pinto.webp"
             ],
             "instagram": "@l.pinto23",
             "status": "ativo",
@@ -275,7 +275,7 @@
                 2
             ],
             "participacoes_gol": 147,
-            "processado_em": "2026-09-16T20:00:47.762411"
+            "processado_em": "2026-09-18T05:08:37.445220"
         },
         {
             "id": "gabri",
@@ -287,8 +287,8 @@
             "posicao_ea": "midfielder",
             "capitania": null,
             "fotos": [
-                "src/assets/players/Gabri/apresentacao_gabri.jpg",
                 "src/assets/players/Gabri/face_gabri.png",
+                "src/assets/players/Gabri/apresentacao_gabri.jpg",
                 "src/assets/players/Gabri/night_gabri.jpg"
             ],
             "instagram": "@gabrijogador27",
@@ -321,7 +321,7 @@
                 0
             ],
             "participacoes_gol": 8,
-            "processado_em": "2026-09-16T20:00:47.762480"
+            "processado_em": "2026-09-18T05:08:37.445256"
         },
         {
             "id": "cleiton",
@@ -333,8 +333,8 @@
             "posicao_ea": "midfielder",
             "capitania": null,
             "fotos": [
-                "src/assets/players/Cleiton/contrato_cleiton.jpg",
-                "src/assets/players/Cleiton/foto_cleiton.jpg"
+                "src/assets/players/Cleiton/foto_cleiton.jpg",
+                "src/assets/players/Cleiton/contrato_cleiton.jpg"
             ],
             "instagram": "@cleiton_da.costa",
             "status": "ativo",
@@ -366,7 +366,7 @@
                 1
             ],
             "participacoes_gol": 136,
-            "processado_em": "2026-09-16T20:00:47.762549"
+            "processado_em": "2026-09-18T05:08:37.445290"
         },
         {
             "id": "formiga",
@@ -408,7 +408,7 @@
                 1
             ],
             "participacoes_gol": 88,
-            "processado_em": "2026-09-16T20:00:47.762616"
+            "processado_em": "2026-09-18T05:08:37.445318"
         },
         {
             "id": "ronald",
@@ -450,7 +450,7 @@
                 0
             ],
             "participacoes_gol": 0,
-            "processado_em": "2026-09-16T20:00:47.762677"
+            "processado_em": "2026-09-18T05:08:37.445338"
         }
     ]
 }
