@@ -1,9 +1,9 @@
 name: Atualizar Estatísticas EA
 
 on:
-  schedule:
-    # Roda todo dia às 05h00 UTC (02h00 no Horário de Brasília)
-    - cron: '0 5 * * *'
+  # schedule:
+  #   # Roda todo dia às 05h00 UTC (02h00 no Horário de Brasília)
+  #   - cron: '0 5 * * *'
   workflow_dispatch: # Permite execução manual pela aba Actions
 
 permissions:
