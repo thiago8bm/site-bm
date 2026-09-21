@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-09-20T05:08:41.679501",
+    "last_updated": "2026-09-21T05:09:42.454720",
     "status": "success",
     "total": 10,
     "data": [
@@ -46,7 +46,7 @@
                 1
             ],
             "participacoes_gol": 15,
-            "processado_em": "2026-09-20T05:08:41.679316"
+            "processado_em": "2026-09-21T05:09:42.454614"
         },
         {
             "id": "thiago",
@@ -94,7 +94,7 @@
                 1
             ],
             "participacoes_gol": 215,
-            "processado_em": "2026-09-20T05:08:41.679171"
+            "processado_em": "2026-09-21T05:09:42.454544"
         },
         {
             "id": "gaps",
@@ -139,7 +139,7 @@
                 8
             ],
             "participacoes_gol": 502,
-            "processado_em": "2026-09-20T05:08:41.679285"
+            "processado_em": "2026-09-21T05:09:42.454595"
         },
         {
             "id": "abreu",
@@ -183,7 +183,7 @@
                 2
             ],
             "participacoes_gol": 284,
-            "processado_em": "2026-09-20T05:08:41.679245"
+            "processado_em": "2026-09-21T05:09:42.454573"
         },
         {
             "id": "dilaurentis",
@@ -229,7 +229,7 @@
                 1
             ],
             "participacoes_gol": 42,
-            "processado_em": "2026-09-20T05:08:41.679345"
+            "processado_em": "2026-09-21T05:09:42.454632"
         },
         {
             "id": "pinto",
@@ -275,7 +275,7 @@
                 2
             ],
             "participacoes_gol": 147,
-            "processado_em": "2026-09-20T05:08:41.679374"
+            "processado_em": "2026-09-21T05:09:42.454652"
         },
         {
             "id": "gabri",
@@ -321,7 +321,7 @@
                 0
             ],
             "participacoes_gol": 8,
-            "processado_em": "2026-09-20T05:08:41.679402"
+            "processado_em": "2026-09-21T05:09:42.454669"
         },
         {
             "id": "cleiton",
@@ -366,7 +366,7 @@
                 1
             ],
             "participacoes_gol": 136,
-            "processado_em": "2026-09-20T05:08:41.679447"
+            "processado_em": "2026-09-21T05:09:42.454687"
         },
         {
             "id": "formiga",
@@ -408,7 +408,7 @@
                 1
             ],
             "participacoes_gol": 88,
-            "processado_em": "2026-09-20T05:08:41.679473"
+            "processado_em": "2026-09-21T05:09:42.454700"
         },
         {
             "id": "ronald",
@@ -450,7 +450,7 @@
                 0
             ],
             "participacoes_gol": 0,
-            "processado_em": "2026-09-20T05:08:41.679491"
+            "processado_em": "2026-09-21T05:09:42.454711"
         }
     ]
 }
