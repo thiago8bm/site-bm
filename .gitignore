@@ -1,6 +1,7 @@
 # Diretórios sensíveis
 docs/
 data/raw/
+data/_raw/
 *.xlsx
 
 # Ambiente virtual do Python

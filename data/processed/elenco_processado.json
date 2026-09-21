@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-09-18T05:08:37.445352",
+    "last_updated": "2026-09-21T16:10:17.423049",
     "status": "success",
     "total": 10,
     "data": [
@@ -13,26 +13,26 @@
             "posicao_ea": "goalkeeper",
             "capitania": null,
             "fotos": [
-                "src/assets/players/Pedrao/face_pedrao.png",
-                "src/assets/players/Pedrao/apresentacao_pedrao.png"
+                "src/assets/players/Pedrao/apresentacao_pedrao.png",
+                "src/assets/players/Pedrao/face_pedrao.png"
             ],
             "instagram": null,
             "status": "ativo",
-            "partidas": 102,
+            "partidas": 121,
             "gols": 9,
             "assistencias": 6,
-            "win_rate": 39,
+            "win_rate": 38,
             "media_nota": 6.4,
             "mvp": 1,
             "cartoes_vermelhos": 1,
-            "passes_feitos": 702,
+            "passes_feitos": 795,
             "taxa_passe": 70,
-            "taxa_chute": 9,
+            "taxa_chute": 8,
             "desarmes": 84,
             "taxa_desarme": 9,
             "overall": 85,
             "clean_sheets_def": 1,
-            "clean_sheets_gk": 0,
+            "clean_sheets_gk": 1,
             "tendencia_gols": [
                 0,
                 0,
@@ -46,7 +46,7 @@
                 1
             ],
             "participacoes_gol": 15,
-            "processado_em": "2026-09-18T05:08:37.445145"
+            "processado_em": "2026-09-21T16:10:17.422382"
         },
         {
             "id": "thiago",
@@ -58,22 +58,22 @@
             "posicao_ea": "midfielder",
             "capitania": "1º Capitão",
             "fotos": [
-                "src/assets/players/Thiago/assinatura_thiago.jfif",
                 "src/assets/players/Thiago/apresentacao_thiago.jfif",
-                "src/assets/players/Thiago/patrocinio_Thiago.jpg",
+                "src/assets/players/Thiago/assinatura_thiago.jfif",
                 "src/assets/players/Thiago/face_thiago.jpeg",
+                "src/assets/players/Thiago/patrocinio_Thiago.jpg",
                 "src/assets/players/Thiago/treino_thiago.jfif"
             ],
             "instagram": "@thiago8ofc_",
             "status": "ativo",
-            "partidas": 222,
-            "gols": 76,
-            "assistencias": 139,
+            "partidas": 238,
+            "gols": 84,
+            "assistencias": 154,
             "win_rate": 49,
             "media_nota": 7.7,
             "mvp": 34,
             "cartoes_vermelhos": 1,
-            "passes_feitos": 3444,
+            "passes_feitos": 3640,
             "taxa_passe": 73,
             "taxa_chute": 32,
             "desarmes": 223,
@@ -93,8 +93,8 @@
                 1,
                 1
             ],
-            "participacoes_gol": 215,
-            "processado_em": "2026-09-18T05:08:37.445013"
+            "participacoes_gol": 238,
+            "processado_em": "2026-09-21T16:10:17.422047"
         },
         {
             "id": "gaps",
@@ -106,19 +106,19 @@
             "posicao_ea": "forward",
             "capitania": "3º Capitão",
             "fotos": [
-                "src/assets/players/Gaps/patrocinio_Gaps.jpeg",
-                "src/assets/players/Gaps/apresentacao_Gaps.jpg"
+                "src/assets/players/Gaps/apresentacao_Gaps.jpg",
+                "src/assets/players/Gaps/patrocinio_Gaps.jpeg"
             ],
             "instagram": "@gapsofc_",
             "status": "ativo",
-            "partidas": 256,
-            "gols": 350,
-            "assistencias": 152,
-            "win_rate": 49,
+            "partidas": 276,
+            "gols": 374,
+            "assistencias": 170,
+            "win_rate": 50,
             "media_nota": 8.0,
             "mvp": 82,
             "cartoes_vermelhos": 10,
-            "passes_feitos": 3783,
+            "passes_feitos": 4027,
             "taxa_passe": 77,
             "taxa_chute": 31,
             "desarmes": 260,
@@ -138,8 +138,8 @@
                 2,
                 8
             ],
-            "participacoes_gol": 502,
-            "processado_em": "2026-09-18T05:08:37.445104"
+            "participacoes_gol": 544,
+            "processado_em": "2026-09-21T16:10:17.422246"
         },
         {
             "id": "abreu",
@@ -155,14 +155,14 @@
             ],
             "instagram": "@sturridge_a15_",
             "status": "ativo",
-            "partidas": 230,
-            "gols": 137,
-            "assistencias": 147,
+            "partidas": 270,
+            "gols": 163,
+            "assistencias": 172,
             "win_rate": 43,
             "media_nota": 7.5,
             "mvp": 46,
             "cartoes_vermelhos": 0,
-            "passes_feitos": 3869,
+            "passes_feitos": 4552,
             "taxa_passe": 80,
             "taxa_chute": 22,
             "desarmes": 229,
@@ -182,8 +182,8 @@
                 2,
                 2
             ],
-            "participacoes_gol": 284,
-            "processado_em": "2026-09-18T05:08:37.445061"
+            "participacoes_gol": 335,
+            "processado_em": "2026-09-21T16:10:17.422152"
         },
         {
             "id": "dilaurentis",
@@ -195,22 +195,22 @@
             "posicao_ea": "defender",
             "capitania": null,
             "fotos": [
-                "src/assets/players/DiLaurentis/viagem_DiLaurentis.jpg",
                 "src/assets/players/DiLaurentis/apresentacao_DiLaurentis.jpg",
-                "src/assets/players/DiLaurentis/campo_DiLaurentis.jpg"
+                "src/assets/players/DiLaurentis/campo_DiLaurentis.jpg",
+                "src/assets/players/DiLaurentis/viagem_DiLaurentis.jpg"
             ],
             "instagram": "@mattia.dila",
             "status": "ativo",
-            "partidas": 133,
-            "gols": 16,
-            "assistencias": 26,
+            "partidas": 143,
+            "gols": 17,
+            "assistencias": 29,
             "win_rate": 34,
             "media_nota": 6.9,
             "mvp": 4,
             "cartoes_vermelhos": 3,
-            "passes_feitos": 1301,
+            "passes_feitos": 1399,
             "taxa_passe": 67,
-            "taxa_chute": 11,
+            "taxa_chute": 10,
             "desarmes": 93,
             "taxa_desarme": 11,
             "overall": 89,
@@ -228,8 +228,8 @@
                 1,
                 1
             ],
-            "participacoes_gol": 42,
-            "processado_em": "2026-09-18T05:08:37.445183"
+            "participacoes_gol": 46,
+            "processado_em": "2026-09-21T16:10:17.422501"
         },
         {
             "id": "pinto",
@@ -241,22 +241,22 @@
             "posicao_ea": "midfielder",
             "capitania": null,
             "fotos": [
-                "src/assets/players/Pinto/treino_campo_pinto.webp",
                 "src/assets/players/Pinto/academia_pinto.jpg",
-                "src/assets/players/Pinto/apresentacao_pinto.webp"
+                "src/assets/players/Pinto/apresentacao_pinto.webp",
+                "src/assets/players/Pinto/treino_campo_pinto.webp"
             ],
             "instagram": "@l.pinto23",
             "status": "ativo",
-            "partidas": 129,
-            "gols": 81,
-            "assistencias": 66,
+            "partidas": 154,
+            "gols": 97,
+            "assistencias": 74,
             "win_rate": 45,
             "media_nota": 7.2,
             "mvp": 14,
             "cartoes_vermelhos": 4,
-            "passes_feitos": 1717,
-            "taxa_passe": 73,
-            "taxa_chute": 27,
+            "passes_feitos": 1964,
+            "taxa_passe": 72,
+            "taxa_chute": 28,
             "desarmes": 113,
             "taxa_desarme": 10,
             "overall": 88,
@@ -274,8 +274,8 @@
                 1,
                 2
             ],
-            "participacoes_gol": 147,
-            "processado_em": "2026-09-18T05:08:37.445220"
+            "participacoes_gol": 171,
+            "processado_em": "2026-09-21T16:10:17.422643"
         },
         {
             "id": "gabri",
@@ -287,22 +287,22 @@
             "posicao_ea": "midfielder",
             "capitania": null,
             "fotos": [
-                "src/assets/players/Gabri/face_gabri.png",
                 "src/assets/players/Gabri/apresentacao_gabri.jpg",
+                "src/assets/players/Gabri/face_gabri.png",
                 "src/assets/players/Gabri/night_gabri.jpg"
             ],
             "instagram": "@gabrijogador27",
             "status": "ativo",
-            "partidas": 8,
-            "gols": 4,
-            "assistencias": 4,
-            "win_rate": 37,
+            "partidas": 14,
+            "gols": 7,
+            "assistencias": 9,
+            "win_rate": 42,
             "media_nota": 7.7,
             "mvp": 0,
             "cartoes_vermelhos": 0,
-            "passes_feitos": 145,
-            "taxa_passe": 79,
-            "taxa_chute": 20,
+            "passes_feitos": 208,
+            "taxa_passe": 77,
+            "taxa_chute": 23,
             "desarmes": 13,
             "taxa_desarme": 31,
             "overall": 86,
@@ -320,8 +320,8 @@
                 0,
                 0
             ],
-            "participacoes_gol": 8,
-            "processado_em": "2026-09-18T05:08:37.445256"
+            "participacoes_gol": 16,
+            "processado_em": "2026-09-21T16:10:17.422741"
         },
         {
             "id": "cleiton",
@@ -333,19 +333,19 @@
             "posicao_ea": "midfielder",
             "capitania": null,
             "fotos": [
-                "src/assets/players/Cleiton/foto_cleiton.jpg",
-                "src/assets/players/Cleiton/contrato_cleiton.jpg"
+                "src/assets/players/Cleiton/contrato_cleiton.jpg",
+                "src/assets/players/Cleiton/foto_cleiton.jpg"
             ],
             "instagram": "@cleiton_da.costa",
             "status": "ativo",
-            "partidas": 267,
-            "gols": 75,
-            "assistencias": 61,
+            "partidas": 304,
+            "gols": 87,
+            "assistencias": 71,
             "win_rate": 43,
             "media_nota": 6.8,
             "mvp": 6,
             "cartoes_vermelhos": 10,
-            "passes_feitos": 2809,
+            "passes_feitos": 3232,
             "taxa_passe": 68,
             "taxa_chute": 19,
             "desarmes": 231,
@@ -365,8 +365,8 @@
                 0,
                 1
             ],
-            "participacoes_gol": 136,
-            "processado_em": "2026-09-18T05:08:37.445290"
+            "participacoes_gol": 158,
+            "processado_em": "2026-09-21T16:10:17.422869"
         },
         {
             "id": "formiga",
@@ -380,16 +380,16 @@
             "fotos": [],
             "instagram": null,
             "status": "ativo",
-            "partidas": 138,
-            "gols": 60,
-            "assistencias": 28,
-            "win_rate": 33,
+            "partidas": 153,
+            "gols": 75,
+            "assistencias": 35,
+            "win_rate": 34,
             "media_nota": 6.6,
             "mvp": 7,
             "cartoes_vermelhos": 2,
-            "passes_feitos": 1300,
-            "taxa_passe": 71,
-            "taxa_chute": 24,
+            "passes_feitos": 1473,
+            "taxa_passe": 72,
+            "taxa_chute": 26,
             "desarmes": 55,
             "taxa_desarme": 11,
             "overall": 87,
@@ -407,13 +407,13 @@
                 0,
                 1
             ],
-            "participacoes_gol": 88,
-            "processado_em": "2026-09-18T05:08:37.445318"
+            "participacoes_gol": 110,
+            "processado_em": "2026-09-21T16:10:17.422961"
         },
         {
             "id": "ronald",
             "nome_display": "Lyonel Lucas",
-            "ea_username": "",
+            "ea_username": "ronaldin586",
             "pro_name": "",
             "numero": 999,
             "posicao": "LE",
@@ -422,20 +422,20 @@
             "fotos": [],
             "instagram": null,
             "status": "ativo",
-            "partidas": 0,
+            "partidas": 8,
             "gols": 0,
-            "assistencias": 0,
-            "win_rate": 0,
+            "assistencias": 1,
+            "win_rate": 62,
             "media_nota": 0.0,
             "mvp": 0,
             "cartoes_vermelhos": 0,
-            "passes_feitos": 0,
-            "taxa_passe": 0,
+            "passes_feitos": 89,
+            "taxa_passe": 76,
             "taxa_chute": 0,
             "desarmes": 0,
             "taxa_desarme": 0,
             "overall": 0,
-            "clean_sheets_def": 0,
+            "clean_sheets_def": 1,
             "clean_sheets_gk": 0,
             "tendencia_gols": [
                 0,
@@ -449,8 +449,8 @@
                 0,
                 0
             ],
-            "participacoes_gol": 0,
-            "processado_em": "2026-09-18T05:08:37.445338"
+            "participacoes_gol": 1,
+            "processado_em": "2026-09-21T16:10:17.423028"
         }
     ]
 }
