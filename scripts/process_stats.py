@@ -24,7 +24,9 @@ MATCH_TYPES  = ["leagueMatch", "playoffMatch", "friendlyMatch"]
 # =============================================
 # DICIONÁRIO DE MAPEAMENTO DO ELENCO
 # =============================================
-CONFIG_ELENCO_PATH = os.path.join("data", "config_elenco.json")
+CONFIG_ELENCO_PATH = os.path.join("config", "elenco.json")
+MANUAL_STATS_PATH = os.path.join("data", "manual", "manual_stats.json")
+MANUAL_MATCHES_PATH = os.path.join("data", "manual", "manual_matches.json")
 ELENCO_MAP = {}
 
 def load_config_elenco():
@@ -137,6 +139,9 @@ def processar_elenco() -> list:
     membros_brutos = raw.get("data", {}).get("members", []) if raw else []
     brutos_map = {m.get("name", ""): m for m in membros_brutos}
     
+    # Carrega dados manuais de sobrescrita
+    manual_stats = carregar_json(MANUAL_STATS_PATH) or {}
+    
     if not membros_brutos and fallback_map:
         print("  [AVISO] Dados brutos da EA indisponíveis. Preservando estatísticas anteriores do elenco.")
 
@@ -148,7 +153,15 @@ def processar_elenco() -> list:
 
         # Se temos dados brutos da EA para esse jogador:
         membro = (brutos_map.get(ea_id) or {}) if ea_id else {}
-        tem_dados_ea = bool(membro)
+        
+        membro_manual = manual_stats.get(ea_id, {})
+        if membro_manual:
+            membro.update(membro_manual)
+            tem_dados_ea = True
+            origem_manual = True
+        else:
+            tem_dados_ea = bool(membro)
+            origem_manual = False
 
         # Se não temos dados novos da EA agora, mas temos histórico anterior:
         dados_anteriores = fallback_map.get(id_jogador, {}) if not tem_dados_ea else {}
@@ -209,7 +222,7 @@ def processar_elenco() -> list:
         }
 
         elenco_final.append(jogador)
-        origem = "EA Atualizada" if tem_dados_ea else ("Histórico Preservado" if dados_anteriores else "Novo (Zerado)")
+        origem = "Manual" if origem_manual else ("EA Atualizada" if tem_dados_ea else ("Histórico Preservado" if dados_anteriores else "Novo (Zerado)"))
         print(f"  [OK] {meta['nome_display']} ({ea_id or 'Sem EA ID'}) — {origem}")
 
     elenco_final.sort(key=lambda x: x["numero"])
@@ -237,6 +250,15 @@ def processar_partidas() -> list:
                 if m_id:
                     todas_partidas[m_id] = p
             print(f"  [INFO] Base histórica carregada: {len(todas_partidas)} partidas.")
+            
+    # Adiciona partidas inseridas manualmente
+    manual_matches = carregar_json(MANUAL_MATCHES_PATH) or []
+    for p_manual in manual_matches:
+        m_id = p_manual.get("match_id")
+        if m_id:
+            todas_partidas[m_id] = p_manual
+    if manual_matches:
+        print(f"  [INFO] {len(manual_matches)} partidas manuais carregadas/sobrescritas.")
 
     for match_type in MATCH_TYPES:
         filepath = os.path.join(RAW_DIR, f"matches_{match_type}.json")
@@ -369,12 +391,14 @@ def processar_partidas() -> list:
 def gerar_stats_globais(elenco: list, partidas: list) -> dict:
     liga = [p for p in partidas if p["tipo"] == "leagueMatch"]
 
-    total    = len(liga)
-    vitorias = sum(1 for p in liga if p["resultado"] == "vitoria")
-    empates  = sum(1 for p in liga if p["resultado"] == "empate")
-    derrotas = sum(1 for p in liga if p["resultado"] == "derrota")
-    gols_m   = sum(p["placar_nos"] for p in liga)
-    gols_s   = sum(p["placar_adv"] for p in liga)
+    manual_club = carregar_json(os.path.join("data", "manual", "manual_club_stats.json")) or {}
+    
+    total    = manual_club.get("total_partidas", len(liga))
+    vitorias = manual_club.get("vitorias", sum(1 for p in liga if p["resultado"] == "vitoria"))
+    empates  = manual_club.get("empates", sum(1 for p in liga if p["resultado"] == "empate"))
+    derrotas = manual_club.get("derrotas", sum(1 for p in liga if p["resultado"] == "derrota"))
+    gols_m   = manual_club.get("gols_marcados", sum(p["placar_nos"] for p in liga))
+    gols_s   = manual_club.get("gols_sofridos", sum(p["placar_adv"] for p in liga))
 
     artilheiros = sorted(elenco, key=lambda x: x["gols"], reverse=True)[:5]
     garcons     = sorted(elenco, key=lambda x: x["assistencias"], reverse=True)[:5]
@@ -398,8 +422,16 @@ def gerar_stats_globais(elenco: list, partidas: list) -> dict:
             "gols_sofridos":  gols_s,
             "saldo_gols":     gols_m - gols_s,
             "win_rate":       round((vitorias / total * 100) if total > 0 else 0, 1),
+            "ch":             manual_club.get("ch", 0),
+            "reputacao":      manual_club.get("reputacao", 0),
+            "mda":            manual_club.get("mda", 0),
+            "ssg":            manual_club.get("ssg", 0),
+            "gpj":            manual_club.get("gpj", 0),
+            "gspj":           manual_club.get("gspj", 0),
+            "divisao":        manual_club.get("divisao", 0),
+            "playoff_pontos": manual_club.get("playoff_pontos", 0)
         },
-        "total_partidas_all": len(partidas),
+        "total_partidas_all": manual_club.get("total_partidas", len(partidas)),
         "top_artilheiros": [
             {"nome": j["nome_display"], "gols": j["gols"], "posicao": j["posicao"]}
             for j in artilheiros
