@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-09-21T05:09:42.456836",
+    "last_updated": "2026-09-21T16:10:17.430535",
     "status": "success",
     "clube": {
         "nome": "Baile de Munique",
@@ -8,67 +8,75 @@
         "instagram": "https://www.instagram.com/bailedemunichofc/"
     },
     "liga": {
-        "total_partidas": 10,
-        "vitorias": 5,
-        "empates": 1,
-        "derrotas": 4,
-        "gols_marcados": 33,
-        "gols_sofridos": 24,
-        "saldo_gols": 9,
-        "win_rate": 50.0
+        "total_partidas": 470,
+        "vitorias": 208,
+        "empates": 57,
+        "derrotas": 205,
+        "gols_marcados": 1075,
+        "gols_sofridos": 1102,
+        "saldo_gols": -27,
+        "win_rate": 44.3,
+        "ch": "1.709",
+        "reputacao": 7,
+        "mda": 1,
+        "ssg": 81,
+        "gpj": 2.29,
+        "gspj": 2.34,
+        "divisao": 4,
+        "playoff_pontos": 35
     },
-    "total_partidas_all": 10,
+    "total_partidas_all": 470,
     "top_artilheiros": [
         {
             "nome": "Gaps",
-            "gols": 350,
+            "gols": 374,
             "posicao": "CA"
         },
         {
             "nome": "Abreu",
-            "gols": 137,
+            "gols": 163,
             "posicao": "VOL"
         },
         {
             "nome": "Pinto",
-            "gols": 81,
+            "gols": 97,
             "posicao": "PE"
         },
         {
-            "nome": "Thiago",
-            "gols": 76,
-            "posicao": "MEI"
+            "nome": "Cleiton",
+            "gols": 87,
+            "posicao": "VOL"
         },
         {
-            "nome": "Cleiton",
-            "gols": 75,
-            "posicao": "VOL"
+            "nome": "Thiago",
+            "gols": 84,
+            "posicao": "MEI"
         }
     ],
     "top_assistentes": [
         {
-            "nome": "Gaps",
-            "assists": 152,
-            "posicao": "CA"
-        },
-        {
             "nome": "Abreu",
-            "assists": 147,
+            "assists": 172,
             "posicao": "VOL"
         },
         {
+            "nome": "Gaps",
+            "assists": 170,
+            "posicao": "CA"
+        },
+        {
             "nome": "Thiago",
-            "assists": 139,
+            "assists": 154,
             "posicao": "MEI"
         },
         {
             "nome": "Pinto",
-            "assists": 66,
+            "assists": 74,
             "posicao": "PE"
         },
         {
             "nome": "Cleiton",
-            "assists": 61,
+            "assists": 71,
             "posicao": "VOL"
         }
     ],
