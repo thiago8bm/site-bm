@@ -28,7 +28,8 @@ export async function renderEstatisticas() {
             <p class="section-subtitle">Temporada EA FC 26 · Liga</p>
 
             <!-- Overview do Clube -->
-            <div class="stats-overview">
+            <!-- Overview do Clube - Principais -->
+            <div class="stats-overview" style="margin-bottom: var(--spacing-sm);">
                 <div class="stat-card">
                     <span class="stat-card__value">${liga.total_partidas ?? 0}</span>
                     <span class="stat-card__label">Partidas</span>
@@ -45,22 +46,64 @@ export async function renderEstatisticas() {
                     <span class="stat-card__value">${liga.derrotas ?? 0}</span>
                     <span class="stat-card__label">Derrotas</span>
                 </div>
+            </div>
+
+            <!-- Overview do Clube - Secundárias (Oculto por padrão) -->
+            <div class="stats-overview hidden" id="extra-stats" style="display: none; margin-bottom: 0;">
+                <div class="stat-card">
+                    <span class="stat-card__value">${liga.win_rate ?? 0}%</span>
+                    <span class="stat-card__label">Aproveitamento</span>
+                </div>
                 <div class="stat-card">
                     <span class="stat-card__value">${liga.gols_marcados ?? 0}</span>
                     <span class="stat-card__label">Gols Pró</span>
                 </div>
                 <div class="stat-card">
                     <span class="stat-card__value">${liga.gols_sofridos ?? 0}</span>
-                    <span class="stat-card__label">Gols Con.</span>
+                    <span class="stat-card__label">Gols Contra</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__value">${liga.ssg ?? 0}</span>
+                    <span class="stat-card__label">Jogos Sem Sofrer Gols</span>
                 </div>
                 <div class="stat-card">
                     <span class="stat-card__value">${liga.saldo_gols ?? 0}</span>
-                    <span class="stat-card__label">Saldo</span>
+                    <span class="stat-card__label">Saldo de Gols</span>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-card__value">${liga.win_rate ?? 0}%</span>
-                    <span class="stat-card__label">Aproveit.</span>
+                    <span class="stat-card__value">${liga.gpj ?? 0}</span>
+                    <span class="stat-card__label">Gols / Jogo</span>
                 </div>
+                <div class="stat-card">
+                    <span class="stat-card__value">${liga.gspj ?? 0}</span>
+                    <span class="stat-card__label">Gols Sofridos / Jogo</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__value">${liga.playoff_pontos ?? 0}</span>
+                    <span class="stat-card__label">Partidas de Playoff</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__value">${liga.mda ?? 0}</span>
+                    <span class="stat-card__label">Melhor Divisão</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__value">${liga.divisao ?? 0}</span>
+                    <span class="stat-card__label">Divisão Atual</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__value">${liga.reputacao ?? 0}</span>
+                    <span class="stat-card__label">Reputação</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__value">${liga.ch ?? 0}</span>
+                    <span class="stat-card__label">Classif. Habilidade</span>
+                </div>
+            </div>
+
+            <div class="stats-toggle-wrapper" style="text-align: center; margin-bottom: var(--spacing-xl); margin-top: 10px;">
+                <button id="toggle-extra-stats" style="background: transparent; border: none; color: var(--text-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">
+                    <span id="toggle-text">Ver mais estatísticas</span> <span id="toggle-arrow" style="transition: transform 0.3s; display: inline-block;">▼</span>
+                </button>
             </div>
 
             <!-- Tabs de ranking de jogadores -->
@@ -94,6 +137,27 @@ export async function renderEstatisticas() {
                 </div>
             </div>
         </div>`;
+
+    // Toggle Extra Stats
+    const toggleBtn = section.querySelector('#toggle-extra-stats');
+    const extraStats = section.querySelector('#extra-stats');
+    const toggleText = section.querySelector('#toggle-text');
+    const toggleArrow = section.querySelector('#toggle-arrow');
+    
+    if (toggleBtn && extraStats) {
+        toggleBtn.addEventListener('click', () => {
+            const isHidden = extraStats.style.display === 'none';
+            if (isHidden) {
+                extraStats.style.display = 'grid'; // because stats-overview is a grid
+                toggleArrow.style.transform = 'rotate(180deg)';
+                toggleText.textContent = 'Ocultar estatísticas';
+            } else {
+                extraStats.style.display = 'none';
+                toggleArrow.style.transform = 'rotate(0deg)';
+                toggleText.textContent = 'Ver mais estatísticas';
+            }
+        });
+    }
 
     // Tabs interaction
     section.querySelectorAll('.tab-btn').forEach(btn => {
