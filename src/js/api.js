@@ -25,14 +25,12 @@ const PATHS = {
     stats:    'data/processed/stats.json',
     elenco:   'data/processed/elenco_processado.json',
     partidas: 'data/processed/matches_processado.json',
-    players:  'data/processed/players.json',
     pesquisa: 'data/survey/pesquisa.json',
 };
 
 export const getStats        = ()      => fetchJSON(PATHS.stats);
 export const getElenco       = ()      => fetchJSON(PATHS.elenco);
 export const getPartidas     = ()      => fetchJSON(PATHS.partidas);
-export const getPlayersBase  = ()      => fetchJSON(PATHS.players);
 export const getPesquisa     = ()      => fetchJSON(PATHS.pesquisa);
 
 /** Retorna partidas filtradas por tipo ('leagueMatch', 'friendlyMatch', etc.) ou todas */
