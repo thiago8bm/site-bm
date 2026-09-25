@@ -152,16 +152,15 @@ def processar_elenco() -> list:
         id_jogador = meta["id"]
 
         # Se temos dados brutos da EA para esse jogador:
-        membro = (brutos_map.get(ea_id) or {}) if ea_id else {}
+        membro_bruto = (brutos_map.get(ea_id) or {}) if ea_id else {}
+        tem_dados_ea = bool(membro_bruto)
         
+        membro = membro_bruto.copy()
         membro_manual = manual_stats.get(ea_id, {})
+        origem_manual = bool(membro_manual)
+        
         if membro_manual:
             membro.update(membro_manual)
-            tem_dados_ea = True
-            origem_manual = True
-        else:
-            tem_dados_ea = bool(membro)
-            origem_manual = False
 
         # Se não temos dados novos da EA agora, mas temos histórico anterior:
         dados_anteriores = fallback_map.get(id_jogador, {}) if not tem_dados_ea else {}

@@ -1,35 +1,35 @@
 {
     "Thiago_Souza108": {
-        "gamesPlayed": 238,
-        "winRate": 49,
-        "goals": 84,
-        "assists": 154,
+        "gamesPlayed": 254,
+        "winRate": 48,
+        "goals": 95,
+        "assists": 163,
         "cleanSheetsDef": 0,
         "cleanSheetsGK": 0,
-        "shotSuccessRate": 32,
-        "passesMade": 3640,
+        "shotSuccessRate": 33,
+        "passesMade": 3853,
         "passSuccessRate": 73
     },
     "NortonJONES": {
-        "gamesPlayed": 304,
-        "winRate": 43,
-        "goals": 87,
-        "assists": 71,
+        "gamesPlayed": 320,
+        "winRate": 42,
+        "goals": 91,
+        "assists": 76,
         "cleanSheetsDef": 0,
         "cleanSheetsGK": 0,
         "shotSuccessRate": 19,
-        "passesMade": 3232,
-        "passSuccessRate": 68
+        "passesMade": 3401,
+        "passSuccessRate": 69
     },
     "DanyTheTrotos": {
-        "gamesPlayed": 270,
+        "gamesPlayed": 286,
         "winRate": 43,
-        "goals": 163,
-        "assists": 172,
+        "goals": 172,
+        "assists": 189,
         "cleanSheetsDef": 3,
         "cleanSheetsGK": 0,
         "shotSuccessRate": 22,
-        "passesMade": 4552,
+        "passesMade": 4842,
         "passSuccessRate": 80
     },
     "gavrielcrvg": {
@@ -99,47 +99,47 @@
         "passSuccessRate": 78
     },
     "SRGT_XEREQUINHA": {
-        "gamesPlayed": 154,
-        "winRate": 45,
-        "goals": 97,
-        "assists": 74,
+        "gamesPlayed": 166,
+        "winRate": 43,
+        "goals": 104,
+        "assists": 77,
         "cleanSheetsDef": 0,
         "cleanSheetsGK": 0,
-        "shotSuccessRate": 28,
-        "passesMade": 1964,
+        "shotSuccessRate": 27,
+        "passesMade": 2096,
         "passSuccessRate": 72
     },
     "Gaps8459": {
-        "gamesPlayed": 276,
+        "gamesPlayed": 288,
         "winRate": 50,
-        "goals": 374,
-        "assists": 170,
+        "goals": 401,
+        "assists": 177,
         "cleanSheetsDef": 0,
         "cleanSheetsGK": 0,
-        "shotSuccessRate": 31,
-        "passesMade": 4027,
+        "shotSuccessRate": 32,
+        "passesMade": 4220,
         "passSuccessRate": 77
     },
     "ronaldin586": {
-        "gamesPlayed": 8,
-        "winRate": 62,
+        "gamesPlayed": 12,
+        "winRate": 66,
         "goals": 0,
         "assists": 1,
         "cleanSheetsDef": 1,
         "cleanSheetsGK": 0,
         "shotSuccessRate": 0,
-        "passesMade": 89,
-        "passSuccessRate": 76
+        "passesMade": 138,
+        "passSuccessRate": 80
     },
     "brsferrari": {
-        "gamesPlayed": 143,
+        "gamesPlayed": 154,
         "winRate": 34,
-        "goals": 17,
-        "assists": 29,
+        "goals": 18,
+        "assists": 30,
         "cleanSheetsDef": 1,
         "cleanSheetsGK": 0,
         "shotSuccessRate": 10,
-        "passesMade": 1399,
+        "passesMade": 1493,
         "passSuccessRate": 67
     }
 }
