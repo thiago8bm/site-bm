@@ -13,6 +13,7 @@ env/
 # Arquivos de ambiente e chaves (NUNCA envie para o GitHub)
 .env
 .env.local
+atualizar_jornais.bat
 
 # Arquivos temporários do Python e Cache
 __pycache__/
