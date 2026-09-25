@@ -36,6 +36,6 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add data/processed/
+          git add data/processed/ logs/
           git commit -m "Automated: Atualização diária de estatísticas do Baile de Munique" || echo "Nenhuma alteração para commitar"
           git push origin main

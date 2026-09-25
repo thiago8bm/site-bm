@@ -487,5 +487,21 @@ def main():
     print("=" * 60)
 
 
+
+    # LOGS E STEP SUMMARY
+    import os
+    summary_path = os.environ.get('GITHUB_STEP_SUMMARY')
+    if summary_path:
+        with open(summary_path, 'a', encoding='utf-8') as f:
+            f.write(f"### 📊 Estatísticas Processadas\n")
+            f.write(f"- Jogadores processados: {len(elenco)}\n")
+            f.write(f"- Partidas processadas: {len(partidas)}\n")
+
+    os.makedirs('logs', exist_ok=True)
+    log_file_path = os.path.join('logs', 'update_stats.log')
+    with open(log_file_path, 'a', encoding='utf-8') as f:
+        timestamp = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+        f.write(f"[{timestamp}] ProcessStats: {len(elenco)} jogadores, {len(partidas)} partidas.\n")
+
 if __name__ == "__main__":
     main()

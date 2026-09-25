@@ -185,5 +185,21 @@ def main():
         # if raw_members_career:
         #     save_json_data(raw_members_career, "players_career_stats.json")
 
+
+    # LOGS E STEP SUMMARY
+    import os
+    from datetime import datetime
+    summary_path = os.environ.get('GITHUB_STEP_SUMMARY')
+    if summary_path:
+        with open(summary_path, 'a', encoding='utf-8') as f:
+            f.write(f"### 📥 Fetch EA Data\n")
+            f.write(f"- Consulta na API da EA concluída com sucesso.\n")
+
+    os.makedirs('logs', exist_ok=True)
+    log_file_path = os.path.join('logs', 'update_stats.log')
+    with open(log_file_path, 'a', encoding='utf-8') as f:
+        timestamp = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+        f.write(f"[{timestamp}] FetchEA: Sucesso ao buscar dados da EA.\n")
+
 if __name__ == "__main__":
     main()
