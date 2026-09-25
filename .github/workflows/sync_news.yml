@@ -38,6 +38,6 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add src/assets/news/
+          git add src/assets/news/ logs/
           git commit -m "ci: sincroniza novos jornais a partir do Google Drive" || echo "Nenhuma alteração para commitar"
           git push origin HEAD:main

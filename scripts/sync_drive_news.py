@@ -2,13 +2,13 @@ import os
 import io
 import json
 import base64
+from datetime import datetime
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 
 def main():
     creds_b64 = os.environ.get('GDRIVE_CREDENTIALS')
-    # O folder_id agora será o ID da pasta RAIZ (JORNAIS - BM)
     root_folder_id = os.environ.get('GDRIVE_NEWS_FOLDER_ID')
 
     if not creds_b64 or not root_folder_id:
@@ -25,7 +25,6 @@ def main():
 
     service = build('drive', 'v3', credentials=creds)
 
-    # 1. Busca as subpastas dentro da pasta raiz
     folder_query = f"'{root_folder_id}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false"
     folder_results = service.files().list(q=folder_query, fields="nextPageToken, files(id, name)").execute()
     subfolders = folder_results.get('files', [])
@@ -35,19 +34,18 @@ def main():
         return
 
     base_output_dir = os.path.join('src', 'assets', 'news')
+    downloaded_files = []
 
     for subfolder in subfolders:
         subfolder_id = subfolder['id']
         subfolder_name = subfolder['name']
         
-        # Remove espaços do nome para bater com "BMNews" e "TheFicientsNews"
         local_folder_name = subfolder_name.replace(" ", "")
         output_dir = os.path.join(base_output_dir, local_folder_name)
         os.makedirs(output_dir, exist_ok=True)
         
         print(f'\nLendo subpasta: {subfolder_name} -> Salvando em: {output_dir}')
         
-        # 2. Busca arquivos dentro dessa subpasta
         file_query = f"'{subfolder_id}' in parents and mimeType != 'application/vnd.google-apps.folder' and trashed = false"
         file_results = service.files().list(q=file_query, fields="nextPageToken, files(id, name)").execute()
         items = file_results.get('files', [])
@@ -74,6 +72,36 @@ def main():
             while done is False:
                 status, done = downloader.next_chunk()
             print(f'    Download concluído.')
+            
+            # Registra o que foi baixado para os logs
+            downloaded_files.append(f"{local_folder_name}/{file_name}")
+
+    # ==========================================
+    # GERAÇÃO DE LOGS E STEP SUMMARY
+    # ==========================================
+    
+    # 1. Step Summary do GitHub Actions
+    summary_path = os.environ.get('GITHUB_STEP_SUMMARY')
+    if summary_path:
+        with open(summary_path, 'a', encoding='utf-8') as f:
+            if downloaded_files:
+                f.write(f"### ✅ Sincronização Concluída\nForam baixados {len(downloaded_files)} novos arquivos:\n")
+                for df in downloaded_files:
+                    f.write(f"- `{df}`\n")
+            else:
+                f.write("### 💤 Sincronização Concluída\nNenhum arquivo novo encontrado no Drive hoje.\n")
+
+    # 2. Log Persistente no Repositório (Apenas se houver novidade)
+    if downloaded_files:
+        os.makedirs('logs', exist_ok=True)
+        log_file_path = os.path.join('logs', 'sync_news.log')
+        timestamp = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+        with open(log_file_path, 'a', encoding='utf-8') as f:
+            arquivos_str = ', '.join(downloaded_files)
+            f.write(f"[{timestamp}] Sucesso: {len(downloaded_files)} novos jornais baixados: {arquivos_str}\n")
+            print(f"\nLog atualizado em {log_file_path}")
+    else:
+        print("\nNenhum arquivo novo baixado. O log não será alterado para evitar commits vazios.")
 
 if __name__ == '__main__':
     main()
