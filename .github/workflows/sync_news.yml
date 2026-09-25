@@ -1,0 +1,43 @@
+name: Sincronizar Jornais do Google Drive
+
+on:
+  schedule:
+    # Roda todo dia às 06h00 UTC (03h00 no Horário de Brasília)
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Permite execução manual pela aba Actions
+
+permissions:
+  contents: write
+
+jobs:
+  sync-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependências da API do Google
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
+
+      - name: Baixar novos jornais do Drive
+        env:
+          GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
+          GDRIVE_NEWS_FOLDER_ID: ${{ secrets.GDRIVE_NEWS_FOLDER_ID }}
+        run: |
+          python scripts/sync_drive_news.py
+
+      - name: Commit e Push das alterações
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add src/assets/news/
+          git commit -m "ci: sincroniza novos jornais a partir do Google Drive" || echo "Nenhuma alteração para commitar"
+          git push origin HEAD:main
