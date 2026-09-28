@@ -76,6 +76,15 @@ def main():
             # Registra o que foi baixado para os logs
             downloaded_files.append(f"{local_folder_name}/{file_name}")
 
+        # PRUNING: Remove local files that are no longer on Google Drive
+        drive_filenames = [item['name'] for item in items]
+        for local_file in os.listdir(output_dir):
+            if local_file.lower().endswith(('.jpg', '.jpeg', '.png', '.webp', '.pdf')):
+                if local_file not in drive_filenames:
+                    print(f'  - Arquivo {local_file} foi excluído do Drive. Removendo localmente...')
+                    os.remove(os.path.join(output_dir, local_file))
+                    downloaded_files.append(f"[EXCLUÍDO DO DRIVE] {local_folder_name}/{local_file}")
+
     # ==========================================
     # GERAÇÃO DE LOGS E STEP SUMMARY
     # ==========================================
@@ -85,11 +94,11 @@ def main():
     if summary_path:
         with open(summary_path, 'a', encoding='utf-8') as f:
             if downloaded_files:
-                f.write(f"### ✅ Sincronização Concluída\nForam baixados {len(downloaded_files)} novos arquivos:\n")
+                f.write(f"### ✅ Sincronização Concluída\nAlterações ({len(downloaded_files)} arquivos afetados):\n")
                 for df in downloaded_files:
                     f.write(f"- `{df}`\n")
             else:
-                f.write("### 💤 Sincronização Concluída\nNenhum arquivo novo encontrado no Drive hoje.\n")
+                f.write("### 💤 Sincronização Concluída\nNenhuma alteração encontrada no Drive hoje.\n")
 
     # 2. Log Persistente no Repositório (Apenas se houver novidade)
     if downloaded_files:
@@ -98,10 +107,10 @@ def main():
         timestamp = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
         with open(log_file_path, 'a', encoding='utf-8') as f:
             arquivos_str = ', '.join(downloaded_files)
-            f.write(f"[{timestamp}] Sucesso: {len(downloaded_files)} novos jornais baixados: {arquivos_str}\n")
+            f.write(f"[{timestamp}] Sucesso: {len(downloaded_files)} modificações: {arquivos_str}\n")
             print(f"\nLog atualizado em {log_file_path}")
     else:
-        print("\nNenhum arquivo novo baixado. O log não será alterado para evitar commits vazios.")
+        print("\nNenhum arquivo modificado. O log não será alterado para evitar commits vazios.")
 
 if __name__ == '__main__':
     main()

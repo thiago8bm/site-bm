@@ -27,17 +27,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
-      - name: Baixar novos jornais do Drive
+      - name: Baixar novos jornais do Drive e Gerar Índice
         env:
           GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
           GDRIVE_NEWS_FOLDER_ID: ${{ secrets.GDRIVE_NEWS_FOLDER_ID }}
         run: |
           python scripts/sync_drive_news.py
+          python scripts/generate_news_index.py
 
       - name: Commit e Push das alterações
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add src/assets/news/ logs/
+          git add src/assets/news/ logs/ config/
           git commit -m "ci: sincroniza novos jornais a partir do Google Drive" || echo "Nenhuma alteração para commitar"
           git push origin HEAD:main

@@ -10,39 +10,7 @@ import { renderLoading } from '../utils/helpers.js';
 // Formato de nome: {Editora}_{tipo}{numero}_{DDMM}.jpg
 // Editoras conhecidas: TheFicientsNews, BMNews (vazia por ora)
 
-export const THEFICIENTS_EDITIONS = [
-    'TheFicientsNews_1ed_1507.jpg',
-    'TheFicientsNews_2ed_1607.jpg',
-    'TheFicientsNews_3ed_2107.jpg',
-    'TheFicientsNews_4ed_2207.jpg',
-    'TheFicientsNews_5ed_2307.jpg',
-    'TheFicientsNews_6ed_2407.jpg',
-    'TheFicientsNews_7ed_0308.jpg',
-    'TheFicientsNews_8ed_0408.jpg',
-    'TheFicientsNews_9ed_0608.jpg',
-    'TheFicientsNews_10ed_0708.jpg',
-    'TheFicientsNews_11ed_1008.jpg',
-    'TheFicientsNews_12ed_1208.jpg',
-    'TheFicientsNews_13ed_1408.jpg',
-    'TheFicientsNews_14ed_1508.jpg',
-    'TheFicientsNews_15ed_1708.jpg',
-    'TheFicientsNews_16ed_1808.jpg',
-    'TheFicientsNews_17ed_2008.jpg',
-    'TheFicientsNews_18ed_2208.jpg',
-    'TheFicientsNews_19ed_2808.jpg',
-    'TheFicientsNews_20ed_0209.jpg',
-    'TheFicientsNews_21ed_0509.jpg',
-    'edicao22_2026-09-05_Volta-por-Cima-em-Revanche-Historica.jpg',
-    // Plantões
-    'TheFicientsNews_plantao1_2807.jpg',
-    'TheFicientsNews_plantao2_2907.jpg',
-    'TheFicientsNews_plantao3_1208.jpg',
-    'TheFicientsNews_plantao4_1308.jpg',
-    'TheFicientsNews_plantao5_1308.jpg',
-    'TheFicientsNews_plantao6_1608.jpg',
-    // Poster
-    'TheFicientsNews_poster_2508.jpg',
-];
+// A lista de edições agora é lida dinamicamente do arquivo config/news_index.json
 
 export const BASE_PATH_THEFICIENTS = './src/assets/news/TheFicientsNews/';
 const BASE_PATH_BMNEWS      = './src/assets/news/BMNews/';
@@ -52,24 +20,27 @@ export function parseEdition(filename) {
     const noExt = filename.replace(/\.(jpg|jpeg|png|webp)$/i, '');
     let tipo, numero, rotulo, dataFormatada;
 
-    // Novo Padrão: edicao{NUMERO}_{DATA-ISO}_{TITULO}
-    if (noExt.startsWith('edicao') && noExt.includes('_202')) {
-        const parts = noExt.split('_');
-        tipo = 'edicao';
-        numero = parseInt(parts[0].replace('edicao', ''), 10);
+    // Padrão Universal: {tipo}{numero}_{YYYY-MM-DD}_{Titulo}
+    // Exemplos: edicao25_2026-09-25_Estreia-Tesao.jpg, plantao07_2026-08-16_Urgente.jpg, poster_2026-08-25_Campeoes.jpg
+    const matchUniversal = noExt.match(/^(edicao|plantao|poster)(\d*)_(\d{4}-\d{2}-\d{2})_?(.*)$/i);
+    if (matchUniversal) {
+        tipo = matchUniversal[1].toLowerCase();
+        numero = matchUniversal[2] ? parseInt(matchUniversal[2], 10) : null;
         
-        const isoDate = parts[1]; // ex: 2026-09-05
+        const isoDate = matchUniversal[3];
         const dateParts = isoDate.split('-');
-        if (dateParts.length === 3) {
-            dataFormatada = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+        dataFormatada = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+        
+        const tituloLimpo = matchUniversal[4] ? matchUniversal[4].replace(/-/g, ' ') : '';
+        
+        if (tipo === 'edicao') {
+            rotulo = `Edição Nº ${numero}${tituloLimpo ? ' — ' + tituloLimpo : ''}`;
+        } else if (tipo === 'plantao') {
+            rotulo = `Plantão ${numero ? 'Nº '+numero : ''}${tituloLimpo ? ' — ' + tituloLimpo : ''}`;
         } else {
-            dataFormatada = isoDate;
+            rotulo = `Poster${tituloLimpo ? ' — ' + tituloLimpo : ''}`;
         }
         
-        const tituloBruto = parts.slice(2).join('-');
-        const tituloLimpo = tituloBruto.replace(/-/g, ' ');
-        
-        rotulo = `Edição Nº ${numero} — ${tituloLimpo}`;
         return { tipo, numero, rotulo, data: dataFormatada, filename, titulo: tituloLimpo };
     }
 
@@ -115,7 +86,17 @@ export async function renderNoticias() {
 
     renderLoading(section, 'Carregando edições...');
 
-    const theficientsParsed = THEFICIENTS_EDITIONS.map(parseEdition);
+    let indexData = { TheFicientsNews: [], BMNews: [] };
+    try {
+        const response = await fetch('./config/news_index.json');
+        if (response.ok) {
+            indexData = await response.json();
+        }
+    } catch (e) {
+        console.error('Erro ao carregar o json de notícias', e);
+    }
+
+    const theficientsParsed = (indexData.TheFicientsNews || []).map(parseEdition);
     const theficientsOrdenadas = ordenarEdicoes(theficientsParsed);
 
     const edicoes      = theficientsOrdenadas.filter(e => e.tipo === 'edicao');

@@ -4,7 +4,7 @@
  */
 
 import { renderLoading } from '../utils/helpers.js';
-import { THEFICIENTS_EDITIONS, parseEdition, ordenarEdicoes, BASE_PATH_THEFICIENTS } from './noticias.js';
+import { parseEdition, ordenarEdicoes, BASE_PATH_THEFICIENTS } from './noticias.js';
 
 export async function renderHome() {
     const section = document.getElementById('home-view');
@@ -29,11 +29,22 @@ export async function renderHome() {
         console.warn('Não foi possível carregar config/club.json. Usando valores padrão.');
     }
 
-    // Pega a última edição de forma dinâmica usando a lógica de noticias.js
-    const theficientsParsed = THEFICIENTS_EDITIONS.map(parseEdition);
+    // Pega a última edição de forma dinâmica
+    let theficientsRaw = [];
+    try {
+        const resNews = await fetch('./config/news_index.json');
+        if (resNews.ok) {
+            const dataNews = await resNews.json();
+            theficientsRaw = dataNews.TheFicientsNews || [];
+        }
+    } catch (e) {
+        console.warn('Não foi possível carregar config/news_index.json.');
+    }
+
+    const theficientsParsed = theficientsRaw.map(parseEdition);
     const edicoes = ordenarEdicoes(theficientsParsed).filter(e => e.tipo === 'edicao');
-    const ultimaEdicao = edicoes[0];
-    const imgSrc = `${BASE_PATH_THEFICIENTS}${ultimaEdicao.filename}`;
+    const ultimaEdicao = edicoes[0] || { filename: '', rotulo: '' };
+    const imgSrc = ultimaEdicao.filename ? `${BASE_PATH_THEFICIENTS}${ultimaEdicao.filename}` : '';
 
     // Divisões
     const divisions = [
