@@ -43,28 +43,6 @@
         "passesMade": 208,
         "passSuccessRate": 77
     },
-    "Maximo_Vini1109": {
-        "gamesPlayed": 12,
-        "winRate": 41,
-        "goals": 4,
-        "assists": 6,
-        "cleanSheetsDef": 0,
-        "cleanSheetsGK": 0,
-        "shotSuccessRate": 20,
-        "passesMade": 122,
-        "passSuccessRate": 74
-    },
-    "john_shellllby": {
-        "gamesPlayed": 4,
-        "winRate": 50,
-        "goals": 3,
-        "assists": 0,
-        "cleanSheetsDef": 0,
-        "cleanSheetsGK": 0,
-        "shotSuccessRate": 60,
-        "passesMade": 67,
-        "passSuccessRate": 72
-    },
     "ZeCriminoso": {
         "gamesPlayed": 121,
         "winRate": 38,
@@ -86,17 +64,6 @@
         "shotSuccessRate": 26,
         "passesMade": 1473,
         "passSuccessRate": 72
-    },
-    "Mau-Mau_Damas": {
-        "gamesPlayed": 21,
-        "winRate": 42,
-        "goals": 4,
-        "assists": 8,
-        "cleanSheetsDef": 0,
-        "cleanSheetsGK": 0,
-        "shotSuccessRate": 22,
-        "passesMade": 331,
-        "passSuccessRate": 78
     },
     "SRGT_XEREQUINHA": {
         "gamesPlayed": 174,
