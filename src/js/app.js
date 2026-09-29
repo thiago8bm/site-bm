@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initRouter();
     initFooter();
+    initTwitchLiveStatus();
 });
 
 
@@ -272,3 +273,44 @@ function initTheme() {
 // EXPORTS
 // =====================================================
 export { navigateTo, ROUTES, DEFAULT_ROUTE };
+
+// =====================================================
+// TWITCH LIVE STATUS
+// =====================================================
+async function initTwitchLiveStatus() {
+    let isLive = false;
+    let streamUrl = 'https://twitch.tv/oboueri';
+
+    try {
+        const resConfig = await fetch('./config/club.json');
+        if (resConfig.ok) {
+            const clubConfig = await resConfig.json();
+            if (clubConfig.ao_vivo === true) {
+                isLive = true;
+            }
+        }
+        
+        if (!isLive) {
+            const resTwitch = await fetch('https://decapi.me/twitch/uptime/oboueri');
+            if (resTwitch.ok) {
+                const text = await resTwitch.text();
+                if (!text.toLowerCase().includes('offline')) {
+                    isLive = true;
+                }
+            }
+        }
+    } catch (e) {
+        console.warn('Não foi possível verificar status da Twitch.', e);
+    }
+
+    if (isLive) {
+        const liveBtn = document.createElement('a');
+        liveBtn.href = streamUrl;
+        liveBtn.target = '_blank';
+        liveBtn.rel = 'noopener noreferrer';
+        liveBtn.className = 'floating-live-btn';
+        liveBtn.innerHTML = '<div class="live-pulse"></div><span>ESTAMOS AO VIVO</span>';
+        document.body.appendChild(liveBtn);
+    }
+}
+

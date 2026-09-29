@@ -273,7 +273,34 @@
 /* News Section */
 .home-news-section {
     padding-top: var(--spacing-xs);
+    padding-bottom: var(--spacing-xl);
+}
+
+/* Twitch Section */
+.home-twitch-section {
+    padding-top: var(--spacing-md);
     padding-bottom: var(--spacing-2xl);
+}
+
+.twitch-embed-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 400px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.twitch-embed-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 .latest-news-card {

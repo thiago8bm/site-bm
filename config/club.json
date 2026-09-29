@@ -2,5 +2,6 @@
     "divisaoAtual": 3,
     "reputacaoNivel": 7,
     "torcedores": "13.573.141",
-    "heroGradient": "linear-gradient(to bottom, rgba(0,0,0,0.40), rgba(0,0,0,0.80))"
+    "heroGradient": "linear-gradient(to bottom, rgba(0,0,0,0.40), rgba(0,0,0,0.80))",
+    "ao_vivo": false
 }

@@ -158,6 +158,16 @@ export async function renderHome() {
                 '</div>' +
             '</div>' +
         '</div>' +
+    '</div>' +
+
+    '<div class="container">' +
+        '<div class="home-twitch-section">' +
+            '<h3 class="section-title">Acompanhe as Transmissões</h3>' +
+            '<p class="section-subtitle">Assista aos nossos jogos ao vivo e participe do chat com a torcida.</p>' +
+            '<div class="twitch-embed-wrapper" style="aspect-ratio: 16/9; min-height: 400px;">' +
+                '<iframe src="https://player.twitch.tv/?channel=oboueri&parent=thiago8bm.github.io&parent=localhost" frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%"></iframe>' +
+            '</div>' +
+        '</div>' +
     '</div>';
 
     const btnLer = document.getElementById('btn-ler-edicao');
