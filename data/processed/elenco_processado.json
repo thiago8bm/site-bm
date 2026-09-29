@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-09-29T00:53:06.783497",
+    "last_updated": "2026-09-29T01:00:35.971676",
     "status": "success",
     "total": 10,
     "data": [
@@ -46,7 +46,49 @@
                 1
             ],
             "participacoes_gol": 15,
-            "processado_em": "2026-09-29T00:53:06.782765"
+            "processado_em": "2026-09-29T01:00:35.970942"
+        },
+        {
+            "id": "ronald",
+            "nome_display": "Lyonel Lucas",
+            "ea_username": "ronaldin586",
+            "pro_name": "",
+            "numero": 6,
+            "posicao": "LE",
+            "posicao_ea": "defender",
+            "capitania": null,
+            "fotos": [],
+            "instagram": null,
+            "status": "ativo",
+            "partidas": 16,
+            "gols": 0,
+            "assistencias": 1,
+            "win_rate": 75,
+            "media_nota": 0.0,
+            "mvp": 0,
+            "cartoes_vermelhos": 0,
+            "passes_feitos": 180,
+            "taxa_passe": 76,
+            "taxa_chute": 0,
+            "desarmes": 0,
+            "taxa_desarme": 0,
+            "overall": 0,
+            "clean_sheets_def": 2,
+            "clean_sheets_gk": 0,
+            "tendencia_gols": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "participacoes_gol": 1,
+            "processado_em": "2026-09-29T01:00:35.971639"
         },
         {
             "id": "thiago",
@@ -94,7 +136,7 @@
                 1
             ],
             "participacoes_gol": 267,
-            "processado_em": "2026-09-29T00:53:06.781197"
+            "processado_em": "2026-09-29T01:00:35.970606"
         },
         {
             "id": "gaps",
@@ -139,7 +181,7 @@
                 8
             ],
             "participacoes_gol": 596,
-            "processado_em": "2026-09-29T00:53:06.782318"
+            "processado_em": "2026-09-29T01:00:35.970829"
         },
         {
             "id": "abreu",
@@ -183,7 +225,7 @@
                 2
             ],
             "participacoes_gol": 366,
-            "processado_em": "2026-09-29T00:53:06.781791"
+            "processado_em": "2026-09-29T01:00:35.970731"
         },
         {
             "id": "dilaurentis",
@@ -229,7 +271,7 @@
                 1
             ],
             "participacoes_gol": 48,
-            "processado_em": "2026-09-29T00:53:06.782923"
+            "processado_em": "2026-09-29T01:00:35.971036"
         },
         {
             "id": "pinto",
@@ -275,7 +317,7 @@
                 2
             ],
             "participacoes_gol": 189,
-            "processado_em": "2026-09-29T00:53:06.783072"
+            "processado_em": "2026-09-29T01:00:35.971150"
         },
         {
             "id": "gabri",
@@ -321,7 +363,7 @@
                 0
             ],
             "participacoes_gol": 16,
-            "processado_em": "2026-09-29T00:53:06.783195"
+            "processado_em": "2026-09-29T01:00:35.971285"
         },
         {
             "id": "cleiton",
@@ -366,7 +408,7 @@
                 1
             ],
             "participacoes_gol": 169,
-            "processado_em": "2026-09-29T00:53:06.783296"
+            "processado_em": "2026-09-29T01:00:35.971457"
         },
         {
             "id": "formiga",
@@ -408,49 +450,7 @@
                 1
             ],
             "participacoes_gol": 110,
-            "processado_em": "2026-09-29T00:53:06.783391"
-        },
-        {
-            "id": "ronald",
-            "nome_display": "Lyonel Lucas",
-            "ea_username": "ronaldin586",
-            "pro_name": "",
-            "numero": 999,
-            "posicao": "LE",
-            "posicao_ea": "defender",
-            "capitania": null,
-            "fotos": [],
-            "instagram": null,
-            "status": "ativo",
-            "partidas": 16,
-            "gols": 0,
-            "assistencias": 1,
-            "win_rate": 75,
-            "media_nota": 0.0,
-            "mvp": 0,
-            "cartoes_vermelhos": 0,
-            "passes_feitos": 180,
-            "taxa_passe": 76,
-            "taxa_chute": 0,
-            "desarmes": 0,
-            "taxa_desarme": 0,
-            "overall": 0,
-            "clean_sheets_def": 2,
-            "clean_sheets_gk": 0,
-            "tendencia_gols": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "participacoes_gol": 1,
-            "processado_em": "2026-09-29T00:53:06.783468"
+            "processado_em": "2026-09-29T01:00:35.971567"
         }
     ]
 }
