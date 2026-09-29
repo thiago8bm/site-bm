@@ -78,8 +78,17 @@
     margin: 0 0 var(--spacing-md) 0;
 }
 
-/* Instagram Button */
-.btn--instagram {
+.home-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+}
+
+/* Redes Sociais Hero */
+.btn--instagram,
+.btn--twitch {
     background: #fff;
     color: #1a1a1a;
     border: none;
@@ -92,13 +101,29 @@
     transition: all 0.2s ease;
 }
 
-.btn--instagram:hover {
-    background: #f0f0f0;
+.btn--twitch {
+    background: #9146FF;
+    color: #fff;
+}
+
+.btn--instagram:hover,
+.btn--twitch:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.btn--instagram:hover {
+    background: #f0f0f0;
     color: #1a1a1a;
 }
-.instagram-icon { flex-shrink: 0; }
+
+.btn--twitch:hover {
+    background: #772CE8;
+    color: #fff;
+}
+
+.instagram-icon,
+.twitch-icon { flex-shrink: 0; }
 
 .reputation-label {
     color: #bbb !important;

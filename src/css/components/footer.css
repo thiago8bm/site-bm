@@ -24,6 +24,24 @@
     text-decoration: underline;
 }
 
+.footer__socials {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.footer__social-link {
+    color: var(--color-gray-300);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.footer__social-link:hover {
+    color: var(--color-white);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
 .update-status {
     display: flex;
     align-items: center;

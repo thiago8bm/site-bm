@@ -77,23 +77,31 @@ export async function renderHome() {
                 '<img src="./src/assets/img/EscudoBM.jpeg" alt="Escudo Baile de Munique" class="home-hero__escudo">' +
                 '<h2 class="home-hero__title">Baile de Munique</h2>' +
                 '<p class="home-hero__subtitle">FC26 Pro Clubs · Formação 1-4-2-3-1</p>' +
-                '<a href="https://www.instagram.com/bailedemunichofc/" target="_blank" rel="noopener noreferrer" class="btn btn--instagram home-hero__instagram" aria-label="Instagram do Baile de Munique">' +
-                    '<svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' +
-                        '<defs>' +
-                            '<radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">' +
-                                '<stop offset="0%"  stop-color="#fdf497"/>' +
-                                '<stop offset="5%"  stop-color="#fdf497"/>' +
-                                '<stop offset="45%" stop-color="#fd5949"/>' +
-                                '<stop offset="60%" stop-color="#d6249f"/>' +
-                                '<stop offset="90%" stop-color="#285AEB"/>' +
-                            '</radialGradient>' +
-                        '</defs>' +
-                        '<rect x="2" y="2" width="20" height="20" rx="6" ry="6" fill="url(#ig-grad)"/>' +
-                        '<circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" stroke-width="1.8"/>' +
-                        '<circle cx="17.5" cy="6.5" r="1.2" fill="#fff"/>' +
-                    '</svg>' +
-                    '@bailedemunichofc' +
-                '</a>' +
+                '<div class="home-hero__actions">' +
+                    '<a href="https://www.instagram.com/bailedemunichofc/" target="_blank" rel="noopener noreferrer" class="btn btn--instagram home-hero__instagram" aria-label="Instagram do Baile de Munique">' +
+                        '<svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' +
+                            '<defs>' +
+                                '<radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">' +
+                                    '<stop offset="0%"  stop-color="#fdf497"/>' +
+                                    '<stop offset="5%"  stop-color="#fdf497"/>' +
+                                    '<stop offset="45%" stop-color="#fd5949"/>' +
+                                    '<stop offset="60%" stop-color="#d6249f"/>' +
+                                    '<stop offset="90%" stop-color="#285AEB"/>' +
+                                '</radialGradient>' +
+                            '</defs>' +
+                            '<rect x="2" y="2" width="20" height="20" rx="6" ry="6" fill="url(#ig-grad)"/>' +
+                            '<circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" stroke-width="1.8"/>' +
+                            '<circle cx="17.5" cy="6.5" r="1.2" fill="#fff"/>' +
+                        '</svg>' +
+                        '@bailedemunichofc' +
+                    '</a>' +
+                    '<a href="https://twitch.tv/oboueri" target="_blank" rel="noopener noreferrer" class="btn btn--twitch home-hero__twitch" aria-label="Twitch do Baile de Munique">' +
+                        '<svg class="twitch-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor">' +
+                            '<path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>' +
+                        '</svg>' +
+                        'oboueri' +
+                    '</a>' +
+                '</div>' +
             '</div>' +
         '</div>' +
     '</div>' +
