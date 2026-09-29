@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-09-21T16:10:17.423049",
+    "last_updated": "2026-09-29T00:49:12.930064",
     "status": "success",
     "total": 10,
     "data": [
@@ -46,7 +46,7 @@
                 1
             ],
             "participacoes_gol": 15,
-            "processado_em": "2026-09-21T16:10:17.422382"
+            "processado_em": "2026-09-29T00:49:12.929436"
         },
         {
             "id": "thiago",
@@ -66,16 +66,16 @@
             ],
             "instagram": "@thiago8ofc_",
             "status": "ativo",
-            "partidas": 238,
-            "gols": 84,
-            "assistencias": 154,
+            "partidas": 258,
+            "gols": 99,
+            "assistencias": 168,
             "win_rate": 49,
             "media_nota": 7.7,
             "mvp": 34,
             "cartoes_vermelhos": 1,
-            "passes_feitos": 3640,
+            "passes_feitos": 3902,
             "taxa_passe": 73,
-            "taxa_chute": 32,
+            "taxa_chute": 34,
             "desarmes": 223,
             "taxa_desarme": 54,
             "overall": 88,
@@ -93,8 +93,8 @@
                 1,
                 1
             ],
-            "participacoes_gol": 238,
-            "processado_em": "2026-09-21T16:10:17.422047"
+            "participacoes_gol": 267,
+            "processado_em": "2026-09-29T00:49:12.929058"
         },
         {
             "id": "gaps",
@@ -111,14 +111,14 @@
             ],
             "instagram": "@gapsofc_",
             "status": "ativo",
-            "partidas": 276,
-            "gols": 374,
-            "assistencias": 170,
-            "win_rate": 50,
+            "partidas": 296,
+            "gols": 413,
+            "assistencias": 183,
+            "win_rate": 51,
             "media_nota": 8.0,
             "mvp": 82,
             "cartoes_vermelhos": 10,
-            "passes_feitos": 4027,
+            "passes_feitos": 4359,
             "taxa_passe": 77,
             "taxa_chute": 31,
             "desarmes": 260,
@@ -138,8 +138,8 @@
                 2,
                 8
             ],
-            "participacoes_gol": 544,
-            "processado_em": "2026-09-21T16:10:17.422246"
+            "participacoes_gol": 596,
+            "processado_em": "2026-09-29T00:49:12.929323"
         },
         {
             "id": "abreu",
@@ -155,14 +155,14 @@
             ],
             "instagram": "@sturridge_a15_",
             "status": "ativo",
-            "partidas": 270,
-            "gols": 163,
-            "assistencias": 172,
-            "win_rate": 43,
+            "partidas": 291,
+            "gols": 173,
+            "assistencias": 193,
+            "win_rate": 44,
             "media_nota": 7.5,
             "mvp": 46,
             "cartoes_vermelhos": 0,
-            "passes_feitos": 4552,
+            "passes_feitos": 4915,
             "taxa_passe": 80,
             "taxa_chute": 22,
             "desarmes": 229,
@@ -182,8 +182,8 @@
                 2,
                 2
             ],
-            "participacoes_gol": 335,
-            "processado_em": "2026-09-21T16:10:17.422152"
+            "participacoes_gol": 366,
+            "processado_em": "2026-09-29T00:49:12.929187"
         },
         {
             "id": "dilaurentis",
@@ -201,14 +201,14 @@
             ],
             "instagram": "@mattia.dila",
             "status": "ativo",
-            "partidas": 143,
-            "gols": 17,
-            "assistencias": 29,
+            "partidas": 154,
+            "gols": 18,
+            "assistencias": 30,
             "win_rate": 34,
             "media_nota": 6.9,
             "mvp": 4,
             "cartoes_vermelhos": 3,
-            "passes_feitos": 1399,
+            "passes_feitos": 1493,
             "taxa_passe": 67,
             "taxa_chute": 10,
             "desarmes": 93,
@@ -228,8 +228,8 @@
                 1,
                 1
             ],
-            "participacoes_gol": 46,
-            "processado_em": "2026-09-21T16:10:17.422501"
+            "participacoes_gol": 48,
+            "processado_em": "2026-09-29T00:49:12.929537"
         },
         {
             "id": "pinto",
@@ -247,16 +247,16 @@
             ],
             "instagram": "@l.pinto23",
             "status": "ativo",
-            "partidas": 154,
-            "gols": 97,
-            "assistencias": 74,
+            "partidas": 174,
+            "gols": 110,
+            "assistencias": 79,
             "win_rate": 45,
             "media_nota": 7.2,
             "mvp": 14,
             "cartoes_vermelhos": 4,
-            "passes_feitos": 1964,
-            "taxa_passe": 72,
-            "taxa_chute": 28,
+            "passes_feitos": 2219,
+            "taxa_passe": 71,
+            "taxa_chute": 27,
             "desarmes": 113,
             "taxa_desarme": 10,
             "overall": 88,
@@ -274,8 +274,8 @@
                 1,
                 2
             ],
-            "participacoes_gol": 171,
-            "processado_em": "2026-09-21T16:10:17.422643"
+            "participacoes_gol": 189,
+            "processado_em": "2026-09-29T00:49:12.929631"
         },
         {
             "id": "gabri",
@@ -321,7 +321,7 @@
                 0
             ],
             "participacoes_gol": 16,
-            "processado_em": "2026-09-21T16:10:17.422741"
+            "processado_em": "2026-09-29T00:49:12.929730"
         },
         {
             "id": "cleiton",
@@ -338,15 +338,15 @@
             ],
             "instagram": "@cleiton_da.costa",
             "status": "ativo",
-            "partidas": 304,
-            "gols": 87,
-            "assistencias": 71,
+            "partidas": 325,
+            "gols": 93,
+            "assistencias": 76,
             "win_rate": 43,
             "media_nota": 6.8,
             "mvp": 6,
             "cartoes_vermelhos": 10,
-            "passes_feitos": 3232,
-            "taxa_passe": 68,
+            "passes_feitos": 3438,
+            "taxa_passe": 69,
             "taxa_chute": 19,
             "desarmes": 231,
             "taxa_desarme": 15,
@@ -365,8 +365,8 @@
                 0,
                 1
             ],
-            "participacoes_gol": 158,
-            "processado_em": "2026-09-21T16:10:17.422869"
+            "participacoes_gol": 169,
+            "processado_em": "2026-09-29T00:49:12.929865"
         },
         {
             "id": "formiga",
@@ -408,7 +408,7 @@
                 1
             ],
             "participacoes_gol": 110,
-            "processado_em": "2026-09-21T16:10:17.422961"
+            "processado_em": "2026-09-29T00:49:12.929970"
         },
         {
             "id": "ronald",
@@ -422,20 +422,20 @@
             "fotos": [],
             "instagram": null,
             "status": "ativo",
-            "partidas": 8,
+            "partidas": 16,
             "gols": 0,
             "assistencias": 1,
-            "win_rate": 62,
+            "win_rate": 75,
             "media_nota": 0.0,
             "mvp": 0,
             "cartoes_vermelhos": 0,
-            "passes_feitos": 89,
+            "passes_feitos": 180,
             "taxa_passe": 76,
             "taxa_chute": 0,
             "desarmes": 0,
             "taxa_desarme": 0,
             "overall": 0,
-            "clean_sheets_def": 1,
+            "clean_sheets_def": 2,
             "clean_sheets_gk": 0,
             "tendencia_gols": [
                 0,
@@ -450,7 +450,7 @@
                 0
             ],
             "participacoes_gol": 1,
-            "processado_em": "2026-09-21T16:10:17.423028"
+            "processado_em": "2026-09-29T00:49:12.930038"
         }
     ]
 }
