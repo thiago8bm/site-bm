@@ -58,16 +58,24 @@
 /* Tabelas de ranking */
 .table-wrapper {
     overflow-x: auto;
+    overflow-y: auto;
+    max-height: 70vh; /* Permite scroll vertical na tabela com header fixo */
     -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--border-radius-sm);
 }
 
 .stats-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     font-size: 0.9rem;
 }
 
 .stats-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 20;
     background: var(--color-gray-100);
     padding: var(--spacing-sm) var(--spacing-md);
     text-align: left;
@@ -80,6 +88,33 @@
     white-space: nowrap;
 }
 
+/* Congela a primeira coluna */
+.stats-table th:first-child,
+.stats-table td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    background: var(--bg-card);
+}
+
+/* Célula do topo esquerdo (cruza linha e coluna) */
+.stats-table thead th:first-child {
+    z-index: 30;
+    background: var(--color-gray-100);
+}
+
+/* Sombra/borda para separar a coluna congelada do resto */
+.stats-table th:first-child::after,
+.stats-table td:first-child::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-gray-200);
+}
+
 .stats-table tbody td {
     padding: var(--spacing-sm) var(--spacing-md);
     border-bottom: 1px solid var(--color-gray-200);
@@ -87,11 +122,21 @@
 }
 
 .stats-table tbody tr:last-child td { border-bottom: none; }
-.stats-table tbody tr:hover td      { background: var(--color-gray-100); }
+
+.stats-table tbody tr:hover td { 
+    background: var(--color-gray-100); 
+}
+.stats-table tbody tr:hover td:first-child { 
+    background: var(--color-gray-100); 
+}
 
 .stats-table tbody .row--first td {
     background: rgba(200,16,46,0.05);
     font-weight: 700;
+}
+.stats-table tbody .row--first td:first-child {
+    /* Precisa de cor sólida pois elementos por trás vazariam num rgba transparente */
+    background: var(--color-gray-100);
 }
 
 .rank-cell {
