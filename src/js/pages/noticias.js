@@ -223,15 +223,22 @@ function initLightbox() {
     const btnPrev   = document.getElementById('lb-prev');
     const btnNext   = document.getElementById('lb-next');
 
-    if (!lightbox || !imgEl) return;
-    
-    // Remove do container atual e injeta no body para escapar de z-index e transform contexts
+    if (!lightbox) return;
+
     if (lightbox.parentNode !== document.body) {
         document.body.appendChild(lightbox);
     }
 
     const cards = Array.from(document.getElementById('noticias-view').querySelectorAll('.noticia-card'));
     let currentIdx = 0;
+
+    const formatDate = (dateStr) => {
+        if (!dateStr || !dateStr.includes('T')) return dateStr;
+        try {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('pt-BR') + ' às ' + d.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+        } catch(e) { return dateStr; }
+    };
 
     const open = (idx) => {
         currentIdx = idx;
@@ -243,7 +250,6 @@ function initLightbox() {
         lightbox.classList.remove('is-zoomed');
         document.body.style.overflow = 'hidden';
 
-        // --- LÓGICA DE REAÇÕES E COMENTÁRIOS ---
         document.getElementById('like-count').textContent = '...';
         document.getElementById('dislike-count').textContent = '...';
         document.getElementById('comments-list').innerHTML = '<div class="loading-comments">Carregando comentários...</div>';
@@ -259,26 +265,51 @@ function initLightbox() {
                 document.getElementById('like-count').textContent = data.likes || 0;
                 document.getElementById('dislike-count').textContent = data.dislikes || 0;
                 
-                // Reseta visual dos botões
                 const interacted = JSON.parse(localStorage.getItem('bm_reactions') || '{}');
                 const state = interacted[editionId];
                 
                 const btnLike = document.getElementById('btn-like');
                 const btnDislike = document.getElementById('btn-dislike');
                 
-                btnLike.style.background = (state === 'like') ? 'rgba(46, 204, 113, 0.2)' : 'transparent';
-                btnLike.style.borderColor = (state === 'like') ? '#2ecc71' : 'var(--color-gray-200)';
-                
-                btnDislike.style.background = (state === 'dislike') ? 'rgba(231, 76, 60, 0.2)' : 'transparent';
-                btnDislike.style.borderColor = (state === 'dislike') ? '#e74c3c' : 'var(--color-gray-200)';
+                if (btnLike && btnDislike) {
+                    btnLike.style.background = (state === 'like') ? 'rgba(46, 204, 113, 0.2)' : 'transparent';
+                    btnLike.style.borderColor = (state === 'like') ? '#2ecc71' : 'var(--color-gray-200)';
+                    
+                    btnDislike.style.background = (state === 'dislike') ? 'rgba(231, 76, 60, 0.2)' : 'transparent';
+                    btnDislike.style.borderColor = (state === 'dislike') ? '#e74c3c' : 'var(--color-gray-200)';
+                }
 
                 const list = document.getElementById('comments-list');
                 list.innerHTML = '';
                 if (!data.comments || data.comments.length === 0) {
                     list.innerHTML = '<div class="empty-comments">Seja o primeiro a comentar!</div>';
                 } else {
+                    const myComments = JSON.parse(localStorage.getItem('bm_my_comments') || '[]');
                     data.comments.forEach(c => {
-                        list.innerHTML += `<div class="comment-item"><strong>${c.name}</strong> <span class="comment-date">${c.date}</span><p>${c.text}</p></div>`;
+                        const isMine = c.id && myComments.includes(c.id);
+                        const deleteBtn = isMine ? `<button class="btn-delete-comment" data-id="${c.id}" title="Apagar comentário">🗑️</button>` : '';
+                        list.innerHTML += `<div class="comment-item" id="comment-${c.id}">
+                            ${deleteBtn}
+                            <strong>${c.name}</strong> <span class="comment-date">${formatDate(c.date)}</span>
+                            <p>${c.text}</p>
+                        </div>`;
+                    });
+                    
+                    list.querySelectorAll('.btn-delete-comment').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const id = e.target.closest('.btn-delete-comment').dataset.id;
+                            if(confirm('Tem certeza que deseja apagar seu comentário?')) {
+                                const cmtDiv = document.getElementById('comment-' + id);
+                                if(cmtDiv) cmtDiv.style.opacity = '0.5';
+                                fetch('https://script.google.com/macros/s/AKfycbyBH4hq66XZuuHoKQtaoyTGCP3M2WbYNwJlRF0Qw8V40iMmHaZA82vmJFkABZALHSFrTg/exec', {
+                                    method: 'POST',
+                                    body: JSON.stringify({ action: 'delete_comment', editionId: editionId, commentId: id }),
+                                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                                }).then(() => {
+                                    if(cmtDiv) cmtDiv.remove();
+                                });
+                            }
+                        });
                     });
                 }
             })
@@ -298,7 +329,6 @@ function initLightbox() {
     const prev = () => open((currentIdx - 1 + cards.length) % cards.length);
     const next = () => open((currentIdx + 1) % cards.length);
 
-    // Cliques nos cards
     cards.forEach((card, idx) => {
         card.addEventListener('click', () => open(idx));
         card.addEventListener('keypress', e => { if (e.key === 'Enter' || e.key === ' ') open(idx); });
@@ -308,20 +338,17 @@ function initLightbox() {
     btnPrev.addEventListener('click', prev);
     btnNext.addEventListener('click', next);
 
-    // Zoom ao clicar na imagem
     imgEl.addEventListener('click', (e) => {
         e.stopPropagation();
         lightbox.classList.toggle('is-zoomed');
     });
 
-    // Fechar ao clicar fora da imagem
     lightbox.addEventListener('click', e => { 
         if (e.target === lightbox || e.target.classList.contains('lightbox__inner')) {
             close();
         }
     });
 
-    // Teclado
     document.addEventListener('keydown', e => {
         if (!lightbox.classList.contains('is-open')) return;
         if (e.key === 'Escape')      close();
@@ -329,22 +356,22 @@ function initLightbox() {
         if (e.key === 'ArrowRight')  next();
     });
 
-    // Auto-open via trigger da Home
     if (sessionStorage.getItem('openLatestNews') === 'true') {
         sessionStorage.removeItem('openLatestNews');
         setTimeout(() => open(0), 100);
     }
 
-    // --- EVENTOS DE REAÇÃO E COMENTÁRIO ---
     const updateBtnStyles = (hasLiked, hasDisliked) => {
         const btnLike = document.getElementById('btn-like');
         const btnDislike = document.getElementById('btn-dislike');
         
-        btnLike.style.background = hasLiked ? 'rgba(46, 204, 113, 0.2)' : 'transparent';
-        btnLike.style.borderColor = hasLiked ? '#2ecc71' : 'var(--color-gray-200)';
-        
-        btnDislike.style.background = hasDisliked ? 'rgba(231, 76, 60, 0.2)' : 'transparent';
-        btnDislike.style.borderColor = hasDisliked ? '#e74c3c' : 'var(--color-gray-200)';
+        if (btnLike && btnDislike) {
+            btnLike.style.background = hasLiked ? 'rgba(46, 204, 113, 0.2)' : 'transparent';
+            btnLike.style.borderColor = hasLiked ? '#2ecc71' : 'var(--color-gray-200)';
+            
+            btnDislike.style.background = hasDisliked ? 'rgba(231, 76, 60, 0.2)' : 'transparent';
+            btnDislike.style.borderColor = hasDisliked ? '#e74c3c' : 'var(--color-gray-200)';
+        }
     };
 
     const sendReaction = (type) => {
@@ -352,35 +379,27 @@ function initLightbox() {
         if(!editionId) return;
         
         let interacted = JSON.parse(localStorage.getItem('bm_reactions') || '{}');
-        const currentState = interacted[editionId]; // 'like', 'dislike' ou undefined
+        const currentState = interacted[editionId];
         
         let actionsToSend = [];
         
-        // Se já está clicado no mesmo botão -> REMOVER
         if (currentState === type) {
             delete interacted[editionId];
             actionsToSend.push('remove_' + type);
-            
             const span = document.getElementById(type + '-count');
             span.textContent = Math.max(0, parseInt(span.textContent || 0) - 1);
-        } 
-        // Se estava clicado no outro botão -> TROCAR
-        else if (currentState && currentState !== type) {
+        } else if (currentState && currentState !== type) {
             interacted[editionId] = type;
             actionsToSend.push('remove_' + currentState);
             actionsToSend.push(type);
             
             const oldSpan = document.getElementById(currentState + '-count');
             oldSpan.textContent = Math.max(0, parseInt(oldSpan.textContent || 0) - 1);
-            
             const newSpan = document.getElementById(type + '-count');
             newSpan.textContent = parseInt(newSpan.textContent || 0) + 1;
-        }
-        // Se nunca clicou -> ADICIONAR
-        else {
+        } else {
             interacted[editionId] = type;
             actionsToSend.push(type);
-            
             const span = document.getElementById(type + '-count');
             span.textContent = parseInt(span.textContent || 0) + 1;
         }
@@ -388,7 +407,6 @@ function initLightbox() {
         localStorage.setItem('bm_reactions', JSON.stringify(interacted));
         updateBtnStyles(interacted[editionId] === 'like', interacted[editionId] === 'dislike');
         
-        // Dispara requisições
         actionsToSend.forEach(actionName => {
             fetch('https://script.google.com/macros/s/AKfycbyBH4hq66XZuuHoKQtaoyTGCP3M2WbYNwJlRF0Qw8V40iMmHaZA82vmJFkABZALHSFrTg/exec', {
                 method: 'POST',
@@ -398,8 +416,11 @@ function initLightbox() {
         });
     };
     
-    document.getElementById('btn-like').addEventListener('click', () => sendReaction('like'));
-    document.getElementById('btn-dislike').addEventListener('click', () => sendReaction('dislike'));
+    const btnLike = document.getElementById('btn-like');
+    if(btnLike) btnLike.addEventListener('click', () => sendReaction('like'));
+    
+    const btnDislike = document.getElementById('btn-dislike');
+    if(btnDislike) btnDislike.addEventListener('click', () => sendReaction('dislike'));
     
     const commentForm = document.getElementById('comment-form');
     if(commentForm) {
@@ -412,18 +433,44 @@ function initLightbox() {
             btn.disabled = true;
             btn.textContent = 'Enviando...';
             
+            const commentId = 'cmt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+            
             fetch('https://script.google.com/macros/s/AKfycbyBH4hq66XZuuHoKQtaoyTGCP3M2WbYNwJlRF0Qw8V40iMmHaZA82vmJFkABZALHSFrTg/exec', {
                 method: 'POST',
-                body: JSON.stringify({ action: 'comment', editionId: lightbox.dataset.editionId, name: name, comment: text }),
+                body: JSON.stringify({ action: 'comment', editionId: lightbox.dataset.editionId, name: name, comment: text, commentId: commentId }),
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' }
             }).then(() => {
+                const myComments = JSON.parse(localStorage.getItem('bm_my_comments') || '[]');
+                myComments.push(commentId);
+                localStorage.setItem('bm_my_comments', JSON.stringify(myComments));
+                
                 const list = document.getElementById('comments-list');
                 const empty = list.querySelector('.empty-comments');
                 if(empty) empty.remove();
                 
-                const newComment = `<div class="comment-item"><strong>${name}</strong> <span class="comment-date">Agora mesmo</span><p>${text}</p></div>`;
+                const deleteBtn = `<button class="btn-delete-comment" data-id="${commentId}" title="Apagar comentário">🗑️</button>`;
+                const newComment = `<div class="comment-item" id="comment-${commentId}">${deleteBtn}<strong>${name}</strong> <span class="comment-date">Agora mesmo</span><p>${text}</p></div>`;
                 list.insertAdjacentHTML('afterbegin', newComment);
                 commentForm.reset();
+                
+                const recBtn = list.querySelector(`.btn-delete-comment[data-id="${commentId}"]`);
+                if(recBtn) {
+                    recBtn.addEventListener('click', (e) => {
+                        const targetBtn = e.target.closest('.btn-delete-comment');
+                        if (!targetBtn) return;
+                        if(confirm('Tem certeza que deseja apagar seu comentário?')) {
+                            const cmtDiv = document.getElementById('comment-' + commentId);
+                            if(cmtDiv) cmtDiv.style.opacity = '0.5';
+                            fetch('https://script.google.com/macros/s/AKfycbyBH4hq66XZuuHoKQtaoyTGCP3M2WbYNwJlRF0Qw8V40iMmHaZA82vmJFkABZALHSFrTg/exec', {
+                                method: 'POST',
+                                body: JSON.stringify({ action: 'delete_comment', editionId: lightbox.dataset.editionId, commentId: commentId }),
+                                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                            }).then(() => {
+                                if(cmtDiv) cmtDiv.remove();
+                            });
+                        }
+                    });
+                }
             }).finally(() => {
                 btn.disabled = false;
                 btn.textContent = 'Enviar';
