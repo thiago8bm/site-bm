@@ -1,35 +1,35 @@
 {
     "Thiago_Souza108": {
-        "gamesPlayed": 258,
+        "gamesPlayed": 266,
         "winRate": 49,
-        "goals": 99,
-        "assists": 168,
+        "goals": 102,
+        "assists": 172,
         "cleanSheetsDef": 0,
         "cleanSheetsGK": 0,
         "shotSuccessRate": 34,
-        "passesMade": 3902,
+        "passesMade": 4044,
         "passSuccessRate": 73
     },
     "NortonJONES": {
-        "gamesPlayed": 325,
+        "gamesPlayed": 329,
         "winRate": 43,
-        "goals": 93,
-        "assists": 76,
+        "goals": 94,
+        "assists": 77,
         "cleanSheetsDef": 0,
         "cleanSheetsGK": 0,
         "shotSuccessRate": 19,
-        "passesMade": 3438,
+        "passesMade": 3475,
         "passSuccessRate": 69
     },
     "DanyTheTrotos": {
-        "gamesPlayed": 291,
-        "winRate": 44,
-        "goals": 173,
-        "assists": 193,
+        "gamesPlayed": 299,
+        "winRate": 45,
+        "goals": 178,
+        "assists": 197,
         "cleanSheetsDef": 3,
         "cleanSheetsGK": 0,
         "shotSuccessRate": 22,
-        "passesMade": 4915,
+        "passesMade": 5055,
         "passSuccessRate": 80
     },
     "gavrielcrvg": {
@@ -55,26 +55,26 @@
         "passSuccessRate": 70
     },
     "Wendelkkho": {
-        "gamesPlayed": 153,
-        "winRate": 34,
-        "goals": 75,
-        "assists": 35,
+        "gamesPlayed": 159,
+        "winRate": 35,
+        "goals": 78,
+        "assists": 36,
         "cleanSheetsDef": 0,
         "cleanSheetsGK": 0,
-        "shotSuccessRate": 26,
-        "passesMade": 1473,
+        "shotSuccessRate": 25,
+        "passesMade": 1524,
         "passSuccessRate": 72
     },
     "SRGT_XEREQUINHA": {
-        "gamesPlayed": 174,
-        "winRate": 45,
-        "goals": 110,
+        "gamesPlayed": 180,
+        "winRate": 46,
+        "goals": 112,
         "assists": 79,
         "cleanSheetsDef": 0,
         "cleanSheetsGK": 0,
         "shotSuccessRate": 27,
-        "passesMade": 2219,
-        "passSuccessRate": 71
+        "passesMade": 2295,
+        "passSuccessRate": 72
     },
     "Gaps8459": {
         "gamesPlayed": 296,
@@ -99,14 +99,14 @@
         "passSuccessRate": 76
     },
     "brsferrari": {
-        "gamesPlayed": 154,
+        "gamesPlayed": 158,
         "winRate": 34,
         "goals": 18,
         "assists": 30,
-        "cleanSheetsDef": 1,
+        "cleanSheetsDef": 2,
         "cleanSheetsGK": 0,
         "shotSuccessRate": 10,
-        "passesMade": 1493,
+        "passesMade": 1530,
         "passSuccessRate": 67
     }
 }
