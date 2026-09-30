@@ -242,6 +242,50 @@ function initLightbox() {
         lightbox.classList.add('is-open');
         lightbox.classList.remove('is-zoomed');
         document.body.style.overflow = 'hidden';
+
+        // --- LÓGICA DE REAÇÕES E COMENTÁRIOS ---
+        document.getElementById('like-count').textContent = '...';
+        document.getElementById('dislike-count').textContent = '...';
+        document.getElementById('comments-list').innerHTML = '<div class="loading-comments">Carregando comentários...</div>';
+        
+        const editionId = card.dataset.src.split('/').pop().replace(/\.[^/.]+$/, "");
+        lightbox.dataset.editionId = editionId;
+        
+        fetch('https://script.google.com/macros/s/AKfycbyBH4hq66XZuuHoKQtaoyTGCP3M2WbYNwJlRF0Qw8V40iMmHaZA82vmJFkABZALHSFrTg/exec?editionId=' + editionId)
+            .then(res => res.json())
+            .then(data => {
+                if (lightbox.dataset.editionId !== editionId) return;
+                
+                document.getElementById('like-count').textContent = data.likes || 0;
+                document.getElementById('dislike-count').textContent = data.dislikes || 0;
+                
+                // Reseta visual dos botões
+                const interacted = JSON.parse(localStorage.getItem('bm_reactions') || '{}');
+                const state = interacted[editionId];
+                
+                const btnLike = document.getElementById('btn-like');
+                const btnDislike = document.getElementById('btn-dislike');
+                
+                btnLike.style.background = (state === 'like') ? 'rgba(46, 204, 113, 0.2)' : 'transparent';
+                btnLike.style.borderColor = (state === 'like') ? '#2ecc71' : 'var(--color-gray-200)';
+                
+                btnDislike.style.background = (state === 'dislike') ? 'rgba(231, 76, 60, 0.2)' : 'transparent';
+                btnDislike.style.borderColor = (state === 'dislike') ? '#e74c3c' : 'var(--color-gray-200)';
+
+                const list = document.getElementById('comments-list');
+                list.innerHTML = '';
+                if (!data.comments || data.comments.length === 0) {
+                    list.innerHTML = '<div class="empty-comments">Seja o primeiro a comentar!</div>';
+                } else {
+                    data.comments.forEach(c => {
+                        list.innerHTML += `<div class="comment-item"><strong>${c.name}</strong> <span class="comment-date">${c.date}</span><p>${c.text}</p></div>`;
+                    });
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('comments-list').innerHTML = '<div class="empty-comments">Erro ao carregar comentários.</div>';
+            });
     };
 
     const close = () => {
@@ -289,5 +333,101 @@ function initLightbox() {
     if (sessionStorage.getItem('openLatestNews') === 'true') {
         sessionStorage.removeItem('openLatestNews');
         setTimeout(() => open(0), 100);
+    }
+
+    // --- EVENTOS DE REAÇÃO E COMENTÁRIO ---
+    const updateBtnStyles = (hasLiked, hasDisliked) => {
+        const btnLike = document.getElementById('btn-like');
+        const btnDislike = document.getElementById('btn-dislike');
+        
+        btnLike.style.background = hasLiked ? 'rgba(46, 204, 113, 0.2)' : 'transparent';
+        btnLike.style.borderColor = hasLiked ? '#2ecc71' : 'var(--color-gray-200)';
+        
+        btnDislike.style.background = hasDisliked ? 'rgba(231, 76, 60, 0.2)' : 'transparent';
+        btnDislike.style.borderColor = hasDisliked ? '#e74c3c' : 'var(--color-gray-200)';
+    };
+
+    const sendReaction = (type) => {
+        const editionId = lightbox.dataset.editionId;
+        if(!editionId) return;
+        
+        let interacted = JSON.parse(localStorage.getItem('bm_reactions') || '{}');
+        const currentState = interacted[editionId]; // 'like', 'dislike' ou undefined
+        
+        let actionsToSend = [];
+        
+        // Se já está clicado no mesmo botão -> REMOVER
+        if (currentState === type) {
+            delete interacted[editionId];
+            actionsToSend.push('remove_' + type);
+            
+            const span = document.getElementById(type + '-count');
+            span.textContent = Math.max(0, parseInt(span.textContent || 0) - 1);
+        } 
+        // Se estava clicado no outro botão -> TROCAR
+        else if (currentState && currentState !== type) {
+            interacted[editionId] = type;
+            actionsToSend.push('remove_' + currentState);
+            actionsToSend.push(type);
+            
+            const oldSpan = document.getElementById(currentState + '-count');
+            oldSpan.textContent = Math.max(0, parseInt(oldSpan.textContent || 0) - 1);
+            
+            const newSpan = document.getElementById(type + '-count');
+            newSpan.textContent = parseInt(newSpan.textContent || 0) + 1;
+        }
+        // Se nunca clicou -> ADICIONAR
+        else {
+            interacted[editionId] = type;
+            actionsToSend.push(type);
+            
+            const span = document.getElementById(type + '-count');
+            span.textContent = parseInt(span.textContent || 0) + 1;
+        }
+        
+        localStorage.setItem('bm_reactions', JSON.stringify(interacted));
+        updateBtnStyles(interacted[editionId] === 'like', interacted[editionId] === 'dislike');
+        
+        // Dispara requisições
+        actionsToSend.forEach(actionName => {
+            fetch('https://script.google.com/macros/s/AKfycbyBH4hq66XZuuHoKQtaoyTGCP3M2WbYNwJlRF0Qw8V40iMmHaZA82vmJFkABZALHSFrTg/exec', {
+                method: 'POST',
+                body: JSON.stringify({ action: actionName, editionId: editionId }),
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+            });
+        });
+    };
+    
+    document.getElementById('btn-like').addEventListener('click', () => sendReaction('like'));
+    document.getElementById('btn-dislike').addEventListener('click', () => sendReaction('dislike'));
+    
+    const commentForm = document.getElementById('comment-form');
+    if(commentForm) {
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('comment-name').value;
+            const text = document.getElementById('comment-text').value;
+            const btn = document.getElementById('btn-submit-comment');
+            
+            btn.disabled = true;
+            btn.textContent = 'Enviando...';
+            
+            fetch('https://script.google.com/macros/s/AKfycbyBH4hq66XZuuHoKQtaoyTGCP3M2WbYNwJlRF0Qw8V40iMmHaZA82vmJFkABZALHSFrTg/exec', {
+                method: 'POST',
+                body: JSON.stringify({ action: 'comment', editionId: lightbox.dataset.editionId, name: name, comment: text }),
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+            }).then(() => {
+                const list = document.getElementById('comments-list');
+                const empty = list.querySelector('.empty-comments');
+                if(empty) empty.remove();
+                
+                const newComment = `<div class="comment-item"><strong>${name}</strong> <span class="comment-date">Agora mesmo</span><p>${text}</p></div>`;
+                list.insertAdjacentHTML('afterbegin', newComment);
+                commentForm.reset();
+            }).finally(() => {
+                btn.disabled = false;
+                btn.textContent = 'Enviar';
+            });
+        });
     }
 }
