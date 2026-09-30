@@ -151,12 +151,34 @@ export async function renderNoticias() {
         <!-- Lightbox -->
         <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizar jornal">
             <button class="lightbox__close" id="lightbox-close" aria-label="Fechar">✕</button>
-            <button class="lightbox__nav lightbox__nav--prev" id="lb-prev" aria-label="Anterior">‹</button>
-            <div class="lightbox__inner">
-                <img class="lightbox__img" id="lightbox-img" src="" alt="">
-                <p class="lightbox__caption" id="lightbox-caption"></p>
+            <button class="lightbox__nav lightbox__nav--prev" id="lb-prev" aria-label="Anterior">⟨</button>
+            <button class="lightbox__nav lightbox__nav--next" id="lb-next" aria-label="Próximo">⟩</button>
+            
+            <div class="lightbox__content-wrapper">
+                <div class="lightbox__inner">
+                    <img class="lightbox__img" id="lightbox-img" src="" alt="">
+                    <p class="lightbox__caption" id="lightbox-caption"></p>
+                </div>
+                
+                <div class="lightbox__sidebar">
+                    <div class="reactions-panel">
+                        <button class="reaction-btn btn-like" id="btn-like">👍 <span id="like-count">0</span></button>
+                        <button class="reaction-btn btn-dislike" id="btn-dislike">👎 <span id="dislike-count">0</span></button>
+                    </div>
+                    
+                    <div class="comments-section">
+                        <h4 class="comments-title">Comentários da Torcida</h4>
+                        <div class="comments-list" id="comments-list">
+                            <div class="loading-comments" id="loading-comments">Carregando comentários...</div>
+                        </div>
+                        <form class="comment-form" id="comment-form">
+                            <input type="text" id="comment-name" placeholder="Seu nome" required maxlength="30">
+                            <textarea id="comment-text" placeholder="O que achou?" required rows="2" maxlength="200"></textarea>
+                            <button type="submit" class="btn btn--primary btn--sm" id="btn-submit-comment">Enviar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <button class="lightbox__nav lightbox__nav--next" id="lb-next" aria-label="Próximo">›</button>
         </div>`;
 
     initLightbox();
