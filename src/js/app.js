@@ -9,6 +9,7 @@ import { renderUltimosJogos } from './pages/jogos.js';
 import { renderEstatisticas } from './pages/estatisticas.js';
 import { renderPesquisa }     from './pages/pesquisa.js';
 import { renderNoticias }     from './pages/noticias.js';
+import { getActiveSeason, setActiveSeason, getSeasonLabel, getStats, getClubConfig } from './api.js';
 
 // =====================================================
 // CONSTANTES E CONFIGURAÇÃO
@@ -26,6 +27,7 @@ const _rendered = new Set();
 document.addEventListener('DOMContentLoaded', () => {
     initHeader();
     initTheme();
+    initSeasonSelector();
     initRouter();
     initFooter();
     initTwitchLiveStatus();
@@ -199,29 +201,60 @@ function buildPlaceholderHTML(route) {
 // =====================================================
 // FOOTER — Indicador de última atualização
 // =====================================================
-function initFooter() {
+async function initFooter() {
     const lastUpdateEl  = document.getElementById('last-update');
     const updateErrorEl = document.getElementById('update-error');
     if (!lastUpdateEl) return;
 
-    fetch('./data/processed/stats.json')
-        .then(res => { if (!res.ok) throw new Error(); return res.json(); })
-        .then(data => {
-            const ts = data?.last_updated;
-            if (ts) {
-                const formatted = new Date(ts).toLocaleString('pt-BR', {
-                    day: '2-digit', month: '2-digit', year: 'numeric',
-                    hour: '2-digit', minute: '2-digit',
-                });
-                lastUpdateEl.textContent = `Última atualização de dados: ${formatted}`;
-            }
-        })
-        .catch(() => {
-            lastUpdateEl.textContent = 'Dados ainda não sincronizados.';
-            if (updateErrorEl) updateErrorEl.style.display = 'inline';
+    const season = getActiveSeason();
+    const data = await getStats();
+    const ts = data?.last_updated;
+
+    if (ts) {
+        const formatted = new Date(ts).toLocaleString('pt-BR', {
+            day: '2-digit', month: '2-digit', year: 'numeric',
+            hour: '2-digit', minute: '2-digit',
         });
+        const suffix = season === 'fc26' ? ' (Arquivo FC 26)' : '';
+        lastUpdateEl.textContent = `Última atualização de dados: ${formatted}${suffix}`;
+        if (updateErrorEl) updateErrorEl.style.display = 'none';
+    } else if (season === 'fc27') {
+        lastUpdateEl.textContent = 'Temporada FC 27 — Aguardando 1ª sincronização';
+        if (updateErrorEl) updateErrorEl.style.display = 'none';
+    } else {
+        lastUpdateEl.textContent = 'Dados ainda não sincronizados.';
+        if (updateErrorEl) updateErrorEl.style.display = 'inline';
+    }
 }
 
+
+// =====================================================
+// SELETOR DE TEMPORADA
+// =====================================================
+function syncSeasonButtons() {
+    const season = getActiveSeason();
+    document.querySelectorAll('.season-btn[data-season]').forEach(btn => {
+        const isActive = btn.getAttribute('data-season') === season;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
+    });
+    document.title = `Baile de Munique | ${getSeasonLabel()} Pro Clubs`;
+}
+
+function initSeasonSelector() {
+    syncSeasonButtons();
+    document.querySelectorAll('.season-btn[data-season]').forEach(btn => {
+        btn.addEventListener('click', () => switchSeason(btn.getAttribute('data-season')));
+    });
+}
+
+function switchSeason(seasonId) {
+    if (!setActiveSeason(seasonId)) return;
+    syncSeasonButtons();
+    _rendered.clear();
+    initFooter();
+    renderRoute(getRouteFromHash() || DEFAULT_ROUTE);
+}
 
 // =====================================================
 // TEMA (DARK/LIGHT MODE)
@@ -272,7 +305,7 @@ function initTheme() {
 // =====================================================
 // EXPORTS
 // =====================================================
-export { navigateTo, ROUTES, DEFAULT_ROUTE };
+export { navigateTo, switchSeason, ROUTES, DEFAULT_ROUTE };
 
 // =====================================================
 // TWITCH LIVE STATUS
@@ -282,12 +315,9 @@ async function initTwitchLiveStatus() {
     let streamUrl = 'https://twitch.tv/oboueri';
 
     try {
-        const resConfig = await fetch('./config/club.json');
-        if (resConfig.ok) {
-            const clubConfig = await resConfig.json();
-            if (clubConfig.ao_vivo === true) {
-                isLive = true;
-            }
+        const clubConfig = await getClubConfig('fc27');
+        if (clubConfig?.ao_vivo === true) {
+            isLive = true;
         }
         
         if (!isLive) {
