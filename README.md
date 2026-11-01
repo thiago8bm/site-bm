@@ -10,6 +10,8 @@ O site foi desenvolvido como uma **Single Page Application (SPA) nativa** em HTM
 
 O portal é estruturado em rotas dinâmicas via hash (`#home`, `#elenco`, `#noticias`, `#jogos`, `#estatisticas`, `#pesquisa`) com carregamento sob demanda (*lazy rendering*):
 
+> **Multi-temporada (FC 27 / FC 26)**: todas as views refletem a temporada selecionada, exibem *empty states* com atalho para o histórico do EA FC 26 quando não há dados do FC 27 e a página de Notícias possui filtros por versão (Todas / EA FC 27 / EA FC 26), mês/período e ordenação.
+
 1. **🏠 Home (Visão Geral do Clube)**
    - **Hero Temático**: Apresentação visual imersiva com imagem do estádio do clube, escudo oficial, redes sociais integradas e indicação do esquema tático padrão (1-4-2-3-1).
    - **Escalada de Divisões**: Barra visual de progresso que rastreia a ascensão do clube da Divisão 5 até a cobiçada Divisão Elite.

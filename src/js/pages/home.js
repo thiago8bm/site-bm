@@ -3,6 +3,7 @@
  * Renderiza a seção Home refatorada (Hero Temático, Divisões, Reputação e TheFicients News).
  */
 
+import { getClubConfig, getActiveSeason, getSeasonLabel } from '../api.js';
 import { renderLoading } from '../utils/helpers.js';
 import { parseEdition, ordenarEdicoes, BASE_PATH_THEFICIENTS } from './noticias.js';
 
@@ -21,12 +22,10 @@ export async function renderHome() {
     };
 
     try {
-        const res = await fetch('./config/club.json');
-        if (res.ok) {
-            clubConfig = await res.json();
-        }
+        const fetchedConfig = await getClubConfig();
+        if (fetchedConfig) clubConfig = { ...clubConfig, ...fetchedConfig };
     } catch (e) {
-        console.warn('Não foi possível carregar config/club.json. Usando valores padrão.');
+        console.warn('Não foi possível carregar a config do clube. Usando valores padrão.');
     }
 
     // Pega a última edição de forma dinâmica
@@ -71,12 +70,17 @@ export async function renderHome() {
         reputacaoTitulo = "Emergente";
     }
 
-    section.innerHTML = '<div class="home-hero-wrapper" style="background-image: ' + clubConfig.heroGradient + ', url(\'./src/assets/img/estadioBM.png\');">' +
+    const seasonLabel = getSeasonLabel();
+    const legacyBanner = getActiveSeason() === 'fc26'
+        ? '<div class="legacy-banner">📜 Você está visualizando o arquivo histórico da temporada <strong>EA FC 26 (2025/2026)</strong>.</div>'
+        : '';
+
+    section.innerHTML = legacyBanner + '<div class="home-hero-wrapper" style="background-image: ' + clubConfig.heroGradient + ', url(\'./src/assets/img/estadioBM.png\');">' +
         '<div class="home-hero">' +
             '<div class="home-hero__content">' +
                 '<img src="./src/assets/img/EscudoBM.jpeg" alt="Escudo Baile de Munique" class="home-hero__escudo">' +
                 '<h2 class="home-hero__title">Baile de Munique</h2>' +
-                '<p class="home-hero__subtitle">FC26 Pro Clubs · Formação 1-4-2-3-1</p>' +
+                '<p class="home-hero__subtitle">' + seasonLabel + ' Pro Clubs · Formação 1-4-2-3-1</p>' +
                 '<div class="home-hero__actions">' +
                     '<a href="https://www.instagram.com/bailedemunichofc/" target="_blank" rel="noopener noreferrer" class="btn btn--instagram home-hero__instagram" aria-label="Instagram do Baile de Munique">' +
                         '<svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' +

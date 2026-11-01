@@ -3,8 +3,9 @@
  * Renderiza o histórico de partidas com filtro por tipo.
  */
 
-import { getPartidas } from '../api.js';
-import { renderLoading, renderError, getResultadoInfo, formatarData, formatMatchType } from '../utils/helpers.js';
+import { getPartidas, getActiveSeason, getSeasonLabel } from '../api.js';
+import { switchSeason } from '../app.js';
+import { renderLoading, renderError, getResultadoInfo, formatarData, formatMatchType, renderSeasonEmptyState } from '../utils/helpers.js';
 
 let _todasPartidas = [];
 let _filtroAtivo   = 'leagueMatch';
@@ -18,6 +19,16 @@ export async function renderUltimosJogos() {
     const raw = await getPartidas();
     _todasPartidas = raw?.data ?? [];
 
+    if (!_todasPartidas.length && getActiveSeason() === 'fc27') {
+        renderSeasonEmptyState(section, {
+            icon: '⚽',
+            title: 'Nenhuma Partida no EA FC 27 Ainda',
+            desc: 'A temporada 2026/2027 está prestes a começar! Assim que o Baile entrar em campo no FC 27, o histórico aparecerá automaticamente aqui.'
+        });
+    section.querySelector('#btn-switch-fc26')?.addEventListener('click', () => switchSeason('fc26'));
+        return;
+    }
+
     if (!_todasPartidas.length) {
         renderError(section, 'Nenhuma partida encontrada ainda.');
         return;
@@ -29,7 +40,7 @@ export async function renderUltimosJogos() {
     section.innerHTML = `
         <div class="container">
             <h2 class="section-title">Últimos Jogos</h2>
-            <p class="section-subtitle">${_todasPartidas.length} partidas registradas</p>
+            <p class="section-subtitle">${_todasPartidas.length} partidas registradas · ${getSeasonLabel()}</p>
             <div class="matches-filter" id="matches-filter">
                 ${tiposDisponiveis.map(tipo => `
                     <button

@@ -3,8 +3,9 @@
  * Renderiza overview do clube + ranking de jogadores em tabs.
  */
 
-import { getStats, getElenco } from '../api.js';
-import { renderLoading, renderError, getPosicaoColor } from '../utils/helpers.js';
+import { getStats, getElenco, getActiveSeason, getSeasonLabel } from '../api.js';
+import { switchSeason } from '../app.js';
+import { renderLoading, renderError, getPosicaoColor, renderSeasonEmptyState } from '../utils/helpers.js';
 
 export async function renderEstatisticas() {
     const section = document.getElementById('estatisticas-view');
@@ -13,6 +14,17 @@ export async function renderEstatisticas() {
     renderLoading(section, 'Carregando estatísticas...');
 
     const [stats, elencoRaw] = await Promise.all([getStats(), getElenco()]);
+
+    const jogadoresChk = elencoRaw?.data ?? [];
+    if (getActiveSeason() === 'fc27' && (!stats || stats.status === 'empty' || (!jogadoresChk.length && (stats.liga?.total_partidas ?? 0) === 0))) {
+        renderSeasonEmptyState(section, {
+            icon: '📊',
+            title: 'Estatísticas do EA FC 27 em Breve',
+            desc: 'As métricas coletivas e os rankings de artilharia e assistências serão habilitados após as primeiras partidas oficiais no FC 27.'
+        });
+    section.querySelector('#btn-switch-fc26')?.addEventListener('click', () => switchSeason('fc26'));
+        return;
+    }
 
     if (!stats) {
         renderError(section, 'Estatísticas ainda não disponíveis.');
@@ -25,7 +37,7 @@ export async function renderEstatisticas() {
     section.innerHTML = `
         <div class="container">
             <h2 class="section-title">Estatísticas</h2>
-            <p class="section-subtitle">Temporada EA FC 26 · Liga</p>
+            <p class="section-subtitle">Temporada ${getSeasonLabel()} · Liga</p>
 
             <!-- Overview do Clube -->
             <!-- Overview do Clube - Principais -->

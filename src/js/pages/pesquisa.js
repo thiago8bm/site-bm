@@ -5,8 +5,9 @@
  * campinho tático 1-4-2-3-1, coringas e gráficos Chart.js.
  */
 
-import { getPesquisa } from '../api.js';
-import { renderLoading, renderError, renderStars } from '../utils/helpers.js';
+import { getPesquisa, getActiveSeason, getSeasonLabel } from '../api.js';
+import { switchSeason } from '../app.js';
+import { renderLoading, renderError, renderStars, renderSeasonEmptyState } from '../utils/helpers.js';
 
 export async function renderPesquisa() {
     const section = document.getElementById('pesquisa-view');
@@ -15,6 +16,16 @@ export async function renderPesquisa() {
     renderLoading(section, 'Carregando pesquisa de elenco...');
 
     const dados = await getPesquisa();
+
+    if ((!dados || dados.status !== 'success') && getActiveSeason() === 'fc27') {
+        renderSeasonEmptyState(section, {
+            icon: '🔍',
+            title: 'Pesquisa de Elenco — EA FC 27',
+            desc: 'A votação interna da temporada EA FC 27 (Termômetro, XI Ideal, Capitães e Premiações) será realizada após o início da temporada.'
+        });
+    section.querySelector('#btn-switch-fc26')?.addEventListener('click', () => switchSeason('fc26'));
+        return;
+    }
 
     if (!dados || dados.status !== 'success') {
         renderError(section, 'Dados da pesquisa ainda não disponíveis.');

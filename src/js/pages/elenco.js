@@ -3,8 +3,9 @@
  * Renderiza os cards do elenco com foto, posição, capitania e stats expandidas.
  */
 
-import { getElenco } from '../api.js';
-import { renderLoading, renderError, getPosicaoColor, getFotoPath, getCapitaniaIcon } from '../utils/helpers.js';
+import { getElenco, getActiveSeason, getSeasonLabel } from '../api.js';
+import { switchSeason } from '../app.js';
+import { renderLoading, renderError, getPosicaoColor, getFotoPath, getCapitaniaIcon, renderSeasonEmptyState } from '../utils/helpers.js';
 
 export async function renderElenco() {
     const section = document.getElementById('elenco-view');
@@ -14,6 +15,15 @@ export async function renderElenco() {
 
     const raw = await getElenco();
     const jogadores = raw?.data ?? [];
+
+    if (!jogadores.length && getActiveSeason() === 'fc27') {
+        renderSeasonEmptyState(section, {
+            title: 'Elenco EA FC 27 em Formação',
+            desc: 'A janela de transferências do Baile de Munique para o EA FC 27 está aberta! Os jogadores oficiais serão listados assim que o clube estrear.'
+        });
+    section.querySelector('#btn-switch-fc26')?.addEventListener('click', () => switchSeason('fc26'));
+        return;
+    }
 
     if (!jogadores.length) {
         renderError(section, 'Dados do elenco não disponíveis ainda.');
@@ -25,7 +35,7 @@ export async function renderElenco() {
     section.innerHTML = `
         <div class="container">
             <h2 class="section-title">Elenco</h2>
-            <p class="section-subtitle">${jogadores.length} jogadores · Temporada EA FC 26</p>
+            <p class="section-subtitle">${jogadores.length} jogadores · Temporada ${getSeasonLabel()}</p>
             <div class="elenco-grid">${cardsHTML}</div>
         </div>`;
 

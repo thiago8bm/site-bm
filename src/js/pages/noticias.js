@@ -22,16 +22,17 @@ export function parseEdition(filename) {
 
     // Padrão Universal: {tipo}{numero}_{YYYY-MM-DD}_{Titulo}
     // Exemplos: edicao25_2026-09-25_Estreia-Tesao.jpg, plantao07_2026-08-16_Urgente.jpg, poster_2026-08-25_Campeoes.jpg
-    const matchUniversal = noExt.match(/^(edicao|plantao|poster)(\d*)_(\d{4}-\d{2}-\d{2})_?(.*)$/i);
+    const matchUniversal = noExt.match(/^(?:(fc2[67])_)?(edicao|plantao|poster)(\d*)_(\d{4}-\d{2}-\d{2})_?(.*)$/i);
     if (matchUniversal) {
-        tipo = matchUniversal[1].toLowerCase();
-        numero = matchUniversal[2] ? parseInt(matchUniversal[2], 10) : null;
+        const prefixoJogo = matchUniversal[1] ? matchUniversal[1].toLowerCase() : null;
+        tipo = matchUniversal[2].toLowerCase();
+        numero = matchUniversal[3] ? parseInt(matchUniversal[3], 10) : null;
         
-        const isoDate = matchUniversal[3];
+        const isoDate = matchUniversal[4];
         const dateParts = isoDate.split('-');
         dataFormatada = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
         
-        const tituloLimpo = matchUniversal[4] ? matchUniversal[4].replace(/-/g, ' ') : '';
+        const tituloLimpo = matchUniversal[5] ? matchUniversal[5].replace(/-/g, ' ') : '';
         
         if (tipo === 'edicao') {
             rotulo = `Edição Nº ${numero}${tituloLimpo ? ' — ' + tituloLimpo : ''}`;
@@ -41,7 +42,10 @@ export function parseEdition(filename) {
             rotulo = `Poster${tituloLimpo ? ' — ' + tituloLimpo : ''}`;
         }
         
-        return { tipo, numero, rotulo, data: dataFormatada, filename, titulo: tituloLimpo };
+        const mesAno = `${dateParts[1]}/${dateParts[0]}`;
+        const jogo = prefixoJogo ?? (isoDate >= '2026-10-01' ? 'fc27' : 'fc26');
+
+        return { tipo, numero, rotulo, data: dataFormatada, filename, titulo: tituloLimpo, isoDate, mesAno, jogo };
     }
 
     // Antigo padrão: TheFicientsNews_22ed_0509
@@ -52,6 +56,11 @@ export function parseEdition(filename) {
     dataFormatada = ddmm.length === 4
         ? `${ddmm.slice(0, 2)}/${ddmm.slice(2)}`
         : '—';
+
+    // Formato legado DDMM: ano inferido como 2026; prefixo TheFicientsNews_ pertence ao FC 26
+    const isoDate = /^\d{4}$/.test(ddmm) ? `2026-${ddmm.slice(2)}-${ddmm.slice(0, 2)}` : '';
+    const mesAno = isoDate ? `${isoDate.slice(5, 7)}/${isoDate.slice(0, 4)}` : '';
+    const jogo = parts[0].toLowerCase() === 'fc27' ? 'fc27' : 'fc26';
 
     if (tipoPart.startsWith('poster')) {
         tipo = 'poster';
@@ -67,7 +76,7 @@ export function parseEdition(filename) {
         rotulo = `Edição ${numero} — ${dataFormatada}`;
     }
 
-    return { tipo, numero, rotulo, data: dataFormatada, filename, titulo: rotulo };
+    return { tipo, numero, rotulo, data: dataFormatada, filename, titulo: rotulo, isoDate, mesAno, jogo };
 }
 
 // ─── Ordenação: edições regulares (por número) → plantões → posters ──────────
@@ -99,40 +108,48 @@ export async function renderNoticias() {
     const theficientsParsed = (indexData.TheFicientsNews || []).map(parseEdition);
     const theficientsOrdenadas = ordenarEdicoes(theficientsParsed);
 
-    const edicoes      = theficientsOrdenadas.filter(e => e.tipo === 'edicao');
-    const plantoes     = theficientsOrdenadas.filter(e => e.tipo === 'plantao');
-    const posters      = theficientsOrdenadas.filter(e => e.tipo === 'poster');
+    // Meses disponíveis (MM/YYYY), do mais recente para o mais antigo
+    const mesesDisponiveis = [...new Set(theficientsParsed.map(e => e.mesAno).filter(Boolean))]
+        .sort((a, b) => {
+            const [ma, ya] = a.split('/');
+            const [mb, yb] = b.split('/');
+            return `${yb}-${mb}`.localeCompare(`${ya}-${ma}`);
+        });
+
+    const filtros = { jogo: 'all', mes: 'all', ordem: 'desc' };
 
     section.innerHTML = `
         <div class="container">
             <h2 class="section-title">Notícias</h2>
             <p class="section-subtitle">Cobertura da imprensa esportiva do Baile de Munique</p>
 
+            <div class="noticias-controls">
+                <div class="noticias-filter-group" role="group" aria-label="Filtrar por versão">
+                    <button type="button" class="btn btn--outline btn--sm filter-btn active" data-jogo="all">Todas</button>
+                    <button type="button" class="btn btn--outline btn--sm filter-btn" data-jogo="fc27">EA FC 27</button>
+                    <button type="button" class="btn btn--outline btn--sm filter-btn" data-jogo="fc26">EA FC 26</button>
+                </div>
+                <div class="noticias-filter-group">
+                    <select id="news-month-filter" class="noticias-select" aria-label="Filtrar por mês">
+                        <option value="all">Todos os meses</option>
+                        ${mesesDisponiveis.map(m => `<option value="${m}">${m}</option>`).join('')}
+                    </select>
+                    <select id="news-sort-filter" class="noticias-select" aria-label="Ordenação">
+                        <option value="desc">Mais recentes primeiro</option>
+                        <option value="asc">Mais antigas primeiro</option>
+                    </select>
+                </div>
+            </div>
+
             <!-- TheFicients News -->
             <div class="editora-bloco">
                 <div class="editora-header">
                     <div>
                         <h3 class="editora-nome">📰 TheFicients News</h3>
-                        <p class="editora-desc">${edicoes.length} edições · ${plantoes.length} plantões · ${posters.length} poster</p>
+                        <p class="editora-desc" id="news-desc"></p>
                     </div>
                 </div>
-
-                <h4 class="noticias-subtitulo">Edições Regulares</h4>
-                <div class="noticias-grid" id="grid-edicoes">
-                    ${edicoes.map(e => buildCard(e, BASE_PATH_THEFICIENTS)).join('')}
-                </div>
-
-                ${plantoes.length ? `
-                <h4 class="noticias-subtitulo">Plantões</h4>
-                <div class="noticias-grid">
-                    ${plantoes.map(e => buildCard(e, BASE_PATH_THEFICIENTS)).join('')}
-                </div>` : ''}
-
-                ${posters.length ? `
-                <h4 class="noticias-subtitulo">Posters</h4>
-                <div class="noticias-grid noticias-grid--poster">
-                    ${posters.map(e => buildCard(e, BASE_PATH_THEFICIENTS)).join('')}
-                </div>` : ''}
+                <div id="news-gallery"></div>
             </div>
 
             <!-- BMNews (vazia por enquanto) -->
@@ -181,7 +198,73 @@ export async function renderNoticias() {
             </div>
         </div>`;
 
-    initLightbox();
+    const bindLightboxCards = initLightbox();
+
+    const galleryEl = document.getElementById('news-gallery');
+    const descEl    = document.getElementById('news-desc');
+
+    function renderFilteredNews() {
+        const dir = filtros.ordem === 'asc' ? 1 : -1;
+        const filtradas = theficientsParsed
+            .filter(e => filtros.jogo === 'all' || e.jogo === filtros.jogo)
+            .filter(e => filtros.mes === 'all' || e.mesAno === filtros.mes)
+            .sort((a, b) => dir * (a.isoDate.localeCompare(b.isoDate) || (a.numero ?? 0) - (b.numero ?? 0)));
+
+        const edicoes  = filtradas.filter(e => e.tipo === 'edicao');
+        const plantoes = filtradas.filter(e => e.tipo === 'plantao');
+        const posters  = filtradas.filter(e => e.tipo === 'poster');
+
+        descEl.textContent = `${edicoes.length} edições · ${plantoes.length} plantões · ${posters.length} poster`;
+
+        if (!filtradas.length) {
+            galleryEl.innerHTML = `
+                <div class="empty-state" style="padding:var(--spacing-xl) 0;">
+                    <span class="empty-state__icon" style="opacity:0.3">📭</span>
+                    <p class="empty-state__title">Nenhuma edição encontrada</p>
+                    <p class="empty-state__desc">Ajuste os filtros de versão ou período para ver outras edições.</p>
+                </div>`;
+        } else {
+            galleryEl.innerHTML = `
+                ${edicoes.length ? `
+                <h4 class="noticias-subtitulo">Edições Regulares</h4>
+                <div class="noticias-grid" id="grid-edicoes">
+                    ${edicoes.map(e => buildCard(e, BASE_PATH_THEFICIENTS)).join('')}
+                </div>` : ''}
+
+                ${plantoes.length ? `
+                <h4 class="noticias-subtitulo">Plantões</h4>
+                <div class="noticias-grid">
+                    ${plantoes.map(e => buildCard(e, BASE_PATH_THEFICIENTS)).join('')}
+                </div>` : ''}
+
+                ${posters.length ? `
+                <h4 class="noticias-subtitulo">Posters</h4>
+                <div class="noticias-grid noticias-grid--poster">
+                    ${posters.map(e => buildCard(e, BASE_PATH_THEFICIENTS)).join('')}
+                </div>` : ''}`;
+        }
+
+        bindLightboxCards();
+    }
+
+    section.querySelectorAll('[data-jogo]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            filtros.jogo = btn.dataset.jogo;
+            section.querySelectorAll('[data-jogo]').forEach(b => b.classList.toggle('active', b === btn));
+            renderFilteredNews();
+        });
+    });
+    document.getElementById('news-month-filter').addEventListener('change', e => {
+        filtros.mes = e.target.value;
+        renderFilteredNews();
+    });
+    document.getElementById('news-sort-filter').addEventListener('change', e => {
+        filtros.ordem = e.target.value;
+        renderFilteredNews();
+    });
+
+    renderFilteredNews();
+    initLatestNewsShortcut();
 }
 
 // ─── Card de edição ───────────────────────────────────────────────────────────
@@ -209,6 +292,7 @@ function buildCard(edicao, basePath) {
         </div>
         <div class="noticia-card__info">
             <span class="badge ${badgeClass}">${badgeLabel}</span>
+            <span class="badge badge--gray noticia-card__versao">${edicao.jogo === 'fc27' ? 'FC 27' : 'FC 26'}</span>
             <span class="noticia-card__data">${edicao.data}</span>
         </div>
     </div>`;
@@ -216,6 +300,7 @@ function buildCard(edicao, basePath) {
 
 // ─── Lightbox ─────────────────────────────────────────────────────────────────
 function initLightbox() {
+    const noop = () => {};
     const lightbox  = document.getElementById('lightbox');
     const imgEl     = document.getElementById('lightbox-img');
     const captionEl = document.getElementById('lightbox-caption');
@@ -223,13 +308,13 @@ function initLightbox() {
     const btnPrev   = document.getElementById('lb-prev');
     const btnNext   = document.getElementById('lb-next');
 
-    if (!lightbox) return;
+    if (!lightbox) return noop;
 
     if (lightbox.parentNode !== document.body) {
         document.body.appendChild(lightbox);
     }
 
-    const cards = Array.from(document.getElementById('noticias-view').querySelectorAll('.noticia-card'));
+    let cards = [];
     let currentIdx = 0;
 
     const formatDate = (dateStr) => {
@@ -329,10 +414,14 @@ function initLightbox() {
     const prev = () => open((currentIdx - 1 + cards.length) % cards.length);
     const next = () => open((currentIdx + 1) % cards.length);
 
-    cards.forEach((card, idx) => {
-        card.addEventListener('click', () => open(idx));
-        card.addEventListener('keypress', e => { if (e.key === 'Enter' || e.key === ' ') open(idx); });
-    });
+    // Re-vincula os cards atualmente visíveis (chamado a cada re-render dos filtros)
+    const bindCards = () => {
+        cards = Array.from(document.getElementById('noticias-view').querySelectorAll('.noticia-card'));
+        cards.forEach((card, idx) => {
+            card.addEventListener('click', () => open(idx));
+            card.addEventListener('keypress', e => { if (e.key === 'Enter' || e.key === ' ') open(idx); });
+        });
+    };
 
     btnClose.addEventListener('click', close);
     btnPrev.addEventListener('click', prev);
@@ -356,10 +445,7 @@ function initLightbox() {
         if (e.key === 'ArrowRight')  next();
     });
 
-    if (sessionStorage.getItem('openLatestNews') === 'true') {
-        sessionStorage.removeItem('openLatestNews');
-        setTimeout(() => open(0), 100);
-    }
+    _openFirstCard = () => { if (cards.length) open(0); };
 
     const updateBtnStyles = (hasLiked, hasDisliked) => {
         const btnLike = document.getElementById('btn-like');
@@ -476,5 +562,16 @@ function initLightbox() {
                 btn.textContent = 'Enviar';
             });
         });
+    }
+
+    return bindCards;
+}
+
+// Abre a edição mais recente quando vindo do botão da Home
+let _openFirstCard = () => {};
+function initLatestNewsShortcut() {
+    if (sessionStorage.getItem('openLatestNews') === 'true') {
+        sessionStorage.removeItem('openLatestNews');
+        setTimeout(() => _openFirstCard(), 100);
     }
 }

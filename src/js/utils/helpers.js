@@ -74,6 +74,25 @@ export function renderError(container, msg = 'Erro ao carregar dados.') {
         </div>`;
 }
 
+// ─── Empty state multi-temporada ─────────────────────────────
+export function renderSeasonEmptyState(container, { icon = '⏳', title, desc, showLegacyBtn = true }) {
+    container.innerHTML = `
+        <div class="container">
+            <div class="empty-state empty-state--season">
+                <span class="empty-state__icon">${icon}</span>
+                <h2 class="section-title">${title}</h2>
+                <p class="empty-state__desc">${desc}</p>
+                ${showLegacyBtn ? `
+                    <div style="margin-top: var(--spacing-md);">
+                        <button type="button" class="btn btn--outline" id="btn-switch-fc26">
+                            📜 Consultar Histórico do EA FC 26
+                        </button>
+                    </div>
+                ` : ''}
+            </div>
+        </div>`;
+}
+
 // ─── Capitania badge ─────────────────────────────────────────
 export function getCapitaniaIcon(capitania) {
     if (!capitania) return '';
