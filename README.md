@@ -57,6 +57,9 @@ O portal é estruturado em rotas dinâmicas via hash (`#home`, `#elenco`, `#noti
 7. **🌓 Tema Claro / Escuro (Dark & Light Mode)**
    - Sistema de alternância de temas via botão no cabeçalho com persistência automática no `localStorage`.
 
+8. **🎮 Seletor de Temporada / Versão do Jogo (FC 27 & FC 26)**
+   - Alternância ágil entre a temporada atual (EA FC 27) e os registros históricos da temporada anterior (EA FC 26) diretamente pelo cabeçalho.
+
 ---
 
 ## 🏛️ Arquitetura do Projeto
