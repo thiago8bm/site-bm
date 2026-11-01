@@ -31,6 +31,7 @@ site-bm/
 ├── .nojekyll                            [0.0 KB]  # Desativa o processador Jekyll no GitHub Pages (preserva pastas com underline)
 ├── README.md                            [~7 KB]   # Documentação completa de negócio, arquitetura e instruções
 ├── REPO_MAP.md                          [~15 KB]  # Este documento: mapa arquitetural vivo e otimizado para IA
+├── PLANO_COMPATIBILIDADE_FC27.md        [~25 KB]  # Especificação técnica completa de transição para o EA FC 27
 │
 ├── .github/
 │   └── workflows/
