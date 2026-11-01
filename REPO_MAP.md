@@ -117,7 +117,7 @@ site-bm/
     │   │   ├── buttons.css              [2.8 KB]  # Estilização de botões (.btn, .btn--primary, .floating-live-btn, etc.)
     │   │   ├── cards.css                [3.2 KB]  # Estilos base de cartões, estados vazios (.empty-state) e badges
     │   │   ├── footer.css               [1.3 KB]  # Estilos do rodapé, ícones sociais e status de atualização
-    │   │   └── header.css               [4.7 KB]  # Cabeçalho fixo, logo, menu navbar desktop/mobile e alternador de tema
+    │   │   └── header.css               [5.8 KB]  # Cabeçalho fixo, logo, menu navbar desktop/mobile, seletor de temporada e alternador de tema
     │   └── pages/
     │       ├── home.css                 [8.0 KB]  # Hero com estádio, barra de divisões, reputação, card de jornal e Twitch
     │       ├── elenco.css               [4.2 KB]  # Grid de atletas, cards expansíveis (.player-card), fotos e stats
@@ -151,17 +151,18 @@ O `index.html` atua como o casulo estático da Single Page Application (SPA). As
 | Elemento / Bloco | ID Principal DOM | Linha Início | Linha Fim | Papel & Comportamento |
 | :--- | :--- | :---: | :---: | :--- |
 | `<head>` | — | `L1` | `L28` | Meta tags, correção de slash do GitHub Pages (`L8-11`), import dos 11 arquivos CSS (`L14-26`) |
-| **Cabeçalho Principal** | `<header class="header">` | `L30` | `L62` | Topo fixo da aplicação |
+| **Cabeçalho Principal** | `<header class="header">` | `L30` | `L67` | Topo fixo da aplicação |
 | ├── Logotipo & Nome | `.logo-container` | `L32` | `L36` | Escudo do clube e âncora navegável para `#home` |
 | ├── Menu de Navegação | `.navbar` | `L38` | `L47` | Lista de links com atributo `data-route`: `home`, `elenco`, `noticias`, `jogos`, `estatisticas`, `pesquisa` |
-| ├── Alternador de Tema | `#theme-toggle` | `L50` | `L53` | Botão Dark/Light com ícones `#theme-icon-sun` e `#theme-icon-moon` |
-| └── Botão Hambúrguer Mobile | `.hamburger` | `L55` | `L59` | Gatilho para abrir o menu gaveta (*drawer*) em telas menores que 768px |
-| **Container Central (SPA)** | `#app-content` | `L65` | `L70` | Ponto de montagem de todas as rotas da SPA |
-| └── View Inicial (Home) | `#home-view` | `L66` | `L69` | Marcador inicial da rota Home (substituído pelo render dinâmico de `home.js`) |
-| **Rodapé Global** | `<footer class="footer">`| `L72` | `L91` | Rodapé com links de redes sociais e status |
-| ├── Redes Sociais | `.footer__socials` | `L73` | `L84` | Links externos oficiais para Instagram (`@bailedemunichofc`) e Twitch (`oboueri`) |
-| └── Status de Atualização | `.update-status` | `L87` | `L90` | Elementos `#last-update` (data/hora lida de `stats.json`) e `#update-error` (alerta de falha) |
-| **Scripts** | — | `L93` | `L97` | CDN do Chart.js v4.4.4 (`L94`) e carregamento do roteador modular `src/js/app.js` (`L96`) |
+| ├── Seletor de Versão | `#season-selector` | `L50` | `L53` | Botões `.season-btn` para alternância entre FC 27 e FC 26 |
+| ├── Alternador de Tema | `#theme-toggle` | `L55` | `L58` | Botão Dark/Light com ícones `#theme-icon-sun` e `#theme-icon-moon` |
+| └── Botão Hambúrguer Mobile | `.hamburger` | `L60` | `L64` | Gatilho para abrir o menu gaveta (*drawer*) em telas menores que 768px |
+| **Container Central (SPA)** | `#app-content` | `L70` | `L75` | Ponto de montagem de todas as rotas da SPA |
+| └── View Inicial (Home) | `#home-view` | `L71` | `L74` | Marcador inicial da rota Home (substituído pelo render dinâmico de `home.js`) |
+| **Rodapé Global** | `<footer class="footer">`| `L77` | `L96` | Rodapé com links de redes sociais e status |
+| ├── Redes Sociais | `.footer__socials` | `L78` | `L89` | Links externos oficiais para Instagram (`@bailedemunichofc`) e Twitch (`oboueri`) |
+| └── Status de Atualização | `.update-status` | `L92` | `L95` | Elementos `#last-update` (data/hora lida de `stats.json`) e `#update-error` (alerta de falha) |
+| **Scripts** | — | `L98` | `L102` | CDN do Chart.js v4.4.4 (`L99`) e carregamento do roteador modular `src/js/app.js` (`L101`) |
 
 ---
 
@@ -239,7 +240,7 @@ Todas as folhas de estilo estão desacopladas por responsabilidade em `src/css/`
 | Arquivo CSS | Escopo / Seletor Principal | Responsabilidade e Componentes Estilizados |
 | :--- | :--- | :--- |
 | `src/css/main.css` | `*`, `:root`, `body`, `.container` | Reset universal do box model, tipografia principal (`Segoe UI`, `Inter`), paleta de variáveis CSS (cores, sombras, raios de borda, espaçamentos), background do estádio, spinners de carregamento (`.spinner`, `.loading-wrapper`) e estados vazios globais. |
-| `src/css/components/header.css` | `.header`, `.navbar`, `.hamburger`, `.theme-toggle` | Cabeçalho fixo no topo (`sticky`), centralização da logo do clube, menu de links de navegação, transição de drawer mobile (largura `< 768px`), cortina escura `.nav-overlay` e botão de alternância Dark/Light. |
+| `src/css/components/header.css` | `.header`, `.navbar`, `.hamburger`, `.theme-toggle`, `.season-selector` | Cabeçalho fixo no topo (`sticky`), centralização da logo do clube, menu de links de navegação, seletor de temporada (`FC 27` / `FC 26`), transição de drawer mobile (largura `< 768px`), cortina escura `.nav-overlay` e botão de alternância Dark/Light. |
 | `src/css/components/footer.css` | `.footer`, `.footer__socials`, `.update-status` | Rodapé com fundo contrastante, ícones de redes sociais com hover suave e linha informativa da última sincronização do GitHub Actions com alerta de erro. |
 | `src/css/components/buttons.css` | `.btn`, `.btn--primary`, `.btn--outline`, `.btn--instagram`, `.btn--twitch`, `.floating-live-btn` | Sistema consistente de botões: primário (vermelho do clube), contorno vazado, gradiente do Instagram, roxo da Twitch, botões de ação do Lightbox e botão flutuante com animação de pulso para live online. |
 | `src/css/components/cards.css` | `.card`, `.badge`, `.empty-state`, `.posicao-pill` | Moldura padrão de cartões com cantos arredondados e sombra, etiquetas com cores contextuais (`badge--blue`, `badge--red`, `badge--green`) e pílulas identificadoras de posições de jogadores. |
