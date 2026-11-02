@@ -64,6 +64,17 @@ O portal é estruturado em rotas dinâmicas via hash (`#home`, `#elenco`, `#noti
 
 ---
 
+
+## ?? Testes Automatizados
+
+```bash
+python tests/test_01_integrity.py     # integridade de configs/dados/assets
+python tests/test_02_pipeline_e2e.py  # pipeline ETL + simula??o FC27 (restaura o estado ao final)
+python tests/test_03_frontend_spa.py  # abre tests/runner_frontend.html em http://localhost:5500
+```
+
+O `process_stats.py` inclui automaticamente (Auto-Discovery) membros da EA ausentes em `config/<season>/elenco.json` (desativado no FC26, arquivo hist?rico).
+
 ## 🏛️ Arquitetura do Projeto
 
 O repositório é concebido com separação rigorosa entre camada de apresentação (HTML/CSS/JS nativos), camada de configuração, pipeline de extração e dados processados em JSON:
@@ -75,7 +86,9 @@ site-bm/
 ├── disparar.ps1                 # Script para acionar GitHub Actions localmente
 ├── atualizar_jornais.bat        # Atalho de sincronização rápida de jornais
 ├── README.md                    # Documentação geral do sistema
-├── REPO_MAP.md                  # Mapa vivo do repositório para devs e agentes IA
+│
+├── docs/                      # Configurações declarativas de negócio
+│   └── REPO_MAP.md                  # Mapa vivo do repositório para devs e agentes IA
 │
 ├── config/                      # Configurações declarativas de negócio
 │   ├── seasons.json             # Metadados e datas de corte de cada temporada (fc26, fc27, default)

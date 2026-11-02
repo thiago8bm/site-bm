@@ -118,6 +118,9 @@ export async function renderNoticias() {
 
     const filtros = { jogo: 'all', mes: 'all', ordem: 'desc' };
 
+    // Remove lightbox anterior anexado ao body (evita duplicação em re-renders)
+    document.getElementById('lightbox')?.remove();
+
     section.innerHTML = `
         <div class="container">
             <h2 class="section-title">Notícias</h2>
@@ -438,12 +441,17 @@ function initLightbox() {
         }
     });
 
-    document.addEventListener('keydown', e => {
+    // Evita empilhamento de listeners de teclado a cada re-renderização
+    if (document._bmLightboxKeyHandler) {
+        document.removeEventListener('keydown', document._bmLightboxKeyHandler);
+    }
+    document._bmLightboxKeyHandler = e => {
         if (!lightbox.classList.contains('is-open')) return;
         if (e.key === 'Escape')      close();
         if (e.key === 'ArrowLeft')   prev();
         if (e.key === 'ArrowRight')  next();
-    });
+    };
+    document.addEventListener('keydown', document._bmLightboxKeyHandler);
 
     _openFirstCard = () => { if (cards.length) open(0); };
 
