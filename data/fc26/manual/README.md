@@ -1,6 +1,11 @@
 # Documentação: Dados Manuais
 
-Esta pasta (`data/manual/`) é utilizada para inserir estatísticas e partidas manualmente quando a API da EA Sports estiver com problemas. Os dados inseridos aqui têm **prioridade máxima** e irão sobrescrever as informações obtidas automaticamente.
+Esta pasta é utilizada para inserir estatísticas e partidas manualmente quando a API da EA Sports estiver com problemas. Os dados inseridos aqui têm **prioridade máxima** e irão sobrescrever as informações obtidas automaticamente.
+
+> [!TIP]
+> **Como reprocessar dados manuais para qualquer temporada:**
+> - Para atualizar dados manuais do FC26: `python scripts/process_stats.py --season fc26`
+> - Para atualizar dados manuais do FC27: `python scripts/process_stats.py --season fc27`
 
 ---
 

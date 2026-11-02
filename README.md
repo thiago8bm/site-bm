@@ -102,7 +102,7 @@ site-bm/
 │
 ├── scripts/                     # Automações em Python (ETL e integrações)
 │   ├── fetch_ea_data.py         # Coleta dados da EA (--season; le config/<season>/club.json)
-│   ├── process_stats.py         # Higieniza estatísticas e cruza com config/elenco.json
+│   ├── process_stats.py         # Higieniza estatísticas e cruza com config/<season>/elenco.json (--season)
 │   ├── sync_drive_news.py       # Baixa novos jornais do Google Drive via API
 │   ├── generate_news_index.py   # Compila a lista de jornais em config/news_index.json
 │   ├── script_pesquisa_elenco.py# Processa a planilha de pesquisa do Forms
@@ -125,7 +125,7 @@ site-bm/
 │
 └── .github/workflows/           # Automação de CI/CD (GitHub Actions)
     ├── sync_news.yml            # Sincronização automática diária de jornais do Drive
-    └── update_stats.yml         # Raspagem e atualização de estatísticas da EA Sports
+    └── update_stats.yml         # Raspagem e processamento automatizado para EA FC 27
 ```
 
 ---
@@ -189,7 +189,7 @@ Caso queira atualizar os dados de estatísticas ou reprocessar planilhas localme
 
 O repositório é configurado para hospedagem estática no **GitHub Pages** a partir do branch `main`.
 
-- **Sincronização de Estatísticas**: O workflow `.github/workflows/update_stats.yml` roda os scripts de raspagem, atualiza `data/processed/` e commita os dados automaticamente.
+- **Sincronização de Estatísticas**: O workflow `.github/workflows/update_stats.yml` executa os scripts de raspagem e processamento para a temporada atual (`--season fc27`), atualiza `data/fc27/processed/`, `config/fc27/club.json` e commita os dados automaticamente.
 - **Sincronização de Notícias**: O workflow `.github/workflows/sync_news.yml` consulta o Google Drive da equipe diariamente via Service Account, baixa edições recentes para `src/assets/news/`, reconstrói `config/news_index.json` e publica as novidades.
 - **Disparo Manual Local**: O script `disparar.ps1` (ou `atualizar_jornais.bat`) permite solicitar ao GitHub Actions uma sincronização imediata através da API do GitHub.
 

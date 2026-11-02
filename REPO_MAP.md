@@ -36,7 +36,7 @@ site-bm/
 ├── .github/
 │   └── workflows/
 │       ├── sync_news.yml                [1.4 KB]  # Workflow GitHub Actions: sincroniza jornais do Google Drive diariamente
-│       └── update_stats.yml             [1.2 KB]  # Workflow GitHub Actions: raspa dados da EA e processa estatísticas
+│       └── update_stats.yml             [1.2 KB]  # Workflow GitHub Actions: raspa dados da EA e processa estatísticas para EA FC 27
 │
 ├── config/
 │   ├── seasons.json                     [0.6 KB]  # Metadados e datas de corte de cada temporada (fc26, fc27, default)
@@ -174,7 +174,7 @@ Todas as views secundárias são garantidas no DOM por `ensureAllViewsExist()` e
 | :--- | :--- | :--- | :--- |
 | `#home` | `#home-view` | `src/js/pages/home.js` | Hero do estádio, cards de divisão/reputação, última edição de jornal e iframe Twitch |
 | `#elenco` | `#elenco-view` | `src/js/pages/elenco.js` | Grid de cards de atletas (`.player-card`) com carrossel de fotos e estatísticas expansíveis |
-| `#noticias`| `#noticias-view` | `src/js/pages/noticias.js`| Galerias por editora (`TheFicients News`, `BMNews`) com edições, plantões e posters |
+| `#noticias`| `#noticias-view` | `src/js/pages/noticias.js`| Barra de filtros de notícias (`.noticias-controls`: versão `.filter-btn`, mês `#news-month-filter` e ordenação `#news-sort-filter`), galerias por editora (`TheFicients News`, `BMNews`) com edições, plantões e posters |
 | `#jogos` | `#jogos-view` | `src/js/pages/jogos.js` | Barra de filtros (`#matches-filter`) e lista de cards de partidas (`#matches-list`) |
 | `#estatisticas`| `#estatisticas-view`| `src/js/pages/estatisticas.js` | Overview do clube, sanfona `#extra-stats`, tabs de ranking (`#stats-tabs`) e tabelas |
 | `#pesquisa`| `#pesquisa-view` | `src/js/pages/pesquisa.js` | Termômetro com estrelas, premiações, prancheta tática 1-4-2-3-1 e gráficos Chart.js |
@@ -185,11 +185,11 @@ Todas as views secundárias são garantidas no DOM por `ensureAllViewsExist()` e
 
 | Componente | ID / Classe DOM | Módulo de Origem | Comportamento e Interatividade |
 | :--- | :--- | :--- | :--- |
-| **Lightbox de Jornais** | `#lightbox` | `src/js/pages/noticias.js` (L151-182) | Visualizador modal em tela cheia com `#lightbox-img`, zoom no clique (`.is-zoomed`), navegação por `#lb-prev`/`#lb-next`, e fechamento com `Esc` ou `#lightbox-close`. |
+| **Lightbox de Jornais** | `#lightbox` | `src/js/pages/noticias.js` (L169-200) | Visualizador modal em tela cheia com `#lightbox-img`, zoom no clique (`.is-zoomed`), navegação por `#lb-prev`/`#lb-next`, e fechamento com `Esc` ou `#lightbox-close`. |
 | ├── Painel de Reações | `.reactions-panel` | `src/js/pages/noticias.js` | Botões `#btn-like` e `#btn-dislike` conectados ao Google Apps Script com persistência local. |
 | └── Sidebar de Comentários | `.comments-section` | `src/js/pages/noticias.js` | Feed `#comments-list` e formulário `#comment-form` para envio e exclusão de comentários do leitor. |
-| **Overlay do Menu Mobile** | `.nav-overlay` | `src/js/app.js` (L47-50) | Cortina escura sobreposta quando o menu hambúrguer é aberto; fecha ao ser clicada. |
-| **Botão Flutuante Twitch** | `.floating-live-btn` | `src/js/app.js` (L306-314) | Botão flutuante com animação de pulso inserido no canto da tela quando o canal da Twitch estiver transmitindo. |
+| **Overlay do Menu Mobile** | `.nav-overlay` | `src/js/app.js` (L47-52) | Cortina escura sobreposta quando o menu hambúrguer é aberto; fecha ao ser clicada. |
+| **Botão Flutuante Twitch** | `.floating-live-btn` | `src/js/app.js` (L336-344) | Botão flutuante com animação de pulso inserido no canto da tela quando o canal da Twitch estiver transmitindo. |
 
 ---
 
@@ -199,8 +199,8 @@ Todas as views secundárias são garantidas no DOM por `ensureAllViewsExist()` e
 
 | Arquivo | Funções / Constantes Exportadas | Responsabilidade e Fluxo de Negócio |
 | :--- | :--- | :--- |
-| `src/js/app.js` | • `navigateTo(route, updateHash)`<br>• `switchSeason(seasonId)`<br>• `ROUTES`<br>• `DEFAULT_ROUTE` | Roteador SPA central: escuta eventos de hash, manipula o histórico do browser, aplica *lazy loading* de rotas, gerencia Dark/Light Mode, abre/fecha menu mobile e checa status ao vivo da Twitch. |
-| `src/js/api.js` | • `getActiveSeason()`<br>• `setActiveSeason(id)`<br>• `getSeasonLabel(id)`<br>• `getSeasonsConfig()`<br>• `getClubConfig(s)`<br>• `getStats(s)`<br>• `getElenco(s)`<br>• `getPartidas(s)`<br>• `getPlayersBase(s)`<br>• `getPesquisa(s)`<br>• `getPartidasByTipo(tipo)`<br>• `getLastUpdated()`<br>• `invalidateCache(path)` | Camada de dados centralizada: executa requisições `fetch()` para os JSONs estáticos da pasta `data/`, mantendo cache em memória (`Map`) para eliminar requisições redundantes. |
+| `src/js/app.js` | • `navigateTo(route, updateHash)`<br>• `switchSeason(seasonId)`<br>• `ROUTES`<br>• `DEFAULT_ROUTE` | Roteador SPA central: gerencia histórico de hash, lazy loading das views, seletor de versão `#season-selector` (`switchSeason`), Dark/Light Mode, menu mobile responsivo e status de live da Twitch. |
+| `src/js/api.js` | • `getActiveSeason()`<br>• `setActiveSeason(id)`<br>• `getSeasonLabel(id)`<br>• `getSeasonsConfig()`<br>• `getClubConfig(s)`<br>• `getStats(s)`<br>• `getElenco(s)`<br>• `getPartidas(s)`<br>• `getPlayersBase(s)`<br>• `getPesquisa(s)`<br>• `getPartidasByTipo(tipo)`<br>• `getLastUpdated()`<br>• `invalidateCache(path)` | Camada de dados reativa multi-temporada (FC 27 / FC 26): resolve dinamicamente caminhos em `config/<season>/` e `data/<season>/processed/`, mantendo cache em memória (`Map`) para requisições assíncronas. |
 | `src/js/utils/helpers.js` | • `getPosicaoColor(posicao)`<br>• `getResultadoInfo(resultado)`<br>• `formatarData(dataStr)`<br>• `formatMatchType(tipo)`<br>• `renderStars(nota)`<br>• `renderLoading(container, msg)`<br>• `renderError(container, msg)`<br>• `getCapitaniaIcon(capitania)`<br>• `getFotoPath(fotoPasta)`<br>• `renderSeasonEmptyState(container, opts)` | Biblioteca de utilitários: mapeia cores de posições (GK, ZAG, VOL, MEI, AT), formata datas ISO para pt-BR, gera estrelas de classificação, spinners de carregamento e badges de capitão. |
 | `src/js/pages/home.js` | • `renderHome()` | Constrói a tela inicial: carrega configurações de divisão e reputação de `config/club.json`, obtém a última edição de notícias de `config/news_index.json` e embute o player de transmissão da Twitch. |
 | `src/js/pages/elenco.js` | • `renderElenco()` | Renderiza a lista de atletas a partir de `data/processed/elenco_processado.json`. Implementa rotação cíclica de fotos no clique e expansão dos cartões de métricas individuais. |
@@ -229,7 +229,11 @@ Todas as views secundárias são garantidas no DOM por `ensureAllViewsExist()` e
 | **Ajustar cards ou animações do Elenco** | `src/css/pages/elenco.css`<br>`src/js/pages/elenco.js` | Edite as classes `.player-card`, `.is-expanded` ou o template retornado por `buildPlayerCard()`. |
 | **Ajustar layout do campinho tático** | `src/css/pages/pesquisa.css`<br>`src/js/pages/pesquisa.js` | Modifique as classes `.campinho`, `.campinho__linha` e a função `buildCampinho()`. |
 | **Ajustar raspagem da API oficial da EA Sports** | `scripts/fetch_ea_data.py` | Modifique os parâmetros de requisição, headers ou tratamento de status code na classe `API`. |
-| **Ajustar regras de consolidação e cálculo de stats** | `scripts/process_stats.py` | Altere o cálculo de médias, taxas de aproveitamento ou a lógica de mesclagem de dados manuais. |
+| **Ajustar regras de consolidação e cálculo de stats** | `scripts/process_stats.py` | Altere o cálculo de médias, taxas de aproveitamento ou a lógica de mesclagem de dados manuais (use flag `--season fc26|fc27`). |
+| **Configurar temporadas ou alterar temporada ativa padrão** | `config/seasons.json`<br>`src/js/api.js` | Edite `config/seasons.json` (metadados e datas de corte) e a constante `DEFAULT_SEASON` em `src/js/api.js`. |
+| **Ajustar filtros de versão e ordenação de notícias** | `src/js/pages/noticias.js`<br>`src/css/pages/noticias.css` | Modifique `parseEdition()`, os seletores `.filter-btn` ou os selects `#news-month-filter` / `#news-sort-filter` em `.noticias-controls`. |
+| **Reprocessar estatísticas de uma temporada via CLI** | Terminal / PowerShell | Execute `python scripts/process_stats.py --season fc27` (ou `python scripts/process_stats.py --season fc26`). |
+| **Ajustar automação de CI/CD para estatísticas** | `.github/workflows/update_stats.yml` | Altere os argumentos de `--season` dos scripts ou as pastas monitoradas no commit do GitHub Actions. |
 
 ---
 

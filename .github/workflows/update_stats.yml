@@ -27,15 +27,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scripts/requirements.txt
 
-      - name: Executar scripts de raspagem e processamento
+      - name: Executar scripts de raspagem e processamento (EA FC 27)
         run: |
-          python scripts/fetch_ea_data.py
-          python scripts/process_stats.py
+          python scripts/fetch_ea_data.py --season fc27
+          python scripts/process_stats.py --season fc27
 
       - name: Commit e Push das alterações
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add data/processed/ logs/
-          git commit -m "Automated: Atualização diária de estatísticas do Baile de Munique" || echo "Nenhuma alteração para commitar"
+          git add data/fc27/processed/ config/fc27/club.json logs/
+          git commit -m "Automated: Atualização de estatísticas EA FC 27" || echo "Nenhuma alteração para commitar"
           git push origin main
