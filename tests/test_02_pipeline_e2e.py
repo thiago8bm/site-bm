@@ -188,6 +188,18 @@ def test_fc27_simulated_debut():
         with open("data/fc27/raw/matches_leagueMatch.json", "w", encoding="utf-8") as f:
             json.dump(raw_matches_mock, f, indent=4, ensure_ascii=False)
 
+        overall_mock = {"last_updated": "2026-11-01T23:00:00", "status": "success", "data": [{
+            "clubId": "9992727", "gamesPlayed": "14", "gamesPlayedPlayoff": "2", "goals": "56",
+            "goalsAgainst": "28", "wins": "11", "ties": "1", "losses": "2",
+            "bestDivision": None, "skillRating": "1669", "reputationtier": "2"}]}
+        with open("data/fc27/raw/club_overall_stats.json", "w", encoding="utf-8") as f:
+            json.dump(overall_mock, f, indent=4)
+        career_mock = {"last_updated": "2026-11-01T23:00:00", "status": "success", "data": {"members": [
+            {"name": "Thiago_Souza108", "gamesPlayed": "14", "goals": "9", "assists": "12",
+             "manOfTheMatch": "5", "ratingAve": "8.6"}]}}
+        with open("data/fc27/raw/players_career_stats.json", "w", encoding="utf-8") as f:
+            json.dump(career_mock, f, indent=4)
+
         # 3. Executa process_stats.py --season fc27
         res = subprocess.run(
             [sys.executable, "scripts/process_stats.py", "--season", "fc27"],
@@ -210,7 +222,16 @@ def test_fc27_simulated_debut():
         check(matches_out["total"] == 1, "Partida de estreia FC27 processada em matches_processado.json")
         check(matches_out["data"][0]["adversario"] == "Rival FC 27", "Adversário da partida FC27 identificado corretamente")
         check(matches_out["data"][0]["resultado"] == "vitoria", "Resultado da partida FC27 calculado como 'vitoria'")
-        check(stats_out["liga"]["vitorias"] == 1 and stats_out["liga"]["gols_marcados"] == 3, "Stats globais da Liga FC27 calculadas corretamente (1V, 3 GP)")
+        liga = stats_out["liga"]
+        check(liga["total_partidas"] == 14 and liga["vitorias"] == 11 and liga["gols_marcados"] == 56,
+              "Stats da Liga FC27 usam club_overall_stats.json (14J, 11V, 56 GP)")
+        check(liga["saldo_gols"] == 28 and liga["pontos"] == 34, "Saldo de gols (+28) e pontos (34) calculados")
+        check(liga["aproveitamento"] == round(34 / 42 * 100, 1), "Aproveitamento calculado a partir dos pontos")
+        check(liga["ch"] == 1669 and liga["reputacao"] == 2 and liga["playoff_pontos"] == 2,
+              "skillRating, reputationtier e jogos de playoff mapeados")
+        thiago = next((j for j in elenco_out["data"] if j["ea_username"] == "Thiago_Souza108"), {})
+        check(thiago.get("carreira", {}).get("mvp") == 5, "Carreira (members/career/stats) anexada ao jogador")
+        check(any(j["ea_username"] == "NovoCraque_FC27" for j in elenco_out["data"]), "Auto-Discovery inclui jogador nao cadastrado")
 
     finally:
         # Teardown: restaura config/fc27 e data/fc27 exatamente como estavam

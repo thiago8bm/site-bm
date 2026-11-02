@@ -89,7 +89,7 @@ site-bm/
 ├── scripts/
 │   ├── test_endpoints.py                [15.5 KB] # Diagnóstico e testes automatizados de endpoints externos com relatório em terminal e logs
 │   ├── fetch_ea_data.py                 [8.8 KB]  # Coleta dados nos endpoints públicos da EA Pro Clubs via curl_cffi; CLI --season/--force, le config/<season>/club.json, grava em data/<season>/raw/
-│   ├── process_stats.py                 [21.5 KB] # Mescla dados brutos com manual e config/elenco.json gerando data/<season>/processed/ (CLI --season fc26|fc27) + Auto-Discovery de membros da EA n?o cadastrados (exceto fc26)
+│   ├── process_stats.py                 [21.5 KB] # Mescla dados brutos com manual e config/elenco.json gerando data/<season>/processed/ (CLI --season fc26|fc27); stats.json com preced?ncia manual > club_overall_stats (EA) > partidas (pontos, aproveitamento, ch, mda, ssg, gpj/gspj), carreira por jogador + Auto-Discovery de membros da EA n?o cadastrados (exceto fc26)
 │   ├── sync_drive_news.py               [4.9 KB]  # Sincroniza edições de jornais de pastas do Google Drive para src/assets/news/
 │   ├── generate_news_index.py           [1.2 KB]  # Varre src/assets/news/ e gera config/news_index.json
 │   ├── script_pesquisa_elenco.py        [10.8 KB] # Lê data/raw/*.xlsx, calcula rankings/médias e gera data/<season>/survey/pesquisa.json (CLI --season)

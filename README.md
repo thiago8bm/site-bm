@@ -75,6 +75,8 @@ python tests/test_03_frontend_spa.py  # abre tests/runner_frontend.html em http:
 
 O `process_stats.py` inclui automaticamente (Auto-Discovery) membros da EA ausentes em `config/<season>/elenco.json` (desativado no FC26, arquivo hist?rico).
 
+O `fetch_ea_data.py` tamb?m coleta `clubs/info`, `clubs/overallStats` e `members/career/stats` (em `data/<season>/raw/`) e atualiza `divisaoAtual` e `reputacaoTier` em `config/<season>/club.json`. O `process_stats.py` consolida o `stats.json` com a preced?ncia *manual > overallStats da EA > soma das partidas*. `torcedores` e `reputacaoNivel` n?o existem na API da EA e continuam manuais. O agendamento di?rio (`cron`) do workflow `update_stats.yml` permanece desativado at? o clube do FC 27 ser criado.
+
 ## 🏛️ Arquitetura do Projeto
 
 O repositório é concebido com separação rigorosa entre camada de apresentação (HTML/CSS/JS nativos), camada de configuração, pipeline de extração e dados processados em JSON:

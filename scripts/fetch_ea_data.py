@@ -7,6 +7,13 @@ import urllib.parse
 from datetime import datetime
 from curl_cffi import requests
 
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except AttributeError:
+        pass
+
 NUMERO_RESULTADOS = 50
 MATCH_TYPES = ["leagueMatch", "playoffMatch", "friendlyMatch"]
 
@@ -132,6 +139,45 @@ class API:
             print("Aviso: Falha ao buscar membros. Mantendo o players_club_stats.json anterior.")
 
 
+    def atualizar_info_clube(self, id_clube: str, plataforma: str):
+        """Salva /clubs/info em club_info.json. Retorna o payload ou None."""
+        url = self._formatar_url(f"/clubs/info?platform={plataforma}&clubIds={id_clube}")
+        dados = self._chamar_api(url, "informa??es do clube")
+        if dados:
+            self._salvar_json(dados, "club_info.json")
+        else:
+            print("Aviso: Falha ao buscar club info. Mantendo o club_info.json anterior.")
+        return dados or None
+
+    def atualizar_estatisticas_gerais_clube(self, id_clube: str, plataforma: str):
+        """Salva /clubs/overallStats em club_overall_stats.json. Retorna o payload ou None."""
+        url = self._formatar_url(f"/clubs/overallStats?platform={plataforma}&clubIds={id_clube}")
+        dados = self._chamar_api(url, "estat?sticas gerais do clube")
+        if dados:
+            self._salvar_json(dados, "club_overall_stats.json")
+        else:
+            print("Aviso: Falha ao buscar overallStats. Mantendo o club_overall_stats.json anterior.")
+        return dados or None
+
+    def atualizar_carreira_membros(self, id_clube: str, plataforma: str) -> None:
+        """Salva /members/career/stats em players_career_stats.json."""
+        url = self._formatar_url(f"/members/career/stats?platform={plataforma}&clubId={id_clube}")
+        dados = self._chamar_api(url, "estat?sticas de carreira dos membros")
+        if dados:
+            self._salvar_json(dados, "players_career_stats.json")
+        else:
+            print("Aviso: Falha ao buscar carreira. Mantendo o players_career_stats.json anterior.")
+
+    def buscar_divisao_atual(self, nome_clube: str, id_clube: str, plataforma: str):
+        """currentDivision s? existe no endpoint de busca; filtra pelo clubId."""
+        nome_formatado = urllib.parse.quote(nome_clube)
+        url = self._formatar_url(f"/allTimeLeaderboard/search?platform={plataforma}&clubName={nome_formatado}")
+        resposta = self._chamar_api(url, "divis?o atual do clube")
+        for clube in resposta or []:
+            if str(clube.get("clubId")) == str(id_clube):
+                return clube.get("currentDivision")
+        return None
+
     def procurar_clube(self, nome_clube:str, plataforma:str) -> str | None:
         self._ultimo_nome = nome_clube
         self._ultima_plataforma = plataforma
@@ -175,6 +221,38 @@ def carregar_config_clube(season: str) -> tuple[str, dict]:
         return path, json.load(f)
 
 
+def sincronizar_config_clube(config_path: str, config: dict, overall, divisao_atual) -> None:
+    """
+    Atualiza config/<season>/club.json com dados da EA.
+    - divisaoAtual  <- currentDivision (busca)
+    - reputacaoTier <- reputationtier (overallStats, 0-3)
+    'torcedores' e 'reputacaoNivel' NAO sao expostos pela EA e permanecem manuais.
+    """
+    alterado = False
+    if divisao_atual not in (None, ""):
+        try:
+            nova = int(divisao_atual)
+            if config.get("divisaoAtual") != nova:
+                config["divisaoAtual"] = nova
+                alterado = True
+        except (TypeError, ValueError):
+            pass
+    registro = overall[0] if isinstance(overall, list) and overall else None
+    if registro and registro.get("reputationtier") not in (None, ""):
+        try:
+            tier = int(registro["reputationtier"])
+            if config.get("reputacaoTier") != tier:
+                config["reputacaoTier"] = tier
+                alterado = True
+        except (TypeError, ValueError):
+            pass
+    if alterado:
+        with open(config_path, "w", encoding="utf-8") as f:
+            json.dump(config, f, indent=4, ensure_ascii=False)
+            f.write("\n")
+        print(f"club.json sincronizado com a EA: {config_path}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Coleta dados da API de Pro Clubs da EA.")
     parser.add_argument("--season", default="fc27", help="Temporada (padrao: fc27)")
@@ -210,14 +288,13 @@ def main():
         api.atualizar_historico_partidas(id_clube, plataforma, match_type, NUMERO_RESULTADOS)
     
     api.atualizar_estatisticas_membros(id_clube, plataforma)
-    
-    print("Processo de fetch finalizado com segurança.")
-    
-    # URL_MEMBERS_CAREER = f"https://proclubs.ea.com/api/fc/members/career/stats?platform={PLATAFORMA}&clubId={CLUB_ID}"
-    # raw_members_career = fetch_from_ea(URL_MEMBERS_CAREER, "estatísticas de carreira dos membros")
-        # if raw_members_career:
-        #     save_json_data(raw_members_career, "players_career_stats.json")
+    api.atualizar_carreira_membros(id_clube, plataforma)
+    api.atualizar_info_clube(id_clube, plataforma)
+    overall = api.atualizar_estatisticas_gerais_clube(id_clube, plataforma)
+    divisao = api.buscar_divisao_atual(nome_clube, id_clube, plataforma)
+    sincronizar_config_clube(config_path, config, overall, divisao)
 
+    print("Processo de fetch finalizado com seguran?a.")
 
     # LOGS E STEP SUMMARY
     import os

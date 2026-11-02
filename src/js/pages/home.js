@@ -56,19 +56,19 @@ export async function renderHome() {
     ];
 
     // Cálculo do Tier de Reputação
+    const REPUTACAO_TITULOS = ["Orgulho da cidade", "Emergente", "Conhecido", "Famoso mundialmente"];
     let reputacaoTier = 0;
-    let reputacaoTitulo = "Orgulho da cidade";
-    
-    if (clubConfig.reputacaoNivel >= 9) {
+    if (Number.isInteger(clubConfig.reputacaoTier) && clubConfig.reputacaoTier >= 0 && clubConfig.reputacaoTier <= 3) {
+        // Tier oficial da EA (0-3), gravado automaticamente pelo pipeline
+        reputacaoTier = clubConfig.reputacaoTier;
+    } else if (clubConfig.reputacaoNivel >= 9) {
         reputacaoTier = 3;
-        reputacaoTitulo = "Famoso mundialmente";
     } else if (clubConfig.reputacaoNivel >= 7) {
         reputacaoTier = 2;
-        reputacaoTitulo = "Conhecido";
     } else if (clubConfig.reputacaoNivel >= 4) {
         reputacaoTier = 1;
-        reputacaoTitulo = "Emergente";
     }
+    const reputacaoTitulo = REPUTACAO_TITULOS[reputacaoTier];
 
     const seasonLabel = getSeasonLabel();
     const legacyBanner = getActiveSeason() === 'fc26'

@@ -137,6 +137,38 @@ def get_player_photos(pasta: str) -> list:
     files = [f for f in os.listdir(dir_path) if f.lower().endswith(exts)]
     return [f"src/assets/players/{pasta}/{f}" for f in files]
 
+def carregar_overall_ea() -> dict | None:
+    """L? club_overall_stats.json (lista com 1 registro) e retorna o registro do nosso clube."""
+    raw = carregar_json(os.path.join(RAW_DIR, "club_overall_stats.json")) if os.path.exists(os.path.join(RAW_DIR, "club_overall_stats.json")) else None
+    dados = (raw or {}).get("data")
+    if isinstance(dados, list) and dados:
+        for reg in dados:
+            if str(reg.get("clubId")) == ID_CLUBE:
+                return {k: (safe_int(v) if k not in ("clubId",) and isinstance(v, str) and v.lstrip("-").isdigit() else v) for k, v in reg.items()}
+        return None
+    return None
+
+
+def carregar_carreira_map() -> dict:
+    """Mapa name -> registro de /members/career/stats."""
+    path = os.path.join(RAW_DIR, "players_career_stats.json")
+    raw = carregar_json(path) if os.path.exists(path) else None
+    membros = ((raw or {}).get("data") or {}).get("members", []) if isinstance((raw or {}).get("data"), dict) else []
+    return {m.get("name"): m for m in membros if m.get("name")}
+
+
+def montar_carreira(reg: dict | None) -> dict | None:
+    if not reg:
+        return None
+    return {
+        "partidas":     safe_int(reg.get("gamesPlayed")),
+        "gols":         safe_int(reg.get("goals")),
+        "assistencias": safe_int(reg.get("assists")),
+        "mvp":          safe_int(reg.get("manOfTheMatch")),
+        "media_nota":   safe_float(reg.get("ratingAve")),
+    }
+
+
 # =============================================
 # PROCESSAMENTO DO ELENCO
 # =============================================
@@ -167,6 +199,7 @@ def processar_elenco() -> list:
         print("  [AVISO] Dados brutos da EA indisponíveis. Preservando estatísticas anteriores do elenco.")
 
     elenco_final = []
+    carreira_map = carregar_carreira_map()
 
     for key, meta in ELENCO_MAP.items():
         ea_id = meta["ea_id"]
@@ -241,6 +274,9 @@ def processar_elenco() -> list:
             "participacoes_gol":  goals + assists,
             "processado_em":      datetime.now().isoformat(),
         }
+        carreira = montar_carreira(carreira_map.get(ea_id)) if ea_id else None
+        if carreira:
+            jogador["carreira"] = carreira
 
         elenco_final.append(jogador)
         origem = "Manual" if origem_manual else ("EA Atualizada" if tem_dados_ea else ("Histórico Preservado" if dados_anteriores else "Novo (Zerado)"))
@@ -299,6 +335,9 @@ def processar_elenco() -> list:
             "participacoes_gol":  gols_m + assists_m,
             "processado_em":      datetime.now().isoformat(),
         }
+        carreira_auto = montar_carreira(carreira_map.get(ea_id))
+        if carreira_auto:
+            jogador_auto["carreira"] = carreira_auto
         elenco_final.append(jogador_auto)
         print(f"  [AUTO-DISCOVERY] {jogador_auto['nome_display']} ({ea_id}) incluído automaticamente da API da EA.")
 
@@ -469,13 +508,32 @@ def gerar_stats_globais(elenco: list, partidas: list) -> dict:
     liga = [p for p in partidas if p["tipo"] == "leagueMatch"]
 
     manual_club = carregar_json(MANUAL_CLUB_PATH) or {}
-    
-    total    = manual_club.get("total_partidas", len(liga))
-    vitorias = manual_club.get("vitorias", sum(1 for p in liga if p["resultado"] == "vitoria"))
-    empates  = manual_club.get("empates", sum(1 for p in liga if p["resultado"] == "empate"))
-    derrotas = manual_club.get("derrotas", sum(1 for p in liga if p["resultado"] == "derrota"))
-    gols_m   = manual_club.get("gols_marcados", sum(p["placar_nos"] for p in liga))
-    gols_s   = manual_club.get("gols_sofridos", sum(p["placar_adv"] for p in liga))
+    ea = carregar_overall_ea()
+
+    # Preced?ncia: manual > overallStats da EA > soma das partidas processadas
+    def pick(chave_manual, chave_ea, fallback):
+        if chave_manual in manual_club:
+            return manual_club[chave_manual]
+        if ea and chave_ea in ea:
+            return ea[chave_ea]
+        return fallback
+
+    total    = pick("total_partidas", "gamesPlayed", len(liga))
+    vitorias = pick("vitorias", "wins", sum(1 for p in liga if p["resultado"] == "vitoria"))
+    empates  = pick("empates", "ties", sum(1 for p in liga if p["resultado"] == "empate"))
+    derrotas = pick("derrotas", "losses", sum(1 for p in liga if p["resultado"] == "derrota"))
+    gols_m   = pick("gols_marcados", "goals", sum(p["placar_nos"] for p in liga))
+    gols_s   = pick("gols_sofridos", "goalsAgainst", sum(p["placar_adv"] for p in liga))
+    pontos   = vitorias * 3 + empates
+    aproveitamento = round((pontos / (total * 3) * 100) if total > 0 else 0, 1)
+    ssg_calc = sum(1 for p in liga if p["placar_adv"] == 0)
+
+    club_cfg = carregar_json(CLUB_CONFIG_PATH) or {}
+    divisao_atual = manual_club.get("divisao", club_cfg.get("divisaoAtual", 0))
+    melhor_div = manual_club.get("mda", (ea or {}).get("bestDivision") or divisao_atual)
+    reputacao = manual_club.get("reputacao", (ea or {}).get("reputationtier", club_cfg.get("reputacaoTier", 0)))
+    ch = manual_club.get("ch", (ea or {}).get("skillRating", 0))
+    playoff_jogos = pick("playoff_pontos", "gamesPlayedPlayoff", 0)
 
     artilheiros = sorted(elenco, key=lambda x: x["gols"], reverse=True)[:5]
     garcons     = sorted(elenco, key=lambda x: x["assistencias"], reverse=True)[:5]
@@ -498,15 +556,18 @@ def gerar_stats_globais(elenco: list, partidas: list) -> dict:
             "gols_marcados":  gols_m,
             "gols_sofridos":  gols_s,
             "saldo_gols":     gols_m - gols_s,
+            "pontos":         pontos,
             "win_rate":       round((vitorias / total * 100) if total > 0 else 0, 1),
-            "ch":             manual_club.get("ch", 0),
-            "reputacao":      manual_club.get("reputacao", 0),
-            "mda":            manual_club.get("mda", 0),
-            "ssg":            manual_club.get("ssg", 0),
-            "gpj":            manual_club.get("gpj", 0),
-            "gspj":           manual_club.get("gspj", 0),
-            "divisao":        manual_club.get("divisao", 0),
-            "playoff_pontos": manual_club.get("playoff_pontos", 0)
+            "aproveitamento": aproveitamento,
+            "ch":             ch,
+            "reputacao":      reputacao,
+            "mda":            melhor_div,
+            "ssg":            manual_club.get("ssg", ssg_calc),
+            "gpj":            manual_club.get("gpj", round(gols_m / total, 2) if total > 0 else 0),
+            "gspj":           manual_club.get("gspj", round(gols_s / total, 2) if total > 0 else 0),
+            "divisao":        divisao_atual,
+            "playoff_pontos": playoff_jogos,
+            "fonte":          "manual" if manual_club else ("ea" if ea else "partidas")
         },
         "total_partidas_all": manual_club.get("total_partidas", len(partidas)),
         "top_artilheiros": [
