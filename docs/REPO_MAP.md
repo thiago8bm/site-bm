@@ -24,7 +24,8 @@ Tamanhos aproximados e papéis de cada arquivo versionado no repositório:
 site-bm/
 │
 ├── index.html                           [6.7 KB]  # Shell principal da SPA; importa CSS, CDN Chart.js, router JS
-├── favicon.ico                          [21.2 KB] # Ícone oficial multi-resolução gerado a partir do brasão do clube
+├── favicon.ico                          [20.7 KB] # Ícone multi-resolução transparente gerado com máscara circular
+├── favicon.png                          [77.6 KB] # Ícone PNG transparente de alta resolução para navegadores modernos
 ├── serve.bat                            [0.3 KB]  # Script de conveniência: inicia servidor local em http://localhost:5500
 ├── disparar.ps1                         [5.3 KB]  # Script PowerShell: dispara via API do GitHub a Action de sincronização
 ├── atualizar_jornais.bat                [0.3 KB]  # Atalho para executar disparar.ps1 em ambiente Windows

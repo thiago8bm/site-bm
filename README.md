@@ -82,7 +82,8 @@ O repositório é concebido com separação rigorosa entre camada de apresentaç
 ```
 site-bm/
 ├── index.html                   # Casca da SPA (HTML principal na raiz do projeto)
-├── favicon.ico                  # Ícone oficial multi-resolução da aba (16x16 a 64x64)
+├── favicon.ico                  # Ícone oficial multi-resolução transparente da aba (16x16 a 64x64)
+├── favicon.png                  # Ícone oficial em PNG com transparência e recorte circular
 ├── serve.bat                    # Atalho para servidor de desenvolvimento local
 ├── disparar.ps1                 # Script para acionar GitHub Actions localmente
 ├── atualizar_jornais.bat        # Atalho de sincronização rápida de jornais
