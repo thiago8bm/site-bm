@@ -255,7 +255,10 @@ def processar_elenco() -> list:
         "forward":    "CA",
     }
 
-    for membro in membros_brutos:
+    # Temporadas legadas (fc26) são mantidas manualmente: não incluir ex-membros retornados pela API
+    membros_candidatos = [] if SEASON == "fc26" else membros_brutos
+
+    for membro in membros_candidatos:
         ea_id = membro.get("name", "")
         if not ea_id or ea_id in ea_ids_mapeados:
             continue
