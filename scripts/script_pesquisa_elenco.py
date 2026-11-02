@@ -9,6 +9,7 @@ responsabilidade do frontend (src/js/). Apenas empacota os dados em JSON.
 
 import pandas as pd
 from collections import Counter
+import argparse
 import json
 import os
 from datetime import datetime
@@ -16,8 +17,13 @@ from datetime import datetime
 # =============================================
 # CONFIGURAÇÃO
 # =============================================
-CAMINHO_XLSX  = os.path.join("data", "raw", "Pesquisa_de_elenco_-_BM_(respostas).xlsx")
-CAMINHO_JSON  = os.path.join("data", "survey", "pesquisa.json")
+_parser = argparse.ArgumentParser(description="Processa a pesquisa de elenco.")
+_parser.add_argument("--season", default="fc27")
+args, _ = _parser.parse_known_args()
+
+SEASON        = args.season
+CAMINHO_XLSX  = os.path.join("data", SEASON, "raw", "Pesquisa_de_elenco_-_BM_(respostas).xlsx")
+CAMINHO_JSON  = os.path.join("data", SEASON, "survey", "pesquisa.json")
 
 # =============================================
 # UTILITÁRIO: Extrair top N com suporte a empates
@@ -269,7 +275,7 @@ def main():
         print("\n[ERRO] Nenhum dado processado. Abortando.")
         return
 
-    os.makedirs("data", exist_ok=True)
+    os.makedirs(os.path.dirname(CAMINHO_JSON), exist_ok=True)
     with open(CAMINHO_JSON, "w", encoding="utf-8") as f:
         json.dump(dados, f, indent=4, ensure_ascii=False)
 

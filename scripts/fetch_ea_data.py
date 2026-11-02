@@ -1,18 +1,18 @@
+import argparse
 import json
 import os
+import sys
 import time
 import urllib.parse
 from datetime import datetime
 from curl_cffi import requests
 
-NOME_CLUBE = "Baile d Munich"
-ID_CLUBE = "1071934"
-PLATAFORMA = "common-gen5"
 NUMERO_RESULTADOS = 50
 MATCH_TYPES = ["leagueMatch", "playoffMatch", "friendlyMatch"]
 
 class API:
-    def __init__(self) -> None:
+    def __init__(self, season: str = "fc27") -> None:
+        self.season = season
         self.url_base = "https://proclubs.ea.com/api/fc"
         self.timeout = 25
         self._ultimo_nome: str = None # type: ignore
@@ -63,8 +63,8 @@ class API:
    
     def _salvar_json(self, dados: dict | list, filename: str, extra_meta: dict = None) -> None: # type: ignore
         """Salva dados genéricos sobrescrevendo o arquivo e aceitando metadados extras."""
-        os.makedirs(os.path.join("data", "raw"), exist_ok=True)
-        path = os.path.join("data", "raw", filename)
+        os.makedirs(os.path.join("data", self.season, "raw"), exist_ok=True)
+        path = os.path.join("data", self.season, "raw", filename)
         payload = {
             "last_updated": datetime.now().isoformat(),
             "status": "success",
@@ -91,7 +91,7 @@ class API:
             return
 
         filename = f"matches_{match_type}.json"
-        path = os.path.join("data", "raw", filename)
+        path = os.path.join("data", self.season, "raw", filename)
         
         dados_existentes = []
         
@@ -132,7 +132,7 @@ class API:
             print("Aviso: Falha ao buscar membros. Mantendo o players_club_stats.json anterior.")
 
 
-    def procurar_clube(self, nome_clube:str, plataforma:str) -> None:
+    def procurar_clube(self, nome_clube:str, plataforma:str) -> str | None:
         self._ultimo_nome = nome_clube
         self._ultima_plataforma = plataforma
         
@@ -160,23 +160,56 @@ class API:
         
         self._ultimo_id = id_clube
         self._ultima_resposta = [clube]
+        return id_clube
 
 
 # ==========================================
 # EXECUÇÃO PRINCIPAL
 # ==========================================
+def carregar_config_clube(season: str) -> tuple[str, dict]:
+    path = os.path.join("config", season, "club.json")
+    if not os.path.exists(path):
+        print(f"[ERRO] Config nao encontrada: {path}")
+        sys.exit(1)
+    with open(path, "r", encoding="utf-8-sig") as f:
+        return path, json.load(f)
+
+
 def main():
-    print(f"=== Iniciando raspagem de dados da EA para {NOME_CLUBE} ===")
-    api = API()
-    
-    global ID_CLUBE
-    if not ID_CLUBE:
-        ID_CLUBE = api.procurar_clube(NOME_CLUBE, PLATAFORMA)   
-    
+    parser = argparse.ArgumentParser(description="Coleta dados da API de Pro Clubs da EA.")
+    parser.add_argument("--season", default="fc27", help="Temporada (padrao: fc27)")
+    parser.add_argument("--force", action="store_true", help="Permite executar para temporadas encerradas (fc26)")
+    args = parser.parse_args()
+    season = args.season
+
+    if season == "fc26" and not args.force:
+        print("[AVISO] A API da EA para o FC26 foi encerrada e os dados do FC26 sao mantidos manualmente.")
+        print("        Use --force para executar mesmo assim.")
+        sys.exit(1)
+
+    config_path, config = carregar_config_clube(season)
+    nome_clube = config.get("nome_clube_ea", "")
+    id_clube = str(config.get("id_clube_ea") or "")
+    plataforma = config.get("plataforma_ea", "common-gen5")
+
+    print(f"=== Iniciando raspagem de dados da EA para {nome_clube} ({season}) ===")
+    api = API(season)
+
+    if not id_clube:
+        id_clube = str(api.procurar_clube(nome_clube, plataforma) or "")
+        if not id_clube:
+            print(f"[ERRO] Clube '{nome_clube}' nao encontrado na API da EA ({season}).")
+            sys.exit(1)
+        config["id_clube_ea"] = id_clube
+        with open(config_path, "w", encoding="utf-8") as f:
+            json.dump(config, f, indent=4, ensure_ascii=False)
+            f.write("\n")
+        print(f"id_clube_ea salvo em {config_path}: {id_clube}")
+
     for match_type in MATCH_TYPES:
-        api.atualizar_historico_partidas(ID_CLUBE, PLATAFORMA, match_type, NUMERO_RESULTADOS) # type: ignore
+        api.atualizar_historico_partidas(id_clube, plataforma, match_type, NUMERO_RESULTADOS)
     
-    api.atualizar_estatisticas_membros(ID_CLUBE, PLATAFORMA) # type: ignore
+    api.atualizar_estatisticas_membros(id_clube, plataforma)
     
     print("Processo de fetch finalizado com segurança.")
     

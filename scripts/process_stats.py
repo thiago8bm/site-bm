@@ -9,6 +9,7 @@ Saída:
   data/processed/stats.json              — metadados globais do clube (para o footer)
 """
 
+import argparse
 import json
 import os
 from datetime import datetime
@@ -16,17 +17,37 @@ from datetime import datetime
 # =============================================
 # CONFIGURAÇÃO
 # =============================================
-ID_CLUBE     = "1071934"
-RAW_DIR      = os.path.join("data", "raw")
-OUT_DIR      = os.path.join("data", "processed")
+_parser = argparse.ArgumentParser(description="Processa stats do clube.")
+_parser.add_argument("--season", default="fc27", choices=["fc26", "fc27"])
+args, _ = _parser.parse_known_args()
+
+SEASON              = args.season
+CLUB_CONFIG_PATH    = os.path.join("config", SEASON, "club.json")
+RAW_DIR             = os.path.join("data", SEASON, "raw")
+OUT_DIR             = os.path.join("data", SEASON, "processed")
+
+
+def _ler_id_clube() -> str:
+    try:
+        with open(CLUB_CONFIG_PATH, "r", encoding="utf-8-sig") as f:
+            id_ea = str(json.load(f).get("id_clube_ea") or "")
+    except (IOError, json.JSONDecodeError):
+        id_ea = ""
+    if not id_ea and SEASON == "fc26":
+        id_ea = "1071934"
+    return id_ea
+
+
+ID_CLUBE = _ler_id_clube()
 MATCH_TYPES  = ["leagueMatch", "playoffMatch", "friendlyMatch"]
 
 # =============================================
 # DICIONÁRIO DE MAPEAMENTO DO ELENCO
 # =============================================
-CONFIG_ELENCO_PATH = os.path.join("config", "elenco.json")
-MANUAL_STATS_PATH = os.path.join("data", "manual", "manual_stats.json")
-MANUAL_MATCHES_PATH = os.path.join("data", "manual", "manual_matches.json")
+CONFIG_ELENCO_PATH  = os.path.join("config", SEASON, "elenco.json")
+MANUAL_STATS_PATH   = os.path.join("data", SEASON, "manual", "manual_stats.json")
+MANUAL_MATCHES_PATH = os.path.join("data", SEASON, "manual", "manual_matches.json")
+MANUAL_CLUB_PATH    = os.path.join("data", SEASON, "manual", "manual_club_stats.json")
 ELENCO_MAP = {}
 
 def load_config_elenco():
@@ -391,7 +412,7 @@ def processar_partidas() -> list:
 def gerar_stats_globais(elenco: list, partidas: list) -> dict:
     liga = [p for p in partidas if p["tipo"] == "leagueMatch"]
 
-    manual_club = carregar_json(os.path.join("data", "manual", "manual_club_stats.json")) or {}
+    manual_club = carregar_json(MANUAL_CLUB_PATH) or {}
     
     total    = manual_club.get("total_partidas", len(liga))
     vitorias = manual_club.get("vitorias", sum(1 for p in liga if p["resultado"] == "vitoria"))
