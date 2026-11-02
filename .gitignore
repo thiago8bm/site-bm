@@ -31,3 +31,5 @@ Thumbs.db
 # Diretórios das IDEs (VSCode, PyCharm, etc)
 .vscode/
 .idea/
+# Planos de trabalho locais (nao versionar)
+PLANO_*.md
