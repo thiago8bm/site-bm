@@ -30,8 +30,11 @@ site-bm/
 ├── .gitignore                           [0.4 KB]  # Ignora ambientes virtuais, credenciais, temporários e pastas brutas
 ├── .nojekyll                            [0.0 KB]  # Desativa o processador Jekyll no GitHub Pages (preserva pastas com underline)
 ├── README.md                            [~7 KB]   # Documentação completa de negócio, arquitetura e instruções
-├── REPO_MAP.md                          [~15 KB]  # Este documento: mapa arquitetural vivo e otimizado para IA
-├── PLANO_COMPATIBILIDADE_FC27.md        [~25 KB]  # Especificação técnica completa de transição para o EA FC 27
+├── docs/
+│   ├── GUIA_ENDPOINTS_EA_FC27.md        [~18 KB]  # Especificação técnica e catálogo de endpoints EA FC 27, GAS e Twitch
+│   ├── PLANO_COMPATIBILIDADE_FC27.md    [~36 KB]  # Especificação técnica completa de transição para o EA FC 27
+│   ├── PLANO_BATERIA_TESTES_FC27.md     [~34 KB]  # Diagnóstico de QA e especificação da bateria de testes
+│   └── REPO_MAP.md                      [~30 KB]  # Este documento: mapa arquitetural vivo e otimizado para IA
 │
 ├── .github/
 │   └── workflows/
@@ -82,6 +85,7 @@ site-bm/
 │   └── update_stats.log                 [0.2 KB]  # Log de execução do pipeline de atualização de estatísticas
 │
 ├── scripts/
+│   ├── test_endpoints.py                [15.5 KB] # Diagnóstico e testes automatizados de endpoints externos com relatório em terminal e logs
 │   ├── fetch_ea_data.py                 [8.8 KB]  # Coleta dados nos endpoints públicos da EA Pro Clubs via curl_cffi; CLI --season/--force, le config/<season>/club.json, grava em data/<season>/raw/
 │   ├── process_stats.py                 [21.5 KB] # Mescla dados brutos com manual e config/elenco.json gerando data/<season>/processed/ (CLI --season fc26|fc27) + Auto-Discovery de membros da EA n?o cadastrados (exceto fc26)
 │   ├── sync_drive_news.py               [4.9 KB]  # Sincroniza edições de jornais de pastas do Google Drive para src/assets/news/
@@ -238,14 +242,15 @@ Todas as views secundárias são garantidas no DOM por `ensureAllViewsExist()` e
 ---
 
 
-## ?? Testes (`tests/`)
+## 🧪 Testes (`tests/`)
 
-| Arquivo | Papel | Execu??o |
+| Arquivo | Papel | Execução |
 |---|---|---|
 | `tests/test_01_integrity.py` | Integridade de configs, JSONs, fotos e imagens (FC26 + FC27) | `python tests/test_01_integrity.py` |
-| `tests/test_02_pipeline_e2e.py` | Trava do FC26, idempot?ncia e simula??o de estreia FC27 (com backup/restaura??o) | `python tests/test_02_pipeline_e2e.py` |
+| `tests/test_02_pipeline_e2e.py` | Trava do FC26, idempotência e simulação de estreia FC27 (com backup/restauração) | `python tests/test_02_pipeline_e2e.py` |
 | `tests/test_03_frontend_spa.py` | Sobe servidor local (porta 5500) e abre o runner | `python tests/test_03_frontend_spa.py` |
-| `tests/runner_frontend.html` | 21 asser??es E2E de DOM/rotas/filtros via `<iframe>` | `http://localhost:5500/tests/runner_frontend.html` |
+| `tests/test_04_endpoints_diagnostic.py` | Diagnóstico ao vivo de conectividade, endpoints EA FC27, GAS e Twitch | `python tests/test_04_endpoints_diagnostic.py` |
+| `tests/runner_frontend.html` | 21 asserções E2E de DOM/rotas/filtros via `<iframe>` | `http://localhost:5500/tests/runner_frontend.html` |
 
 > `noticias.js`: `renderNoticias()` remove `#lightbox` anterior e `initLightbox()` usa `document._bmLightboxKeyHandler` para evitar listeners duplicados.
 

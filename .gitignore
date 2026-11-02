@@ -31,5 +31,8 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Logs de diagnósticos locais
+logs/diagnostic_endpoints.log
+
 # Planos de trabalho locais (nao versionar)
 PLANO_*.md

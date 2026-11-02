@@ -114,6 +114,7 @@ site-bm/
 │       └── survey/              # JSON processado da pesquisa de elenco do FC 27
 │
 ├── scripts/                     # Automações em Python (ETL e integrações)
+│   ├── test_endpoints.py        # Diagnóstico e testes automatizados de endpoints externos (EA FC 27, GAS, Twitch)
 │   ├── fetch_ea_data.py         # Coleta dados da EA (--season; le config/<season>/club.json)
 │   ├── process_stats.py         # Higieniza estatísticas e cruza com config/<season>/elenco.json (--season)
 │   ├── sync_drive_news.py       # Baixa novos jornais do Google Drive via API
@@ -186,12 +187,18 @@ Caso queira atualizar os dados de estatísticas ou reprocessar planilhas localme
    python scripts/process_stats.py --season fc27   # fc26 ou fc27
    ```
 
-3. **Para reprocessar a pesquisa de elenco**:
+3. **Para diagnosticar endpoints e APIs integradas**:
+   ```bash
+   python scripts/test_endpoints.py              # Diagnóstico completo com relatório no terminal
+   python tests/test_04_endpoints_diagnostic.py  # Execução via suite de testes
+   ```
+
+4. **Para reprocessar a pesquisa de elenco**:
    ```bash
    python scripts/script_pesquisa_elenco.py
    ```
 
-4. **Para reindexar a pasta de notícias e jornais**:
+5. **Para reindexar a pasta de notícias e jornais**:
    ```bash
    python scripts/generate_news_index.py
    ```
