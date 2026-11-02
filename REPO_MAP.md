@@ -83,7 +83,7 @@ site-bm/
 │
 ├── scripts/
 │   ├── fetch_ea_data.py                 [8.8 KB]  # Coleta dados nos endpoints públicos da EA Pro Clubs via curl_cffi; CLI --season/--force, le config/<season>/club.json, grava em data/<season>/raw/
-│   ├── process_stats.py                 [21.5 KB] # Mescla dados brutos com manual e config/elenco.json gerando data/<season>/processed/ (CLI --season fc26|fc27)
+│   ├── process_stats.py                 [21.5 KB] # Mescla dados brutos com manual e config/elenco.json gerando data/<season>/processed/ (CLI --season fc26|fc27) + Auto-Discovery de membros da EA n?o cadastrados (exceto fc26)
 │   ├── sync_drive_news.py               [4.9 KB]  # Sincroniza edições de jornais de pastas do Google Drive para src/assets/news/
 │   ├── generate_news_index.py           [1.2 KB]  # Varre src/assets/news/ e gera config/news_index.json
 │   ├── script_pesquisa_elenco.py        [10.8 KB] # Lê data/raw/*.xlsx, calcula rankings/médias e gera data/<season>/survey/pesquisa.json (CLI --season)
@@ -236,6 +236,18 @@ Todas as views secundárias são garantidas no DOM por `ensureAllViewsExist()` e
 | **Ajustar automação de CI/CD para estatísticas** | `.github/workflows/update_stats.yml` | Altere os argumentos de `--season` dos scripts ou as pastas monitoradas no commit do GitHub Actions. |
 
 ---
+
+
+## ?? Testes (`tests/`)
+
+| Arquivo | Papel | Execu??o |
+|---|---|---|
+| `tests/test_01_integrity.py` | Integridade de configs, JSONs, fotos e imagens (FC26 + FC27) | `python tests/test_01_integrity.py` |
+| `tests/test_02_pipeline_e2e.py` | Trava do FC26, idempot?ncia e simula??o de estreia FC27 (com backup/restaura??o) | `python tests/test_02_pipeline_e2e.py` |
+| `tests/test_03_frontend_spa.py` | Sobe servidor local (porta 5500) e abre o runner | `python tests/test_03_frontend_spa.py` |
+| `tests/runner_frontend.html` | 21 asser??es E2E de DOM/rotas/filtros via `<iframe>` | `http://localhost:5500/tests/runner_frontend.html` |
+
+> `noticias.js`: `renderNoticias()` remove `#lightbox` anterior e `initLightbox()` usa `document._bmLightboxKeyHandler` para evitar listeners duplicados.
 
 ## 🎨 Seção 5 — Mapa de Arquivos CSS
 
