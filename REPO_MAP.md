@@ -82,11 +82,11 @@ site-bm/
 │   └── update_stats.log                 [0.2 KB]  # Log de execução do pipeline de atualização de estatísticas
 │
 ├── scripts/
-│   ├── fetch_ea_data.py                 [8.8 KB]  # Coleta dados nos endpoints públicos da EA Pro Clubs via curl_cffi
-│   ├── process_stats.py                 [21.5 KB] # Mescla dados brutos com manual e config/elenco.json gerando data/processed/
+│   ├── fetch_ea_data.py                 [8.8 KB]  # Coleta dados nos endpoints públicos da EA Pro Clubs via curl_cffi; CLI --season/--force, le config/<season>/club.json, grava em data/<season>/raw/
+│   ├── process_stats.py                 [21.5 KB] # Mescla dados brutos com manual e config/elenco.json gerando data/<season>/processed/ (CLI --season fc26|fc27)
 │   ├── sync_drive_news.py               [4.9 KB]  # Sincroniza edições de jornais de pastas do Google Drive para src/assets/news/
 │   ├── generate_news_index.py           [1.2 KB]  # Varre src/assets/news/ e gera config/news_index.json
-│   ├── script_pesquisa_elenco.py        [10.8 KB] # Lê data/raw/*.xlsx, calcula rankings/médias e gera data/survey/pesquisa.json
+│   ├── script_pesquisa_elenco.py        [10.8 KB] # Lê data/raw/*.xlsx, calcula rankings/médias e gera data/<season>/survey/pesquisa.json (CLI --season)
 │   └── requirements.txt                 [0.1 KB]  # Dependências Python (requests, curl_cffi, python-dotenv, openpyxl, pandas)
 │
 └── src/

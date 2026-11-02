@@ -101,7 +101,7 @@ site-bm/
 │       └── survey/              # JSON processado da pesquisa de elenco do FC 27
 │
 ├── scripts/                     # Automações em Python (ETL e integrações)
-│   ├── fetch_ea_data.py         # Coleta dados da API da EA Sports Pro Clubs via curl_cffi
+│   ├── fetch_ea_data.py         # Coleta dados da EA (--season; le config/<season>/club.json)
 │   ├── process_stats.py         # Higieniza estatísticas e cruza com config/elenco.json
 │   ├── sync_drive_news.py       # Baixa novos jornais do Google Drive via API
 │   ├── generate_news_index.py   # Compila a lista de jornais em config/news_index.json
@@ -169,8 +169,8 @@ Caso queira atualizar os dados de estatísticas ou reprocessar planilhas localme
 
 2. **Para atualizar dados da EA Sports Pro Clubs**:
    ```bash
-   python scripts/fetch_ea_data.py
-   python scripts/process_stats.py
+   python scripts/fetch_ea_data.py --season fc27   # FC26 exige --force (API encerrada)
+   python scripts/process_stats.py --season fc27   # fc26 ou fc27
    ```
 
 3. **Para reprocessar a pesquisa de elenco**:
