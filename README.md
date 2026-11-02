@@ -86,7 +86,9 @@ site-bm/
 ├── disparar.ps1                 # Script para acionar GitHub Actions localmente
 ├── atualizar_jornais.bat        # Atalho de sincronização rápida de jornais
 ├── README.md                    # Documentação geral do sistema
-├── REPO_MAP.md                  # Mapa vivo do repositório para devs e agentes IA
+│
+├── docs/                      # Configurações declarativas de negócio
+│   └── REPO_MAP.md                  # Mapa vivo do repositório para devs e agentes IA
 │
 ├── config/                      # Configurações declarativas de negócio
 │   ├── seasons.json             # Metadados e datas de corte de cada temporada (fc26, fc27, default)

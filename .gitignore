@@ -1,5 +1,4 @@
 # Diretórios sensíveis
-docs/
 data/*/raw/
 data/*/_raw/
 data/_raw/
@@ -31,5 +30,6 @@ Thumbs.db
 # Diretórios das IDEs (VSCode, PyCharm, etc)
 .vscode/
 .idea/
+
 # Planos de trabalho locais (nao versionar)
 PLANO_*.md

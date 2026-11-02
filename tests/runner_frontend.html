@@ -42,9 +42,23 @@
 
             // Limpa estado para simular 1º acesso
             win.localStorage.removeItem('bm_season');
-            const appMod = await win.eval("import('./src/js/app.js')");
-            const apiMod = await win.eval("import('./src/js/api.js')");
-            const newsMod = await win.eval("import('./src/js/pages/noticias.js')");
+            // Importa os m?dulos DENTRO do iframe (mesma inst?ncia usada pela SPA), com URLs absolutas
+            const root = new URL('../', location.href).href;
+            const { appMod, apiMod, newsMod } = await new Promise((resolve, reject) => {
+                const key = '__bmQa' + Date.now();
+                win[key + 'ok'] = resolve;
+                win[key + 'err'] = reject;
+                const s = doc.createElement('script');
+                s.type = 'module';
+                s.textContent = `
+                    Promise.all([
+                        import('${root}src/js/app.js'),
+                        import('${root}src/js/api.js'),
+                        import('${root}src/js/pages/noticias.js')
+                    ]).then(([appMod, apiMod, newsMod]) => window['${key}ok']({ appMod, apiMod, newsMod }))
+                      .catch(e => window['${key}err'](e));`;
+                doc.head.appendChild(s);
+            });
 
             // 1. Estado padrão (FC 27)
             appMod.switchSeason('fc27');
