@@ -246,6 +246,59 @@ def processar_elenco() -> list:
         origem = "Manual" if origem_manual else ("EA Atualizada" if tem_dados_ea else ("Histórico Preservado" if dados_anteriores else "Novo (Zerado)"))
         print(f"  [OK] {meta['nome_display']} ({ea_id or 'Sem EA ID'}) — {origem}")
 
+    # Auto-Discovery: inclui membros retornados pela API da EA que ainda não foram cadastrados em config/<season>/elenco.json
+    ea_ids_mapeados = {m["ea_id"] for m in ELENCO_MAP.values() if m.get("ea_id")}
+    POS_EA_DEFAULT_MAP = {
+        "goalkeeper": "GK",
+        "defender":   "ZAG",
+        "midfielder": "MEI",
+        "forward":    "CA",
+    }
+
+    for membro in membros_brutos:
+        ea_id = membro.get("name", "")
+        if not ea_id or ea_id in ea_ids_mapeados:
+            continue
+
+        pos_ea = membro.get("favoritePosition", "midfielder")
+        pos_curta = POS_EA_DEFAULT_MAP.get(pos_ea, "MEI")
+        gols_m = safe_int(membro.get("goals", 0))
+        assists_m = safe_int(membro.get("assists", 0))
+
+        jogador_auto = {
+            "id":                 ea_id.lower(),
+            "nome_display":       membro.get("proName") or ea_id,
+            "ea_username":        ea_id,
+            "pro_name":           membro.get("proName", ""),
+            "numero":             999,
+            "posicao":            pos_curta,
+            "posicao_ea":         pos_ea,
+            "capitania":          None,
+            "fotos":              [],
+            "instagram":          "",
+            "status":             "ativo",
+            "partidas":           safe_int(membro.get("gamesPlayed", 0)),
+            "gols":               gols_m,
+            "assistencias":       assists_m,
+            "win_rate":           safe_int(membro.get("winRate", 0)),
+            "media_nota":         safe_float(membro.get("ratingAve", 0.0)),
+            "mvp":                safe_int(membro.get("manOfTheMatch", 0)),
+            "cartoes_vermelhos":  safe_int(membro.get("redCards", 0)),
+            "passes_feitos":      safe_int(membro.get("passesMade", 0)),
+            "taxa_passe":         safe_int(membro.get("passSuccessRate", 0)),
+            "taxa_chute":         safe_int(membro.get("shotSuccessRate", 0)),
+            "desarmes":           safe_int(membro.get("tacklesMade", 0)),
+            "taxa_desarme":       safe_int(membro.get("tackleSuccessRate", 0)),
+            "overall":            safe_int(membro.get("proOverall", 0)),
+            "clean_sheets_def":   safe_int(membro.get("cleanSheetsDef", 0)),
+            "clean_sheets_gk":    safe_int(membro.get("cleanSheetsGK", 0)),
+            "tendencia_gols":     [0] * 10,
+            "participacoes_gol":  gols_m + assists_m,
+            "processado_em":      datetime.now().isoformat(),
+        }
+        elenco_final.append(jogador_auto)
+        print(f"  [AUTO-DISCOVERY] {jogador_auto['nome_display']} ({ea_id}) incluído automaticamente da API da EA.")
+
     elenco_final.sort(key=lambda x: x["numero"])
     return elenco_final
 
