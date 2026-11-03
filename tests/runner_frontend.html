@@ -65,12 +65,12 @@
             await wait(300);
             assert(apiMod.getActiveSeason() === 'fc27', '1. Temporada padrão inicial é fc27');
             assert(doc.querySelector('.season-btn[data-season="fc27"]')?.classList.contains('active'), '2. Botão FC 27 no Header está ativo');
-            assert(doc.title.includes('EA FC 27'), '3. <title> reflete EA FC 27');
+            assert(doc.title.includes('FC27'), '3. <title> reflete FC27');
 
             // 2. Navegação pelas views no FC 27 (Empty States)
             appMod.navigateTo('home');
             await wait(300);
-            assert(doc.getElementById('home-view')?.innerHTML.includes('EA FC 27 Pro Clubs'), '4. Home no FC 27 exibe subtítulo EA FC 27 Pro Clubs');
+            assert(doc.getElementById('home-view')?.innerHTML.includes('Pro Clubs · FC27'), '4. Home no FC 27 exibe subtítulo Pro Clubs · FC27');
             assert(!doc.querySelector('.legacy-banner'), '5. Home no FC 27 não exibe banner de legado');
 
             appMod.navigateTo('elenco');

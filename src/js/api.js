@@ -19,7 +19,8 @@ export function setActiveSeason(seasonId) {
 }
 
 export function getSeasonLabel(seasonId = getActiveSeason()) {
-    return seasonId === 'fc26' ? 'EA FC 26' : 'EA FC 27';
+    return seasonId === 'fc26' ? 'FC26' : 'FC27';
+    // return seasonId === 'fc26' ? 'EA FC 26' : 'EA FC 27';
 }
 
 function getPaths(season = getActiveSeason()) {

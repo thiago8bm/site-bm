@@ -80,7 +80,7 @@ export async function renderHome() {
             '<div class="home-hero__content">' +
                 '<img src="./src/assets/img/EscudoBM.jpeg" alt="Escudo Baile de Munique" class="home-hero__escudo">' +
                 '<h2 class="home-hero__title">Baile de Munique</h2>' +
-                '<p class="home-hero__subtitle">' + seasonLabel + ' Pro Clubs · Formação 1-4-2-3-1</p>' +
+                '<p class="home-hero__subtitle"> Pro Clubs · ' + seasonLabel + '</p>' +
                 '<div class="home-hero__actions">' +
                     '<a href="https://www.instagram.com/bailedemunichofc/" target="_blank" rel="noopener noreferrer" class="btn btn--instagram home-hero__instagram" aria-label="Instagram do Baile de Munique">' +
                         '<svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' +
