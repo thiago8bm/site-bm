@@ -1,11 +1,36 @@
 {
-  "last_updated": null,
-  "status": "empty",
-  "clube": { "nome": "Baile de Munique", "id_ea": "", "tatica": "1-4-2-3-1" },
-  "liga": { "total_partidas": 0, "vitorias": 0, "empates": 0, "derrotas": 0, "gols_marcados": 0, "gols_sofridos": 0, "saldo_gols": 0, "win_rate": 0 },
-  "total_partidas_all": 0,
-  "top_artilheiros": [],
-  "top_assistentes": [],
-  "top_mvp": [],
-  "membros_ativos": 0
+    "last_updated": "2026-11-06T12:36:05.520947",
+    "status": "success",
+    "clube": {
+        "nome": "Baile de Munique",
+        "id_ea": "",
+        "tatica": "1-4-2-3-1",
+        "instagram": "https://www.instagram.com/bailedemunichofc/"
+    },
+    "liga": {
+        "total_partidas": 0,
+        "vitorias": 0,
+        "empates": 0,
+        "derrotas": 0,
+        "gols_marcados": 0,
+        "gols_sofridos": 0,
+        "saldo_gols": 0,
+        "pontos": 0,
+        "win_rate": 0,
+        "aproveitamento": 0,
+        "ch": 0,
+        "reputacao": 0,
+        "mda": 5,
+        "ssg": 0,
+        "gpj": 0,
+        "gspj": 0,
+        "divisao": 5,
+        "playoff_pontos": 0,
+        "fonte": "partidas"
+    },
+    "total_partidas_all": 0,
+    "top_artilheiros": [],
+    "top_assistentes": [],
+    "top_mvp": [],
+    "membros_ativos": 0
 }
