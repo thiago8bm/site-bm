@@ -237,8 +237,8 @@ def test_fc27_simulated_debut():
         # Teardown: restaura config/fc27 e data/fc27 exatamente como estavam
         shutil.rmtree("config/fc27", ignore_errors=True)
         shutil.rmtree("data/fc27", ignore_errors=True)
-        shutil.copytree(os.path.join(backup_dir, "config_fc27"), "config/fc27")
-        shutil.copytree(os.path.join(backup_dir, "data_fc27"), "data/fc27")
+        shutil.copytree(os.path.join(backup_dir, "config_fc27"), "config/fc27", dirs_exist_ok=True)
+        shutil.copytree(os.path.join(backup_dir, "data_fc27"), "data/fc27", dirs_exist_ok=True)
         shutil.rmtree(backup_dir, ignore_errors=True)
         print("  [TEARDOWN] Estado original de config/fc27 e data/fc27 restaurado com sucesso.")
 

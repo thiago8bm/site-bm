@@ -178,35 +178,49 @@ class API:
                 return clube.get("currentDivision")
         return None
 
-    def procurar_clube(self, nome_clube:str, plataforma:str) -> str | None:
+    def procurar_clube(self, nome_clube: str, plataforma: str) -> str | None:
         self._ultimo_nome = nome_clube
         self._ultima_plataforma = plataforma
         
         nome_formatado = urllib.parse.quote(nome_clube)
+        # 1. Tenta allTimeLeaderboard
         url = self._formatar_url(f"/allTimeLeaderboard/search?platform={plataforma}&clubName={nome_formatado}")
-        resposta = self._chamar_api(url, "ID do clube")
+        resposta = self._chamar_api(url, "busca do clube (allTimeLeaderboard)")
+        
+        # 2. Fallback para currentSeasonLeaderboard
+        if not resposta:
+            url_season = self._formatar_url(f"/currentSeasonLeaderboard/search?platform={plataforma}&clubName={nome_formatado}")
+            resposta = self._chamar_api(url_season, "busca do clube (currentSeasonLeaderboard)")
         
         if not resposta:
-            print("Nenhum clube encontrado ou erro na requisição.")
+            print(f"Nenhum clube encontrado para '{nome_clube}'.")
             self._ultimo_id = None # type: ignore
             self._ultima_resposta = None # type: ignore
             return None
         
+        nome_alvo = nome_clube.strip().lower()
         for clube in resposta:
-            id_clube = clube.get('clubId')
-            nome = clube.get('clubName')
-            if nome.lower() == nome_clube.lower():
-                print(f"Clube encontrado: {nome} - ID: {id_clube}")
-                break
-        else:
-            clube = resposta[0]
-            id_clube = clube.get('clubId')
-            nome = clube.get('clubName')
-            print(f"Nome exato não encontrado. Pegando o 1º resultado: {nome} - ID: {id_clube}")
+            id_clube = str(clube.get('clubId') or '')
+            nome = (clube.get('clubName') or '').strip()
+            if nome.lower() == nome_alvo:
+                print(f"Clube encontrado (match exato): {nome} - ID: {id_clube}")
+                self._ultimo_id = id_clube
+                self._ultima_resposta = [clube]
+                return id_clube
         
-        self._ultimo_id = id_clube
-        self._ultima_resposta = [clube]
-        return id_clube
+        if len(resposta) == 1:
+            clube = resposta[0]
+            id_clube = str(clube.get('clubId') or '')
+            nome = clube.get('clubName')
+            print(f"Clube unico retornado na busca: {nome} - ID: {id_clube}")
+            self._ultimo_id = id_clube
+            self._ultima_resposta = [clube]
+            return id_clube
+
+        print(f"Multiplos clubes retornados ({len(resposta)}), nenhum com match exato para '{nome_clube}'.")
+        self._ultimo_id = None # type: ignore
+        self._ultima_resposta = None # type: ignore
+        return None
 
 
 # ==========================================
@@ -276,8 +290,10 @@ def main():
     if not id_clube:
         id_clube = str(api.procurar_clube(nome_clube, plataforma) or "")
         if not id_clube:
-            print(f"[ERRO] Clube '{nome_clube}' nao encontrado na API da EA ({season}).")
-            sys.exit(1)
+            print(f"[AVISO] Clube '{nome_clube}' ainda nao indexado na API da EA ({season}).")
+            print("        A API da EA indexa novos clubes na busca assim que a partida de estreia e disputada.")
+            print("        Pipeline finalizado em modo de espera.")
+            sys.exit(0)
         config["id_clube_ea"] = id_clube
         with open(config_path, "w", encoding="utf-8") as f:
             json.dump(config, f, indent=4, ensure_ascii=False)
